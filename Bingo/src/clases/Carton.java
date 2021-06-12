@@ -22,6 +22,17 @@ public class Carton {
         this.crearCeldas();
     }
     
+    public int getFilas(){
+        return this.filas;
+    }
+
+    public int getColumnas(){
+        return this.columnas;
+    }
+    public ArrayList<Celda> getCeldas(){
+        return this.celdas;
+    }
+
     //Esto ewsta de atrevido, hay que ver que onda cuando tengamos realmente los numeros
     private void crearCeldas(){
         int largo = this.filas * this.columnas;
@@ -37,12 +48,15 @@ public class Carton {
         for(int i = 0; i < celdas.size() && result == false; i++){
             result = celdas.get(i).marcar(b);
         }
-        if(result == true){} // tengo que ver si complete figura
         return result;
     }
 
     public boolean cumpleFigura(ArrayList<Figura> figurasHabilitadas) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(figurasHabilitadas.size() == 0) throw new Error("No se configuraron figuras ganadoras");
+        for(Figura f: figurasHabilitadas){
+            if(f.valido(this)) return true;
+        }
+        return false;
     }
     
 }
