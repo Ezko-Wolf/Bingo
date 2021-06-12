@@ -28,6 +28,7 @@ public class Juego {
     public void iniciar(int fila, int columna){
         int cantCartones = this.obtenerCantCartones();
         this.bolillero = new Bolillero(fila, columna, cantCartones);
+        this.dispararCompletadoDeCartones();
         this.continuar();
     }
     
@@ -45,4 +46,12 @@ public class Juego {
         }
         return cant;
     }    
+
+    private void dispararCompletadoDeCartones() {
+        ArrayList<Carton> cartones = new ArrayList();
+        for(Jugador j:jugadores){
+            cartones.addAll(j.getCartones());
+        }
+        HelperLlenarCartones.llenarCartones(bolillero.getBolillas(), cartones);
+    }
 }

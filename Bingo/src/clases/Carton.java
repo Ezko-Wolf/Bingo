@@ -22,7 +22,10 @@ public class Carton {
         this.crearCeldas();
     }
     
-    //Esto ewsta de atrevido, hay que ver que onda cuando tengamos realmente los numeros
+    public ArrayList<Celda> getCeldas(){
+        return this.celdas;
+    }    
+    
     private void crearCeldas(){
         int largo = this.filas * this.columnas;
         for(int i = 0; i < largo; i++){

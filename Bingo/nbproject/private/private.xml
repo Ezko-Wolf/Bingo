@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/Administrador.java</file>
-            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/Config.java</file>
-            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/User.java</file>
+            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/Juego.java</file>
+            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/Carton.java</file>
+            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/HelperLlenarCartones.java</file>
+            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/Bolillero.java</file>
+            <file>file:/C:/Users/Ezko/Desktop/Estudio/Semestre%204/DDA/Obligatorios/Bingo/Bingo/src/clases/Bolilla.java</file>
         </group>
     </open-files>
 </project-private>
