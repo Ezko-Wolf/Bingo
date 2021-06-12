@@ -8,6 +8,8 @@ package clases;
 import interfaces.IFigura;
 import java.util.ArrayList;
 
+import interfaces.IFigura;
+
 /**
  *
  * @author Ezko
@@ -18,14 +20,16 @@ public class Juego {
     private Bolillero bolillero;
     private ArrayList<IFigura> figurasHabilitadas = new ArrayList();
     
+
+    public ArrayList<IFigura> getFigurasHabilitadas(){
+        return this.figurasHabilitadas;
     
     public Juego(ArrayList<Jugador> jugadores, ArrayList<IFigura> figurasHabilitadas, int filas, int columnas){
         this.jugadores = jugadores;
         this.ganador = null;
         this.figurasHabilitadas = figurasHabilitadas;
         this.iniciar(filas, columnas);
- 
-    }
+     }
 
     
     public void setGanador(Jugador ganador) {
@@ -40,9 +44,13 @@ public class Juego {
     }
     
     public void continuar(){
-        Bolilla sorteada = this.bolillero.sortear();
-        for(int i = 0; i < jugadores.size() || ganador == null; i++){
-            jugadores.get(i).anotarBolilla(sorteada);
+        try{
+            Bolilla sorteada = this.bolillero.sortear();
+            for(int i = 0; i < jugadores.size() || ganador == null; i++){
+                jugadores.get(i).anotarBolilla(sorteada);
+            }
+        }catch(Error error){
+            //Capturar el error y mostrarlo en la vista
         }
     }
 

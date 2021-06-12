@@ -7,6 +7,8 @@ package clases;
 
 import java.util.ArrayList;
 
+import interfaces.IFigura;
+
 /**
  *
  * @author Ezko
@@ -54,10 +56,14 @@ public class Carton {
         return result;
     }
 
-    public boolean cumpleFigura(ArrayList<Figura> figurasHabilitadas) {
+    public boolean cumpleFigura(ArrayList<IFigura> figurasHabilitadas) {
         if(figurasHabilitadas.size() == 0) throw new Error("No se configuraron figuras ganadoras");
-        for(Figura f: figurasHabilitadas){
-            if(f.valido(this)) return true;
+        try{
+            for(IFigura f: figurasHabilitadas){
+                if(f.cumpleFigura(this)) return true;
+            }
+        }catch(Error error){
+            //Capturar el error y mostrarlo en la vista
         }
         return false;
     }

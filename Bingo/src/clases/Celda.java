@@ -19,6 +19,10 @@ class Celda {
     public Celda(int valor){
         this.valor = valor;
     }
+
+    public Bolilla getBolilla(){
+        return this.bolilla;
+    }
     
     public void setValor(int valor){
         this.valor = valor;

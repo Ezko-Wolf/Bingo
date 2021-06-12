@@ -11,10 +11,24 @@ import interfaces.IFigura;
  *
  * @author atrias
  */
-public class FiguraDiagonal implements IFigura {
+class FiguraDiagonal implements IFigura {
     @Override
     public boolean cumpleFigura(Carton carton) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (carton.getFilas() != carton.getColumnas())
+            throw new Error("La matriz no es cuadrada, no existe diagonal");
+        boolean izquierdaADerecha = true;
+        boolean derechaAIzquierda = true;
+        
+        int largoCol = carton.getColumnas();
+        int totalCeldas = carton.getColumnas() * carton.getColumnas()+1;
+
+        for (int i = 0; i < carton.getCeldas().size() && izquierdaADerecha; i = i + largoCol + 1) {
+            if (carton.getCeldas().get(i).getBolilla() == null) izquierdaADerecha = false;
+        }
+
+        for(int i = totalCeldas-largoCol+1;i >= 0 && derechaAIzquierda; i= i-largoCol+1){
+            if(carton.getCeldas().get(i).getBolilla() == null) derechaAIzquierda=false;
+        }
+        return izquierdaADerecha || derechaAIzquierda;
     }
-    
 }
