@@ -47,7 +47,11 @@ public class Jugador {
     }
 
     private void isGanador(Carton carton) {
-        boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
-        if(isGanador) juego.setGanador(this);
+        try{
+            boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
+            if(isGanador) juego.setGanador(this);
+        }catch(Error error){
+            //Capturar el error y mostrarlo en la vista
+        }
     }
 }
