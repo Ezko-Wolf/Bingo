@@ -9,6 +9,23 @@ package clases;
  *
  * @author atrias
  */
-public class Usuario {
+public class Usuario extends User {
+    private int cantidadCartones;
+    private double saldo;
     
+    public Usuario(String ci, String pass, String nombre, int cantidadCartones, double saldo) {
+        super(ci, pass, nombre);
+        this.cantidadCartones = cantidadCartones;
+        this.saldo = saldo;
+    }
+
+    public void setCantidadCartones(int cantCartones) {
+        this.cantidadCartones = cantCartones;
+    }
+    
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+
 }
