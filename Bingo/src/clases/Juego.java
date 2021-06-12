@@ -5,6 +5,7 @@
  */
 package clases;
 
+import interfaces.IFigura;
 import java.util.ArrayList;
 
 import interfaces.IFigura;
@@ -19,17 +20,26 @@ public class Juego {
     private Bolillero bolillero;
     private ArrayList<IFigura> figurasHabilitadas = new ArrayList();
     
+
     public ArrayList<IFigura> getFigurasHabilitadas(){
         return this.figurasHabilitadas;
-    }
     
-    void setGanador(Jugador ganador) {
+    public Juego(ArrayList<Jugador> jugadores, ArrayList<IFigura> figurasHabilitadas, int filas, int columnas){
+        this.jugadores = jugadores;
+        this.ganador = null;
+        this.figurasHabilitadas = figurasHabilitadas;
+        this.iniciar(filas, columnas);
+     }
+
+    
+    public void setGanador(Jugador ganador) {
         this.ganador = ganador;
     }
     
     public void iniciar(int fila, int columna){
         int cantCartones = this.obtenerCantCartones();
         this.bolillero = new Bolillero(fila, columna, cantCartones);
+        this.dispararCompletadoDeCartones();
         this.continuar();
     }
     
@@ -51,4 +61,12 @@ public class Juego {
         }
         return cant;
     }    
+  
+    private void dispararCompletadoDeCartones() {
+        ArrayList<Carton> cartones = new ArrayList();
+        for(Jugador j:jugadores){
+            cartones.addAll(j.getCartones());
+        }
+        HelperLlenarCartones.llenarCartones(bolillero.getBolillas(), cartones);
+    }
 }

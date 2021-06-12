@@ -53,5 +53,12 @@ public class Jugador {
         }catch(Error error){
             //Capturar el error y mostrarlo en la vista
         }
+
+        /*boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
+        if(isGanador) juego.setGanador(this);*/
+    }
+
+    public ArrayList<Carton> getCartones() {
+        return this.cartones;
     }
 }

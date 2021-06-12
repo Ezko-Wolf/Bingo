@@ -24,6 +24,10 @@ class Celda {
         return this.bolilla;
     }
     
+    public void setValor(int valor){
+        this.valor = valor;
+    }
+    
     public boolean marcar(Bolilla b) {
         if(this.valor == b.getValor()){
             this.bolilla = b;

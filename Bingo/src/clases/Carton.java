@@ -23,7 +23,11 @@ public class Carton {
         this.columnas = columnas;
         this.crearCeldas();
     }
-    
+ 
+    public ArrayList<Celda> getCeldas(){
+        return this.celdas;
+    } 
+  
     public int getFilas(){
         return this.filas;
     }
@@ -35,7 +39,6 @@ public class Carton {
         return this.celdas;
     }
 
-    //Esto ewsta de atrevido, hay que ver que onda cuando tengamos realmente los numeros
     private void crearCeldas(){
         int largo = this.filas * this.columnas;
         for(int i = 0; i < largo; i++){

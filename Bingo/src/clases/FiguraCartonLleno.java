@@ -5,10 +5,17 @@
  */
 package clases;
 
+import interfaces.IFigura;
+
 /**
  *
  * @author atrias
  */
-public class FiguraCartonLleno {
+public class FiguraCartonLleno implements IFigura {
+
+    @Override
+    public boolean cumpleFigura(Carton carton) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
