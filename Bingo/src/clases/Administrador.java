@@ -16,10 +16,12 @@ public class Administrador extends User {
         super(ci, pass, nombre);
         this.email = email;
     }
-    
-    @Override
-    public boolean Login() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public void setMail(String mail) {
+        this.email = mail;
     }
+    
+
+    
     
 }

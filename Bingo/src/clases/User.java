@@ -19,6 +19,42 @@ public abstract class User {
         this.pass = pass;
         this.nombre = nombre;
     }
+
+    public String getCi() {
+        return ci;
+    }
+
+    public void setCi(String ci) {
+        this.ci = ci;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCedula() {
+        return this.ci;
+    }
+
+    public Object getPassword() {
+        return this.pass;
+    }
+
+
+
+
     
-    public abstract boolean Login();
+    
 }
