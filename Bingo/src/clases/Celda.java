@@ -11,8 +11,7 @@ package clases;
  */
 class Celda {
     private int valor;
-    private Bolilla bolilla = null;
-    private Jugador jugador = null;
+    private Bolilla bolilla;
     
     public Celda(){
     }
