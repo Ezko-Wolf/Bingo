@@ -5,17 +5,37 @@
  */
 package clases;
 
+import interfaces.IFigura;
+import java.util.ArrayList;
+
 /**
  *
  * @author Ezko
  */
 public class Bingo {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    ArrayList<Jugador> enEspera;
+    ArrayList<Juego> juegos;
+    Config configuracion;
+    
+    public Bingo(Config config){
+        this.configuracion = config;
+        enEspera = new ArrayList();
+    }
+
+    public Bingo() {}
+    
+    
+    public void validarJuego(Jugador unJ) {
+        enEspera.add(unJ);
+        if(configuracion.getCantidadJugadores() == enEspera.size()){
+            Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getFilas(), configuracion.getColumnas());
+            this.iniciarJuego(juego);
+        }        
     }
     
+   public void iniciarJuego(Juego juego){        
+        juegos.add(juego);
+        enEspera.clear();   
+   }
 }
