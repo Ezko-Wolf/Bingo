@@ -16,7 +16,7 @@ public class FiguraPerimetro implements IFigura {
     public boolean cumpleFigura(Carton carton) {
         int largoCol = carton.getColumnas();  
         int largoFila = carton.getFilas();
-        int largo = (largoCol * largoFila) - 1; 
+        int largo = carton.getCeldas().size() - 1; 
         
         boolean puedeSeguirExtremo = true;  
         boolean puedeSeguirMedio = true;
