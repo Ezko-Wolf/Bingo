@@ -70,4 +70,8 @@ public class Juego {
         }
         HelperLlenarCartones.llenarCartones(bolillero.getBolillas(), cartones);
     }
+
+    ArrayList<Jugador> getJugadores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
