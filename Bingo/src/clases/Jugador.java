@@ -22,10 +22,7 @@ public class Jugador {
         this.saldo = saldo;
         this.usuario = usuario;
     }
-    
- 
-    //public setJuego
-    
+        
     public double getSaldo(){
         return this.saldo;
     }
@@ -50,7 +47,7 @@ public class Jugador {
         try{
             boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
             if(isGanador) juego.setGanador(this);
-        }catch(Error error){
+        }catch(BingoExceptions error){
             //Capturar el error y mostrarlo en la vista
         }
     }
