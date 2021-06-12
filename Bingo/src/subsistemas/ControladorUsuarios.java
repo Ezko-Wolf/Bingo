@@ -26,16 +26,14 @@ public class ControladorUsuarios {
         administradores = new ArrayList();
     }
     
-    public Jugador loginUsuario(String ci, String pass, int cantCartones, double saldo) throws BingoExceptions{
+    public Jugador loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions{
         Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
         if(usuario != null){
-            usuario.setCantidadCartones(cantCartones);
-            usuario.setSaldo(saldo);
-            
+            usuario.setCantidadCartones(cantCartones);            
             if(existeJugador(usuario))
                throw new BingoExceptions("El jugador: " + usuario.getCi() + " ya está participando del Bingo.");
             
-            Jugador unJ = new Jugador(saldo, usuario, cantCartones);
+            Jugador unJ = new Jugador(usuario.getSaldo(), usuario, cantCartones);
             Fachada.getInstancia().agregarAJuego(unJ);
             return unJ;
         }
@@ -43,12 +41,12 @@ public class ControladorUsuarios {
         throw new BingoExceptions("Acceso denegado.");
     }
     
-    public Administrador loginAdministrador(String ci, String pass, String mail){
+    public Administrador loginAdministrador(String ci, String pass) throws BingoExceptions {
         Administrador admin = (Administrador) loginGenerico(ci, pass, (ArrayList) usuarios);
-        if(admin != null)
-            admin.setMail(mail);
+        if(admin != null)         
+            return admin;
         
-        return admin;
+        throw new BingoExceptions("Acceso denegado.");
     }
 
 
