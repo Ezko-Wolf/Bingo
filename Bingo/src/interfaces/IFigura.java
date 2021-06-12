@@ -13,5 +13,4 @@ import clases.Carton;
  */
 public interface IFigura {
     public abstract boolean cumpleFigura(Carton carton);
-    
 }
