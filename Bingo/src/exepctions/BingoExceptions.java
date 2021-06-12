@@ -1,4 +1,4 @@
-package clases;
+package exepctions;
 
 public class BingoExceptions extends Exception{
     public BingoExceptions(String message){

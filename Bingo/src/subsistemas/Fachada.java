@@ -8,6 +8,7 @@ package subsistemas;
 import clases.Administrador;
 import clases.Bingo;
 import clases.Jugador;
+import exepctions.BingoExceptions;
 
 /**
  *
@@ -36,7 +37,7 @@ public class Fachada {
             Jugador unJ = cu.loginUsuario(ci, pass, cantCartones, saldo);
         
         }
-        catch(Error error){
+        catch(BingoExceptions error){
             //capturar el error y mostralro en pantalla
         }
  
@@ -50,7 +51,7 @@ public class Fachada {
         try{
             bingo.validarJuego(unJ);
         }
-        catch(Error error){
+        catch(BingoExceptions error){
             //capturar el error y mostralro en pantalla
         }
         

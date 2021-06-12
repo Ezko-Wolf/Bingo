@@ -9,6 +9,7 @@ import clases.Administrador;
 import clases.Jugador;
 import clases.User;
 import clases.Usuario;
+import exepctions.BingoExceptions;
 import java.util.ArrayList;
 
 /**
@@ -24,16 +25,17 @@ public class ControladorUsuarios {
         administradores = new ArrayList();
     }
     
-    public Jugador loginUsuario(String ci, String pass, int cantCartones, double saldo){
+    public Jugador loginUsuario(String ci, String pass, int cantCartones, double saldo) throws BingoExceptions{
         Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
         if(usuario != null){
             usuario.setCantidadCartones(cantCartones);
             usuario.setSaldo(saldo);
             Jugador unJ = new Jugador(saldo, usuario);            
             Fachada.getInstancia().agregarAJuego(unJ);
+            return unJ;
         }
         
-        throw new Error("Acceso denegado.");
+        throw new BingoExceptions("Acceso denegado.");
     }
     
     public Administrador loginAdministrador(String ci, String pass, String mail){
