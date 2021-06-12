@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 package clases;
+
 /**
  *
  * @author atrias
  */
-public interface Figura {
-    boolean valido(Carton carton);
+public class FiguraDiagonal {
+    
 }
