@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exepctions.BingoExceptions;
 import interfaces.IFigura;
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class Bingo {
     public Bingo() {}
     
     
-    public void validarJuego(Jugador unJ) {
+    public void validarJuego(Jugador unJ) throws BingoExceptions{
         try{
             enEspera.add(unJ);
             if(this.puedeJugar(unJ)){
@@ -38,26 +39,26 @@ public class Bingo {
                 this.iniciarJuego(juego);
             }  
         }
-        catch(Error error){
+        catch(BingoExceptions error){
             throw error;
         }
    
     }
     
-    private boolean puedeJugar(Jugador unJ){
+    private boolean puedeJugar(Jugador unJ) throws BingoExceptions{
         try{
             return configuracion.getCantidadJugadores() == enEspera.size() && unJ.puedeJugar(configuracion.getCantidadCartones(), configuracion.getValorCarton()) && !this.estaJugando(unJ);
         }
-        catch(Error error){
+        catch(BingoExceptions error){
             throw error;
         }
     }
 
-    private boolean estaJugando(Jugador unJ) {
+    private boolean estaJugando(Jugador unJ) throws BingoExceptions{
         if(unJ.getJuego() == null)
             return true;
         
-        throw new Error("El jugador: " + unJ.getCi() + " ya está participando del Bingo.");
+        throw new BingoExceptions("El jugador: " + unJ.getCi() + " ya está participando del Bingo.");
     }
 
 
