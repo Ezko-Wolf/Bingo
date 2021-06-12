@@ -12,8 +12,6 @@ import clases.Carton;
  * @author atrias
  */
 public interface IFigura {
-    
-    public abstract boolean validar();
     public abstract boolean cumpleFigura(Carton carton);
     
 }
