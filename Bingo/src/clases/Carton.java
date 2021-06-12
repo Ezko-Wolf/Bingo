@@ -35,9 +35,6 @@ public class Carton {
     public int getColumnas(){
         return this.columnas;
     }
-    public ArrayList<Celda> getCeldas(){
-        return this.celdas;
-    }
 
     private void crearCeldas(){
         int largo = this.filas * this.columnas;

@@ -23,6 +23,7 @@ public class Juego {
 
     public ArrayList<IFigura> getFigurasHabilitadas(){
         return this.figurasHabilitadas;
+    }
     
     public Juego(ArrayList<Jugador> jugadores, ArrayList<IFigura> figurasHabilitadas, int filas, int columnas){
         this.jugadores = jugadores;
