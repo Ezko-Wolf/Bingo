@@ -19,10 +19,13 @@ public class Jugador {
     private Juego juego;
     private Usuario usuario;
     
-    public Jugador(double saldo, Usuario usuario){
+    public Jugador(double saldo, Usuario usuario, int cantCartones){
         this.saldo = saldo;
         this.usuario = usuario;
+        this.cantCartones = cantCartones;
         this.juego = null;
+        
+        
     }
 
  
