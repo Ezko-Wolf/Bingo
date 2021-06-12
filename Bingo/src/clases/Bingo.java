@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author Ezko
  */
 public class Bingo {
-
     ArrayList<Jugador> enEspera;
     ArrayList<Juego> juegos;
     Config configuracion;
@@ -21,6 +20,11 @@ public class Bingo {
     public Bingo(Config config){
         this.configuracion = config;
         enEspera = new ArrayList();
+    }
+  
+    public void iniciarJuego(Juego juego){        
+          juegos.add(juego);
+          enEspera.clear();   
     }
 
     public Bingo() {}
@@ -33,9 +37,4 @@ public class Bingo {
             this.iniciarJuego(juego);
         }        
     }
-    
-   public void iniciarJuego(Juego juego){        
-        juegos.add(juego);
-        enEspera.clear();   
-   }
 }

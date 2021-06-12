@@ -50,4 +50,8 @@ public class Jugador {
         /*boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
         if(isGanador) juego.setGanador(this);*/
     }
+
+    public ArrayList<Carton> getCartones() {
+        return this.cartones;
+    }
 }

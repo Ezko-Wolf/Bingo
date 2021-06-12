@@ -13,6 +13,10 @@ class Bolilla {
     private int valor;    
     private Jugador jugador;
     
+    public Bolilla(int valor){
+        this.valor = valor;
+    }
+    
     public int getValor(){
         return this.valor;
     }

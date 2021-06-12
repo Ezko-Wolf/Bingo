@@ -6,6 +6,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -19,7 +20,11 @@ public class Bolillero {
     
     public Bolillero(int fila, int columna, int cantCartones) {
         this.cantidadBolillas = calcularCantidadBolillas(fila, columna, cantCartones);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.generarBolillas();
+    }
+    
+    public ArrayList<Bolilla> getBolillas() {
+        return bolillas;
     }
 
     public Bolilla sortear() {
@@ -40,5 +45,11 @@ public class Bolillero {
     private int calcularCantidadBolillas(int fila, int columna, int cantCartones){
         return fila * columna * cantCartones;
     }
-    
+
+    private void generarBolillas() {
+        for(int i = 0; i < this.cantidadBolillas; i++){
+            bolillas.add(new Bolilla(i));
+        }        
+        Collections.shuffle(bolillas);
+    }    
 }
