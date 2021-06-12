@@ -53,13 +53,13 @@ public class Carton {
         return result;
     }
 
-    public boolean cumpleFigura(ArrayList<IFigura> figurasHabilitadas) {
-        if(figurasHabilitadas.size() == 0) throw new Error("No se configuraron figuras ganadoras");
+    public boolean cumpleFigura(ArrayList<IFigura> figurasHabilitadas) throws BingoExceptions {
+        if(figurasHabilitadas.size() == 0) throw new BingoExceptions("No se configuraron figuras ganadoras");
         try{
             for(IFigura f: figurasHabilitadas){
                 if(f.cumpleFigura(this)) return true;
             }
-        }catch(Error error){
+        }catch(BingoExceptions error){
             //Capturar el error y mostrarlo en la vista
         }
         return false;

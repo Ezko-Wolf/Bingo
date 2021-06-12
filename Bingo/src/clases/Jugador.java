@@ -24,7 +24,7 @@ public class Jugador {
         this.usuario = usuario;
         this.juego = null;
     }
-    
+
  
     public void setJuego(Juego unJ){
         this.juego = unJ;
@@ -54,7 +54,7 @@ public class Jugador {
         try{
             boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
             if(isGanador) juego.setGanador(this);
-        }catch(Error error){
+        }catch(BingoExceptions error){
             //Capturar el error y mostrarlo en la vista
         }
     }
