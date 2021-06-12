@@ -5,10 +5,42 @@
  */
 package subsistemas;
 
+import clases.Administrador;
+import clases.Bingo;
+import clases.Jugador;
+
 /**
  *
  * @author Ezko
  */
-public class Fachada {
+public class Fachada {   
+    private static Fachada instance = null;
+    private ControladorUsuarios cu;
+    private Bingo bingo;
+
+   
+    private Fachada() {
+        this.cu = new ControladorUsuarios();
+        this.bingo = new Bingo();
+    }
+
+    public synchronized static Fachada getInstancia() {
+        if(instance == null) {
+            instance =  new Fachada();
+        }
+        return instance;
+    }
+    
+    public void loginUsuario(String ci, String pass, int cantCartones, double saldo) {
+        Jugador unJ = cu.loginUsuario(ci, pass, cantCartones, saldo);
+    }
+
+    public void loginAdministrador(String ci, String pass, String mail) {
+        Administrador unA = cu.loginAdministrador(ci, pass, mail);        
+    }
+
+    public void agregarAJuego(Jugador unJ) {
+        bingo.validarJuego(unJ);
+    }
     
 }

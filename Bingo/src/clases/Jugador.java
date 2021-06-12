@@ -11,23 +11,19 @@ import java.util.ArrayList;
  *
  * @author Ezko
  */
-public class Jugador extends User {
+public class Jugador {
     private double saldo;
     private ArrayList<Carton> cartones = new ArrayList();
     private int cantCartones;
     private Juego juego;
+    private Usuario usuario;
     
-    public Jugador(String ci, String pass, String nombre, double saldo, int cantCartones){
-        super(ci, pass, nombre);
+    public Jugador(double saldo, Usuario usuario){
         this.saldo = saldo;
-        this.cantCartones = cantCartones;
+        this.usuario = usuario;
     }
     
-    @Override
-    public boolean Login() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+ 
     //public setJuego
     
     public double getSaldo(){
@@ -51,8 +47,8 @@ public class Jugador extends User {
     }
 
     private void isGanador(Carton carton) {
-        boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
-        if(isGanador) juego.setGanador(this);
+        /*boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
+        if(isGanador) juego.setGanador(this);*/
     }
 
     public ArrayList<Carton> getCartones() {

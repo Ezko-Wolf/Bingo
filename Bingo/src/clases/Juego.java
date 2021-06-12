@@ -5,6 +5,7 @@
  */
 package clases;
 
+import interfaces.IFigura;
 import java.util.ArrayList;
 
 /**
@@ -15,13 +16,19 @@ public class Juego {
     private ArrayList<Jugador> jugadores = new ArrayList();
     private Jugador ganador;
     private Bolillero bolillero;
-    private ArrayList<Figura> figurasHabilitadas = new ArrayList();
+    private ArrayList<IFigura> figurasHabilitadas = new ArrayList();
     
-    public ArrayList<Figura> getFigurasHabilitadas(){
-        return this.figurasHabilitadas;
+    
+    public Juego(ArrayList<Jugador> jugadores, ArrayList<IFigura> figurasHabilitadas, int filas, int columnas){
+        this.jugadores = jugadores;
+        this.ganador = null;
+        this.figurasHabilitadas = figurasHabilitadas;
+        this.iniciar(filas, columnas);
+ 
     }
+
     
-    void setGanador(Jugador ganador) {
+    public void setGanador(Jugador ganador) {
         this.ganador = ganador;
     }
     
@@ -46,7 +53,7 @@ public class Juego {
         }
         return cant;
     }    
-
+  
     private void dispararCompletadoDeCartones() {
         ArrayList<Carton> cartones = new ArrayList();
         for(Jugador j:jugadores){

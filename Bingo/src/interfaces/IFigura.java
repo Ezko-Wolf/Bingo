@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package interfaces;
+
+import clases.Carton;
+
 /**
  *
  * @author atrias
  */
-public interface Figura {
-    boolean valido(Carton carton);
+public interface IFigura {
+    public abstract boolean cumpleFigura(Carton carton);
+    
 }
