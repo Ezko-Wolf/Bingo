@@ -38,7 +38,10 @@ public class Jugador extends User {
         boolean marco = false;
         for(int i = 0; i < cartones.size() && marco == false; i++){
             marco = cartones.get(i).marcar(b);
-            if(marco) this.isGanador(cartones.get(i));
+            if(marco){
+                b.setJugador(this);
+                this.isGanador(cartones.get(i));
+            }
         }
         return marco;
     }
