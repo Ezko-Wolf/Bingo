@@ -34,6 +34,9 @@ public class Config {
         return this.maxJugadoresJuego;
     }
     
+    public int getCantidadCartones(){
+        return this.maxCartonesJugador;
+    }
     public int getColumnas() {
         return this.columnas;
     }
@@ -43,6 +46,10 @@ public class Config {
 
     public ArrayList<IFigura> getFigurasHabilitadas() {
         return this.figuras;
+    }
+
+    public double getValorCarton() {
+       return this.valorCarton;
     }
     
     

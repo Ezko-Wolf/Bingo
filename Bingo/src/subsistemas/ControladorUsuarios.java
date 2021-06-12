@@ -24,19 +24,16 @@ public class ControladorUsuarios {
         administradores = new ArrayList();
     }
     
-    
-    
     public Jugador loginUsuario(String ci, String pass, int cantCartones, double saldo){
         Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
-        Jugador unJ = null;
         if(usuario != null){
             usuario.setCantidadCartones(cantCartones);
             usuario.setSaldo(saldo);
-            unJ = new Jugador(saldo, usuario);            
+            Jugador unJ = new Jugador(saldo, usuario);            
             Fachada.getInstancia().agregarAJuego(unJ);
         }
         
-        return unJ;
+        throw new Error("Acceso denegado.");
     }
     
     public Administrador loginAdministrador(String ci, String pass, String mail){
