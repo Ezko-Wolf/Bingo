@@ -32,7 +32,7 @@ public class ControladorUsuarios {
         if(usuario != null){
             usuario.setCantidadCartones(cantCartones);
             usuario.setSaldo(saldo);
-            unJ = new Jugador(saldo, usuario);        
+            unJ = new Jugador(saldo, usuario);
         }
         
         return unJ;

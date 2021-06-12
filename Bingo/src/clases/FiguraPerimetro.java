@@ -9,6 +9,6 @@ package clases;
  *
  * @author atrias
  */
-public class Figura {
+public class FiguraPerimetro {
     
 }

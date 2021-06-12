@@ -5,6 +5,9 @@
  */
 package clases;
 
+import interfaces.IFigura;
+import java.util.ArrayList;
+
 /**
  *
  * @author Ezko
@@ -15,6 +18,7 @@ public class Config {
     private int maxCartonesJugador;
     private int maxJugadoresJuego;
     private int valorCarton;
+    private ArrayList<IFigura> figuras;
     
     
 }
