@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class ControladorUsuarios {
     private ArrayList<Usuario> usuarios;
     private ArrayList<Administrador> administradores;
+    private ArrayList<Jugador> jugadores;
     
     public ControladorUsuarios(){
         usuarios = new ArrayList();
@@ -30,7 +31,11 @@ public class ControladorUsuarios {
         if(usuario != null){
             usuario.setCantidadCartones(cantCartones);
             usuario.setSaldo(saldo);
-            Jugador unJ = new Jugador(saldo, usuario);            
+            
+            if(existeJugador(usuario))
+               throw new BingoExceptions("El jugador: " + usuario.getCi() + " ya está participando del Bingo.");
+            
+            Jugador unJ = new Jugador(saldo, usuario, cantCartones);
             Fachada.getInstancia().agregarAJuego(unJ);
             return unJ;
         }
@@ -54,6 +59,15 @@ public class ControladorUsuarios {
             }
         }
         return null;
+    }
+
+    private boolean existeJugador(Usuario unU) {
+        for(Jugador j: jugadores){
+            if(unU.getCi().equals(j.getCi())) return true;
+        }
+        
+        
+        return false;
     }
     
     

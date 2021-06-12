@@ -20,7 +20,7 @@ class FiguraDiagonal implements IFigura {
         boolean derechaAIzquierda = true;
         
         int largoCol = carton.getColumnas();
-        int totalCeldas = carton.getColumnas() * carton.getColumnas()+1;
+        int totalCeldas = carton.getColumnas() * carton.getColumnas()-1;
 
         for (int i = 0; i < carton.getCeldas().size() && izquierdaADerecha; i = i + largoCol + 1) {
             if (carton.getCeldas().get(i).getBolilla() == null) izquierdaADerecha = false;

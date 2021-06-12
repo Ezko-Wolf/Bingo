@@ -14,7 +14,17 @@ import interfaces.IFigura;
 public class FiguraPerimetro implements IFigura {
     @Override
     public boolean cumpleFigura(Carton carton) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int largoCol = carton.getColumnas();     
+        boolean puedeSeguir = true;  
+        int i = 0;
+        int auxTotalCeldas = carton.getCeldas().size()-1;
+        while(i < largoCol-1){
+            if(carton.getCeldas().get(i).getBolilla() == null || carton.getCeldas().get(auxTotalCeldas).getBolilla() == null) return false;
+            i++;
+            auxTotalCeldas--;
+        }
+        return true;
     }
+    
     
 }

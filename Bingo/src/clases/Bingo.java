@@ -35,7 +35,8 @@ public class Bingo {
         try{
             enEspera.add(unJ);
             if(this.puedeJugar(unJ)){
-                Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getFilas(), configuracion.getColumnas());
+                Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getFilas(), configuracion.getColumnas());                
+                unJ.setJuego(juego);
                 this.iniciarJuego(juego);
             }  
         }
@@ -47,19 +48,11 @@ public class Bingo {
     
     private boolean puedeJugar(Jugador unJ) throws BingoExceptions{
         try{
-            return configuracion.getCantidadJugadores() == enEspera.size() && unJ.puedeJugar(configuracion.getCantidadCartones(), configuracion.getValorCarton()) && !this.estaJugando(unJ);
+            return configuracion.getCantidadJugadores() == enEspera.size() && unJ.puedeJugar(configuracion.getCantidadCartones(), configuracion.getValorCarton());
         }
         catch(BingoExceptions error){
             throw error;
         }
     }
-
-    private boolean estaJugando(Jugador unJ) throws BingoExceptions{
-        if(unJ.getJuego() == null)
-            return true;
-        
-        throw new BingoExceptions("El jugador: " + unJ.getCi() + " ya está participando del Bingo.");
-    }
-
 
 }

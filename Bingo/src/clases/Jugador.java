@@ -26,7 +26,9 @@ public class Jugador {
     }
     
  
-    //public setJuego
+    public void setJuego(Juego unJ){
+        this.juego = unJ;
+    } 
     
     public double getSaldo(){
         return this.saldo;
