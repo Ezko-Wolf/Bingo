@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exepctions.BingoExceptions;
 import interfaces.IFigura;
 import java.util.ArrayList;
 
@@ -30,11 +31,28 @@ public class Bingo {
     public Bingo() {}
     
     
-    public void validarJuego(Jugador unJ) {
-        enEspera.add(unJ);
-        if(configuracion.getCantidadJugadores() == enEspera.size()){
-            Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getFilas(), configuracion.getColumnas());
-            this.iniciarJuego(juego);
-        }        
+    public void validarJuego(Jugador unJ) throws BingoExceptions{
+        try{
+            enEspera.add(unJ);
+            if(this.puedeJugar(unJ)){
+                Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getFilas(), configuracion.getColumnas());                
+                unJ.setJuego(juego);
+                this.iniciarJuego(juego);
+            }  
+        }
+        catch(BingoExceptions error){
+            throw error;
+        }
+   
     }
+    
+    private boolean puedeJugar(Jugador unJ) throws BingoExceptions{
+        try{
+            return configuracion.getCantidadJugadores() == enEspera.size() && unJ.puedeJugar(configuracion.getCantidadCartones(), configuracion.getValorCarton());
+        }
+        catch(BingoExceptions error){
+            throw error;
+        }
+    }
+
 }

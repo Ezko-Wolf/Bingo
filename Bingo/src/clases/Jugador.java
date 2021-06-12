@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exepctions.BingoExceptions;
 import java.util.ArrayList;
 
 /**
@@ -21,8 +22,14 @@ public class Jugador {
     public Jugador(double saldo, Usuario usuario){
         this.saldo = saldo;
         this.usuario = usuario;
+        this.juego = null;
     }
-        
+
+ 
+    public void setJuego(Juego unJ){
+        this.juego = unJ;
+    } 
+    
     public double getSaldo(){
         return this.saldo;
     }
@@ -55,4 +62,43 @@ public class Jugador {
     public ArrayList<Carton> getCartones() {
         return this.cartones;
     }
+
+    public boolean puedeJugar(int maximoCartones, double valorCarton) throws BingoExceptions {
+        try{
+            return this.cantidadCartonesValidas(maximoCartones) && this.saldoSuficiente(valorCarton);  
+        }
+        catch(BingoExceptions error){
+            throw error;
+        }
+    }
+
+    private boolean cantidadCartonesValidas(int maximoCartones) throws BingoExceptions {
+        if(this.cantCartones <= 0)
+            throw new BingoExceptions("Indique con cuantos cartones desea jugar");
+        else if(maximoCartones < this.cantCartones)
+            throw new BingoExceptions("No se puede participar con más de: "+ maximoCartones + " cartones");
+        
+        return true;
+    }
+
+    private boolean saldoSuficiente(double valorCarton) throws BingoExceptions{
+        if(this.saldoInsuficiente(valorCarton))
+            throw new BingoExceptions("Saldo insuficiente");
+        
+        return true;
+             
+    }
+    
+    private boolean saldoInsuficiente(double valorCarton){
+        return saldo < valorCarton*3*this.cantCartones;
+    }
+
+    public Juego getJuego() {
+        return this.juego;
+    }
+
+    public String getCi() {
+        return this.usuario.getCedula();
+    }
+
 }
