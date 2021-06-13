@@ -45,12 +45,12 @@ public class ControladorUsuarios {
         throw new BingoExceptions("Acceso denegado.");
     }
     
-    public Administrador loginAdministrador(String ci, String pass, String mail){
+    public Administrador loginAdministrador(String ci, String pass) throws BingoExceptions {
         Administrador admin = (Administrador) loginGenerico(ci, pass, (ArrayList) usuarios);
-        if(admin != null)
-            admin.setMail(mail);
+        if(admin != null)         
+            return admin;
         
-        return admin;
+        throw new BingoExceptions("Acceso denegado.");
     }
 
 

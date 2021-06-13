@@ -5,6 +5,7 @@
  */
 package interfaces;
 
+import clases.BingoExceptions;
 import clases.Carton;
 
 /**
@@ -12,5 +13,5 @@ import clases.Carton;
  * @author atrias
  */
 public interface IFigura {
-    public abstract boolean cumpleFigura(Carton carton);
+    public abstract boolean cumpleFigura(Carton carton) throws BingoExceptions;
 }

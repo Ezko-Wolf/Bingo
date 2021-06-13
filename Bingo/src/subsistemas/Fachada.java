@@ -38,13 +38,18 @@ public class Fachada {
             cu.loginUsuario(ci, pass, cantCartones);
         }
         catch(BingoExceptions error){
-            //capturar el error y mostralro en pantalla
+            throw error;
         }
  
     }
 
-    public void loginAdministrador(String ci, String pass, String mail) {
-        Administrador unA = cu.loginAdministrador(ci, pass, mail);        
+    public void loginAdministrador(String ci, String pass) throws BingoExceptions {
+        try{
+            Administrador unA = cu.loginAdministrador(ci, pass);        
+        }
+        catch(BingoExceptions error){
+            throw error;
+        }
     }
 
     public void agregarAJuego(Jugador unJ) {
