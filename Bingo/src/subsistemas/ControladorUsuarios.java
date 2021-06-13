@@ -32,44 +32,46 @@ public class ControladorUsuarios {
     }
     
     public void loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions{
-        Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
-        if(usuario != null){
-            if(usuarioEnJuego(usuario))
-               throw new BingoExceptions("El jugador: " + usuario.getCi() + " ya está participando del Bingo.");
-            
+        try{
+            Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
+            Fachada fachada = Fachada.getInstancia();
             Jugador unJ = new Jugador(usuario.getSaldo(), usuario, cantCartones);
+            fachada.puedeJugar(unJ);
             jugadores.add(unJ);
-            Fachada.getInstancia().agregarAJuego(unJ);
+            fachada.agregarAJuego(unJ);
         }
-        
-        //throw new BingoExceptions("Acceso denegado.");
+        catch(BingoExceptions error){
+            throw error;
+        }
+           
     }
     
-    public Administrador loginAdministrador(String ci, String pass) throws BingoExceptions {
-        Administrador admin = (Administrador) loginGenerico(ci, pass, (ArrayList) usuarios);
-        if(admin != null)         
-            return admin;
-        
-        throw new BingoExceptions("Acceso denegado.");
+    public void loginAdministrador(String ci, String pass) throws BingoExceptions {
+        try{            
+            Administrador admin = (Administrador) loginGenerico(ci, pass, (ArrayList) administradores);   
+        }
+        catch(BingoExceptions error){
+            throw error;
+        }
     }
 
 
-   private User loginGenerico(String usuario, String password, ArrayList<User> listaUsuarios) {
+   private User loginGenerico(String usuario, String password, ArrayList<User> listaUsuarios) throws BingoExceptions {
         for (User u : listaUsuarios) {
             if (u.getCi().equals(usuario) && u.getPassword().equals(password)) {
                 return u;
             }
         }
-        return null;
+        throw new BingoExceptions("Acceso denegado.");
     }
 
-    private boolean usuarioEnJuego(Usuario unU) {
+    private boolean usuarioEnJuego(Usuario unU) throws BingoExceptions {
         if(jugadores.size() > 0){
             for(Jugador j: jugadores){
                 if(unU.getCi().equals(j.getCi())) return true;
             }
             return false;
         }        
-        return false;
+        throw new BingoExceptions("El jugador: " + unU.getCi() + " ya está participando del Bingo.");
     }
 }

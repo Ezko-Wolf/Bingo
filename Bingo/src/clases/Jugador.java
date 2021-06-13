@@ -68,34 +68,6 @@ public class Jugador {
         }
     }
 
-    public boolean puedeJugar(int maximoCartones, double valorCarton) throws BingoExceptions {
-        try{
-            return this.cantidadCartonesValidas(maximoCartones) && this.saldoSuficiente(valorCarton);  
-        }
-        catch(BingoExceptions error){
-            throw error;
-        }
-    }
-
-    private boolean cantidadCartonesValidas(int maximoCartones) throws BingoExceptions {
-        if(this.cantCartones <= 0)
-            throw new BingoExceptions("Indique con cuantos cartones desea jugar");
-        else if(maximoCartones < this.cantCartones)
-            throw new BingoExceptions("No se puede participar con más de: "+ maximoCartones + " cartones");
-        
-        return true;
-    }
-
-    private boolean saldoSuficiente(double valorCarton) throws BingoExceptions{
-        if(this.saldoInsuficiente(valorCarton))
-            throw new BingoExceptions("Saldo insuficiente");
-        return true;
-    }
-    
-    private boolean saldoInsuficiente(double valorCarton){
-        return saldo < valorCarton * 3 * this.cantCartones;
-    }
-
     public Juego getJuego() {
         return this.juego;
     }
