@@ -18,8 +18,8 @@ public class Bolillero {
     private ArrayList<Bolilla> bolillasSorteadas = new ArrayList();
     private int cantidadBolillas;
     
-    public Bolillero(int fila, int columna, int cantCartones) {
-        this.cantidadBolillas = calcularCantidadBolillas(fila, columna, cantCartones);
+    public Bolillero(int cantidadBolillas) {
+        this.cantidadBolillas = cantidadBolillas;
         this.generarBolillas();
     }
     
@@ -40,10 +40,6 @@ public class Bolillero {
     
     private void crearBolillas(){
         
-    }
-    
-    private int calcularCantidadBolillas(int fila, int columna, int cantCartones){
-        return fila * columna * cantCartones;
     }
 
     private void generarBolillas() {

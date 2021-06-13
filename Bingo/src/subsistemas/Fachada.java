@@ -8,6 +8,7 @@ package subsistemas;
 import clases.Administrador;
 import clases.Bingo;
 import clases.Jugador;
+import clases.Usuario;
 import exepctions.BingoExceptions;
 
 /**
@@ -32,10 +33,9 @@ public class Fachada {
         return instance;
     }
     
-    public void loginUsuario(String ci, String pass, int cantCartones, double saldo) {
+    public void loginUsuario(String ci, String pass, int cantCartones) {
         try{
-            Jugador unJ = cu.loginUsuario(ci, pass, cantCartones, saldo);
-        
+            cu.loginUsuario(ci, pass, cantCartones);
         }
         catch(BingoExceptions error){
             //capturar el error y mostralro en pantalla
@@ -48,13 +48,17 @@ public class Fachada {
     }
 
     public void agregarAJuego(Jugador unJ) {
-        try{
+        //try{
             bingo.validarJuego(unJ);
-        }
-        catch(BingoExceptions error){
+        //}
+        //catch(BingoExceptions error){
             //capturar el error y mostralro en pantalla
-        }
+        //}
         
+    }
+    
+    public void addUsuario(Usuario usuario){
+        cu.addUser(usuario);
     }
     
 }

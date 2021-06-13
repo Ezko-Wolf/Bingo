@@ -19,16 +19,29 @@ public class Config {
     private int maxJugadoresJuego;
     private int valorCarton;
     private ArrayList<IFigura> figuras;
+    private int numerosPorCarton;
+    private static Config instancia = null;
 
-    public Config(int filas, int columnas, int maxCartonesJugador, int maxJugadoresJuego, int valorCarton, ArrayList<IFigura> figuras) {
+    private Config(int filas, int columnas, int maxCartonesJugador, int maxJugadoresJuego, int valorCarton, ArrayList<IFigura> figuras) {
         this.filas = filas;
         this.columnas = columnas;
         this.maxCartonesJugador = maxCartonesJugador;
         this.maxJugadoresJuego = maxJugadoresJuego;
         this.valorCarton = valorCarton;
         this.figuras = figuras;
+        this.numerosPorCarton = filas * columnas;
+    }
+
+    public synchronized static Config getInstancia(){
+        if(instancia == null){
+            instancia = new Config(2, 3, 3, 4, 50, new ArrayList<IFigura>());
+        }
+        return instancia;
     }
     
+    public int getNumerosPorCarton() {
+        return numerosPorCarton;
+    }
 
     public int getCantidadJugadores() {
         return this.maxJugadoresJuego;

@@ -7,7 +7,6 @@ package clases;
 
 import interfaces.IFigura;
 import java.util.ArrayList;
-
 import interfaces.IFigura;
 
 /**
@@ -19,28 +18,33 @@ public class Juego {
     private Jugador ganador;
     private Bolillero bolillero;
     private ArrayList<IFigura> figurasHabilitadas = new ArrayList();
-    
+    private int auxFilas;
+    private int auxColumnas;
+    private int auxNumerosEnCarton;
+        
+    public Juego(ArrayList<Jugador> jugadores, ArrayList<IFigura> figurasHabilitadas, int numerosEnCarton, int filas, int columnas){
+        this.jugadores = jugadores;
+        this.ganador = null;
+        this.figurasHabilitadas = figurasHabilitadas;
+        this.auxFilas = filas;
+        this.auxColumnas = columnas;
+        this.auxNumerosEnCarton = numerosEnCarton;
+        this.iniciar();
+    }
 
     public ArrayList<IFigura> getFigurasHabilitadas(){
         return this.figurasHabilitadas;
     }
     
-    public Juego(ArrayList<Jugador> jugadores, ArrayList<IFigura> figurasHabilitadas, int filas, int columnas){
-        this.jugadores = jugadores;
-        this.ganador = null;
-        this.figurasHabilitadas = figurasHabilitadas;
-        this.iniciar(filas, columnas);
-     }
-
-    
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
     }
     
-    public void iniciar(int fila, int columna){
+    public void iniciar(){
         int cantCartones = this.obtenerCantCartones();
-        this.bolillero = new Bolillero(fila, columna, cantCartones);
-        this.dispararCompletadoDeCartones();
+        int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.auxNumerosEnCarton);
+        this.bolillero = new Bolillero(cantidadNumeros);
+        this.dispararCreacionDeCartones();
         this.continuar();
     }
     
@@ -63,15 +67,15 @@ public class Juego {
         return cant;
     }    
   
-    private void dispararCompletadoDeCartones() {
-        ArrayList<Carton> cartones = new ArrayList();
-        for(Jugador j:jugadores){
-            cartones.addAll(j.getCartones());
-        }
-        HelperLlenarCartones.llenarCartones(bolillero.getBolillas(), cartones);
+    private void dispararCreacionDeCartones() {
+        HelperCrearCartones.crearCartones(bolillero.getBolillas(), jugadores, auxFilas, auxColumnas);
     }
 
-    ArrayList<Jugador> getJugadores() {
+    public ArrayList<Jugador> getJugadores() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int cantidadNumerosEnJuego(int cantCartones, int numerosEnCarton) {
+        return cantCartones * numerosEnCarton;
     }
 }

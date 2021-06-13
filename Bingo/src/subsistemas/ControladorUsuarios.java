@@ -24,20 +24,22 @@ public class ControladorUsuarios {
     public ControladorUsuarios(){
         usuarios = new ArrayList();
         administradores = new ArrayList();
+        jugadores = new ArrayList();
     }
     
-    public Jugador loginUsuario(String ci, String pass, int cantCartones, double saldo) throws BingoExceptions{
+    public void addUser(Usuario usuario){
+        usuarios.add(usuario);
+    }
+    
+    public void loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions{
         Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
         if(usuario != null){
-            usuario.setCantidadCartones(cantCartones);
-            usuario.setSaldo(saldo);
-            
-            if(existeJugador(usuario))
+            if(usuarioEnJuego(usuario))
                throw new BingoExceptions("El jugador: " + usuario.getCi() + " ya está participando del Bingo.");
             
-            Jugador unJ = new Jugador(saldo, usuario, cantCartones);
+            Jugador unJ = new Jugador(usuario.getSaldo(), usuario, cantCartones);
+            jugadores.add(unJ);
             Fachada.getInstancia().agregarAJuego(unJ);
-            return unJ;
         }
         
         throw new BingoExceptions("Acceso denegado.");
@@ -54,21 +56,20 @@ public class ControladorUsuarios {
 
    private User loginGenerico(String usuario, String password, ArrayList<User> listaUsuarios) {
         for (User u : listaUsuarios) {
-            if (u.getCi().equals(usuario) && u.getPassword().equals(usuario)) {
+            if (u.getCi().equals(usuario) && u.getPassword().equals(password)) {
                 return u;
             }
         }
         return null;
     }
 
-    private boolean existeJugador(Usuario unU) {
-        for(Jugador j: jugadores){
-            if(unU.getCi().equals(j.getCi())) return true;
-        }
-        
-        
+    private boolean usuarioEnJuego(Usuario unU) {
+        if(jugadores.size() > 0){
+            for(Jugador j: jugadores){
+                if(unU.getCi().equals(j.getCi())) return true;
+            }
+            return false;
+        }        
         return false;
     }
-    
-    
 }

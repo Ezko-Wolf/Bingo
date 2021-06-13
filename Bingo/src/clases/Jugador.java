@@ -19,10 +19,11 @@ public class Jugador {
     private Juego juego;
     private Usuario usuario;
     
-    public Jugador(double saldo, Usuario usuario){
+    public Jugador(double saldo, Usuario usuario, int cantCartones){
         this.saldo = saldo;
         this.usuario = usuario;
         this.juego = null;
+        this.cantCartones = cantCartones;
     }
     
  
@@ -32,6 +33,18 @@ public class Jugador {
     
     public double getSaldo(){
         return this.saldo;
+    }
+    
+    public void setCartones(ArrayList<Carton> cartones){
+        this.cartones.addAll(cartones);
+    }
+    
+    public int getCantidadCartones(){
+        return this.cantCartones;
+    }
+
+    public ArrayList<Carton> getCartones() {
+        return this.cartones;
     }
     
     public boolean anotarBolilla(Bolilla b){
@@ -46,10 +59,6 @@ public class Jugador {
         return marco;
     }
     
-    public int getCantidadCartones(){
-        return this.cartones.size();
-    }
-
     private void isGanador(Carton carton) {
         try{
             boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
@@ -57,10 +66,6 @@ public class Jugador {
         }catch(Error error){
             //Capturar el error y mostrarlo en la vista
         }
-    }
-
-    public ArrayList<Carton> getCartones() {
-        return this.cartones;
     }
 
     public boolean puedeJugar(int maximoCartones, double valorCarton) throws BingoExceptions {
@@ -84,13 +89,11 @@ public class Jugador {
     private boolean saldoSuficiente(double valorCarton) throws BingoExceptions{
         if(this.saldoInsuficiente(valorCarton))
             throw new BingoExceptions("Saldo insuficiente");
-        
         return true;
-             
     }
     
     private boolean saldoInsuficiente(double valorCarton){
-        return saldo < valorCarton*3*this.cantCartones;
+        return saldo < valorCarton * 3 * this.cantCartones;
     }
 
     public Juego getJuego() {
@@ -100,5 +103,4 @@ public class Jugador {
     public String getCi() {
         return this.usuario.getCedula();
     }
-
 }

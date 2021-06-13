@@ -15,12 +15,11 @@ public class Usuario extends User {
     
     public Usuario(String ci, String pass, String nombre, int cantidadCartones, double saldo) {
         super(ci, pass, nombre);
-        this.cantidadCartones = cantidadCartones;
         this.saldo = saldo;
     }
-
-    public void setCantidadCartones(int cantCartones) {
-        this.cantidadCartones = cantCartones;
+    
+    public double getSaldo(){
+        return this.saldo;
     }
     
     public void setSaldo(double saldo) {
