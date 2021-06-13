@@ -10,7 +10,6 @@ package clases;
  * @author atrias
  */
 public class Usuario extends User {
-    private int cantidadCartones;
     private double saldo;
     
     public Usuario(String ci, String pass, String nombre, int cantidadCartones, double saldo) {
@@ -25,10 +24,4 @@ public class Usuario extends User {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-
-    public double getSaldo() {
-        return this.saldo;
-    }
-
-
 }

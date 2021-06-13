@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exepctions.BingoExceptions;
 import interfaces.IFigura;
 
 /**
@@ -12,6 +13,7 @@ import interfaces.IFigura;
  * @author atrias
  */
 class FiguraDiagonal implements IFigura {
+    
     @Override
     public boolean cumpleFigura(Carton carton) throws BingoExceptions {
         if (carton.getFilas() != carton.getColumnas())

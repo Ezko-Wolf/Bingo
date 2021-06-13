@@ -24,7 +24,6 @@ public class Jugador {
         this.usuario = usuario;
         this.cantCartones = cantCartones;
         this.juego = null;
-        this.cantCartones = cantCartones;
     }
 
  

@@ -42,7 +42,7 @@ public class ControladorUsuarios {
             Fachada.getInstancia().agregarAJuego(unJ);
         }
         
-        throw new BingoExceptions("Acceso denegado.");
+        //throw new BingoExceptions("Acceso denegado.");
     }
     
     public Administrador loginAdministrador(String ci, String pass) throws BingoExceptions {

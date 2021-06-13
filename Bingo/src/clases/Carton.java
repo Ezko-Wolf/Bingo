@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exepctions.BingoExceptions;
 import java.util.ArrayList;
 
 import interfaces.IFigura;
@@ -60,7 +61,7 @@ public class Carton {
                 if(f.cumpleFigura(this)) return true;
             }
         }catch(BingoExceptions error){
-            //Capturar el error y mostrarlo en la vista
+            throw error;
         }
         return false;
     }

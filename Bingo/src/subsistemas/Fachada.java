@@ -33,7 +33,7 @@ public class Fachada {
         return instance;
     }
     
-    public void loginUsuario(String ci, String pass, int cantCartones) {
+    public void loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions {
         try{
             cu.loginUsuario(ci, pass, cantCartones);
         }

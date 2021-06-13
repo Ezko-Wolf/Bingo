@@ -5,7 +5,7 @@
  */
 package interfaces;
 
-import clases.BingoExceptions;
+import exepctions.BingoExceptions;
 import clases.Carton;
 
 /**
