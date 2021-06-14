@@ -28,35 +28,44 @@ public class Bingo {
         juegos.add(juego);
         enEspera.clear(); 
         juego.iniciar();
-    }    
-    
-    public void validarJuego(Jugador unJ){ //throws BingoExceptions{
-        //try{
-            enEspera.add(unJ);
-            if(this.puedeJugar(unJ)){
-                Juego juego = new Juego(new ArrayList(enEspera), configuracion);
-                for(Jugador j : enEspera){
-                    j.setJuego(juego);
-                }                   
-                this.iniciarJuego(juego);
-                
-                //solo se setea el juego al ultimo jugador
-            }  
-        //}
-        //catch(BingoExceptions error){
-        //    throw error;
-        //}
-   
+    }  
+  
+    public void validarJuego(Jugador unJ){
+        enEspera.add(unJ);
+        if(configuracion.getCantidadJugadores() == enEspera.size()){
+            Juego juego = new Juego(new ArrayList(enEspera), configuracion);
+            for(Jugador j : enEspera){
+                j.setJuego(juego);
+            }
+            this.iniciarJuego(juego);
+
+        }  
     }
     
-    private boolean puedeJugar(Jugador unJ){ //throws BingoExceptions{
-        //try{
-            // && unJ.puedeJugar(configuracion.getCantidadCartones(), configuracion.getValorCarton())
-            return configuracion.getCantidadJugadores() == enEspera.size();
-        //}
-        //catch(BingoExceptions error){
-        //    throw error;
-        //}
+    public void puedeJugar(Jugador unJ) throws BingoExceptions {
+        try{
+            cantidadCartonesValidas(configuracion.getCantidadCartones(), unJ);
+            saldoSuficiente(configuracion.getValorCarton(), unJ);  
+        }
+        catch(BingoExceptions error){
+            throw error;
+        }
+    }
+
+    private void cantidadCartonesValidas(int maximoCartones, Jugador unJ) throws BingoExceptions {
+        if(unJ.getCantidadCartones() <= 0)
+            throw new BingoExceptions("Indique con cuantos cartones desea jugar");
+        else if(maximoCartones < unJ.getCantidadCartones())
+            throw new BingoExceptions("No se puede participar con más de: "+ maximoCartones + " cartones");
+    }
+
+    private void saldoSuficiente(double valorCarton, Jugador unJ) throws BingoExceptions{
+        if(this.saldoInsuficiente(valorCarton, unJ))
+            throw new BingoExceptions("Saldo insuficiente");
+    }
+    
+    private boolean saldoInsuficiente(double valorCarton, Jugador unJ){
+        return unJ.getSaldo() < valorCarton * 3 * unJ.getCantidadCartones();
     }
 
     //ESTO SE VA

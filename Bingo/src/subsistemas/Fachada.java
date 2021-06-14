@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package subsistemas;
-
-import clases.Administrador;
 import clases.Bingo;
 import clases.Jugador;
 import clases.Usuario;
@@ -39,13 +37,21 @@ public class Fachada {
         }
         catch(BingoExceptions error){
             throw error;
+        } 
+    }
+    
+    public void puedeJugar(Jugador unJ) throws BingoExceptions{
+        try{
+            bingo.puedeJugar(unJ);
         }
- 
+        catch(BingoExceptions error){
+            throw error;
+        }
     }
 
     public void loginAdministrador(String ci, String pass) throws BingoExceptions {
         try{
-            Administrador unA = cu.loginAdministrador(ci, pass);        
+            cu.loginAdministrador(ci, pass);        
         }
         catch(BingoExceptions error){
             throw error;
@@ -53,13 +59,7 @@ public class Fachada {
     }
 
     public void agregarAJuego(Jugador unJ) {
-        //try{
-            bingo.validarJuego(unJ);
-        //}
-        //catch(BingoExceptions error){
-            //capturar el error y mostralro en pantalla
-        //}
-        
+        bingo.validarJuego(unJ);        
     }
     
     public void addUsuario(Usuario usuario){
