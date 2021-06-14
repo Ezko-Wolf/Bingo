@@ -34,8 +34,10 @@ public class Bingo {
         //try{
             enEspera.add(unJ);
             if(this.puedeJugar(unJ)){
-                Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getNumerosPorCarton(), configuracion.getFilas(), configuracion.getColumnas());                
-                unJ.setJuego(juego);
+                Juego juego = new Juego(new ArrayList(enEspera), configuracion);
+                for(Jugador j : enEspera){
+                    j.setJuego(juego);
+                }                   
                 this.iniciarJuego(juego);
                 
                 //solo se setea el juego al ultimo jugador
@@ -57,4 +59,12 @@ public class Bingo {
         //}
     }
 
+    //ESTO SE VA
+    public void continuar(){
+        juegos.get(0).continuar();
+    }
+    
+    public boolean ganador(){
+        return juegos.get(0).getGanador() == null ? false : true;
+    }
 }

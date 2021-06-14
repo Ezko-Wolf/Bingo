@@ -34,7 +34,9 @@ public class Config {
 
     public synchronized static Config getInstancia(){
         if(instancia == null){
-            instancia = new Config(2, 3, 3, 4, 50, new ArrayList<IFigura>());
+            ArrayList<IFigura> figuritas = new ArrayList();
+            figuritas.add(new FiguraDiagonal());
+            instancia = new Config(3, 3, 3, 4, 50, figuritas);
         }
         return instancia;
     }

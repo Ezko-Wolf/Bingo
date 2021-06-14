@@ -37,6 +37,13 @@ public class Sistema {
             facha.loginUsuario("3456", "mante123", 1);
             facha.loginUsuario("34536", "tonga123", 3);
             
+            while(!facha.ganador()){
+                facha.continuar();
+            }            
+            
+            System.out.println("Ganador");
+                
+            
         } catch (BingoExceptions error){
             System.out.println(error.getMessage());
         }
