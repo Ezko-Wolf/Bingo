@@ -59,11 +59,11 @@ public class Carton {
         try{
             for(IFigura f: figurasHabilitadas){
                 if(f.cumpleFigura(this)) return true;
-            }
+            }            
+            return false;
         }catch(BingoExceptions error){
             throw error;
         }
-        return false;
     }
     
 }

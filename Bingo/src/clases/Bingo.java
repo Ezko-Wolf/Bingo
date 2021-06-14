@@ -28,12 +28,12 @@ public class Bingo {
         juegos.add(juego);
         enEspera.clear(); 
         juego.iniciar();
-    }    
-    
+    }  
+  
     public void validarJuego(Jugador unJ){
         enEspera.add(unJ);
         if(configuracion.getCantidadJugadores() == enEspera.size()){
-            Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getNumerosPorCarton(), configuracion.getFilas(), configuracion.getColumnas());
+            Juego juego = new Juego(new ArrayList(enEspera), configuracion);
             for(Jugador j : enEspera){
                 j.setJuego(juego);
             }
@@ -68,4 +68,12 @@ public class Bingo {
         return unJ.getSaldo() < valorCarton * 3 * unJ.getCantidadCartones();
     }
 
+    //ESTO SE VA
+    public void continuar(){
+        juegos.get(0).continuar();
+    }
+    
+    public boolean ganador(){
+        return juegos.get(0).getGanador() == null ? false : true;
+    }
 }

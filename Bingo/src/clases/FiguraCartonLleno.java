@@ -15,7 +15,7 @@ public class FiguraCartonLleno implements IFigura {
 
     @Override
     public boolean cumpleFigura(Carton carton) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
     
 }

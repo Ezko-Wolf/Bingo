@@ -66,4 +66,12 @@ public class Fachada {
         cu.addUser(usuario);
     }
     
+    //ESTO SE VA
+    public void continuar(){
+        bingo.continuar();
+    }
+    
+    public boolean ganador(){
+        return bingo.ganador();
+    }
 }
