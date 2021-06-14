@@ -34,8 +34,8 @@ public class Bingo {
         enEspera.add(unJ);
         if(configuracion.getCantidadJugadores() == enEspera.size()){
             Juego juego = new Juego(enEspera, configuracion.getFigurasHabilitadas(), configuracion.getNumerosPorCarton(), configuracion.getFilas(), configuracion.getColumnas());
-            for(Jugador enEspera : enEspera){
-                enEspera.setJuego(juego);
+            for(Jugador j : enEspera){
+                j.setJuego(juego);
             }
             this.iniciarJuego(juego);
 
