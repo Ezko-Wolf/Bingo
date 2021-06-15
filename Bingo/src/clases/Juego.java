@@ -42,6 +42,10 @@ public class Juego extends Observable{
         this.jugadores.add(unJ);
     }
     
+    public ArrayList<Jugador> getJugadores(){
+        return this.jugadores;
+    }
+    
     public int getFilas(){
         return this.cfg.getFilas();
     }

@@ -31,7 +31,7 @@ public class ControllerJugador implements MarcadorBoton, Observer {
         j.getJuego().addObserver(this);
     }
 
-    public void generar(ListaPaneles listaPaneles) {
+    public void generarCarton(ListaPaneles listaPaneles) {
         ArrayList<Carton> cartones = j.getCartones();
         for(int i = 0; i < j.getCantidadCartones(); i++){
             try {            
@@ -67,7 +67,10 @@ public class ControllerJugador implements MarcadorBoton, Observer {
     @Override
     public void update(Observable source, Object event) {
         switch((Observer.Eventos)event) {
-            case JUEGO_INICIADO : vista.generar(); break;
+            case JUEGO_INICIADO : 
+                vista.generarCarton(); 
+                vista.actualizarInterfaz();
+            break;
         }
     }
     
