@@ -37,6 +37,7 @@ public class ControladorUsuarios {
         try{
             Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
             Fachada fachada = Fachada.getInstancia();
+            this.usuarioEnJuego(usuario);
             Jugador unJ = new Jugador(usuario.getSaldo(), usuario, cantCartones);
             fachada.puedeJugar(unJ);
             jugadores.add(unJ);
@@ -69,14 +70,13 @@ public class ControladorUsuarios {
         throw new BingoExceptions("Acceso denegado.");
     }
 
-    private boolean usuarioEnJuego(Usuario unU) throws BingoExceptions {
+    private void usuarioEnJuego(Usuario unU) throws BingoExceptions {
         if(jugadores.size() > 0){
             for(Jugador j: jugadores){
-                if(unU.getCi().equals(j.getCi())) return true;
+                if(unU.getCi().equals(j.getCi())) throw new BingoExceptions("El jugador: " + unU.getCi() + " ya está participando del Bingo.");
             }
-            return false;
         }        
-        throw new BingoExceptions("El jugador: " + unU.getCi() + " ya está participando del Bingo.");
+        
     }
     
 //    public ArrayList<Celda> getCeldasDeJugador(Jugador j) {

@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Ezko
  */
 public class Jugador {
+
     public enum EstadoJugador {
         Continuar,
         Abandona

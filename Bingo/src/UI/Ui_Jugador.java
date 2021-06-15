@@ -183,6 +183,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     private javax.swing.JTextPane saldoJugador;
     // End of variables declaration//GEN-END:variables
     
+   
     public void generarCarton(){
        ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
        cj.generarCarton(listaPaneles);
@@ -194,9 +195,9 @@ public class Ui_Jugador extends javax.swing.JDialog {
         saldoJugador.setText("$"+j.getSaldo());
         listaJugadores.setListData(j.getJuego().getJugadores().toArray());
         figurasHabilitadas.setListData(j.getJuego().getFigurasHabilitadas().toArray());
-        header.setText(j.getNombre() + " COMPLETAR NUMERO DE JUEGO");
+        header.setText("<< " + j.getNombre() + " >> << " + j.getJuego().getNumero() + " >>");
         estadoDelJuego.setText("HACER ESTADO");
-        montoPozo.setText("HACER EL POZO");
+        montoPozo.setText("$" + j.getJuego().getPozo());
         numeroSorteado.setText("Hacer NUMERO SORTEADO");
 //        numerosSorteados.setListData(); ESTO HAY QUE HACERLO TMB
         

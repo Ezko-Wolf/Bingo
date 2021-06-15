@@ -19,11 +19,15 @@ public class Juego extends Observable{
     private ArrayList<Jugador> jugadores = new ArrayList();
     private Jugador ganador;
     private Bolillero bolillero;
+    private Pozo pozo;
     private Config cfg;
+    private int numeroJuego;
         
-    public Juego(Config cfg){
+    public Juego(Config cfg, int numero){
         this.ganador = null;
         this.cfg = cfg;
+        this.pozo = new Pozo();
+        this.numeroJuego = numero;
     }
 
     public ArrayList<IFigura> getFigurasHabilitadas(){
@@ -37,6 +41,7 @@ public class Juego extends Observable{
     public Jugador getGanador(){
         return this.ganador;
     }
+    
     
     public void addJugador(Jugador unJ) {
         this.jugadores.add(unJ);
@@ -93,5 +98,17 @@ public class Juego extends Observable{
 
     private int cantidadNumerosEnJuego(int cantCartones, int numerosEnCarton) {
         return cantCartones * numerosEnCarton;
+    }
+
+    public void setPozo(int cartones) {
+        pozo.agregarSaldo(cartones, cfg.getValorCarton());
+    }
+
+    public double getPozo() {
+        return this.pozo.getMonto();
+    }
+
+    public int getNumero() {
+        return this.numeroJuego;
     }
 }

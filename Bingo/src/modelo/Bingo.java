@@ -35,14 +35,18 @@ public class Bingo {
   
     public void validarJuego(Jugador unJ){
         enEspera.add(unJ);
-        this.getProximoJuego().addJugador(unJ);
+        Juego juego = this.getProximoJuego();
+        juego.addJugador(unJ);
+        juego.setPozo(unJ.getCartones().size());
+        
+        
         if(configuracion.getCantidadJugadores() == enEspera.size())          
             this.iniciarJuego();
     }
     
     public Juego getProximoJuego(){
         if(enEspera.size() == 0){
-            Juego juego = new Juego(configuracion);
+            Juego juego = new Juego(configuracion, juegos.size()+1);
             juegos.add(juego);
         }
         return juegos.get(juegos.size() - 1);            
