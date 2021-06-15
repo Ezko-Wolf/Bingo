@@ -46,7 +46,7 @@ public class Bingo {
     
     public Juego getProximoJuego(){
         if(enEspera.size() == 0){
-            Juego juego = new Juego(configuracion);
+            Juego juego = new Juego(configuracion, juegos.size()+1);
             juegos.add(juego);
         }
         return juegos.get(juegos.size() - 1);            

@@ -6,13 +6,8 @@
 package UI;
 
 import clases.Jugador;
-import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
-import componenteGrid.MarcadorBoton;
 import controladores.ControllerJugador;
-import clases.Celda;
-import java.util.ArrayList;
-
 /**
  *
  * @author Ezko
@@ -26,7 +21,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
         initComponents();
         this.j = j;
         cj =  new ControllerJugador(this, j);
-        this.generar();
+        this.generarCarton();
     }
 
     /**
@@ -48,9 +43,9 @@ public class Ui_Jugador extends javax.swing.JDialog {
         jScrollPane4 = new javax.swing.JScrollPane();
         estadoDelJuego = new javax.swing.JTextPane();
         jScrollPane5 = new javax.swing.JScrollPane();
-        listaJugadores = new javax.swing.JList<>();
+        listaJugadores = new javax.swing.JList();
         jScrollPane6 = new javax.swing.JScrollPane();
-        figurasHabilitadas = new javax.swing.JList<>();
+        figurasHabilitadas = new javax.swing.JList();
         continuar = new javax.swing.JButton();
         abandonar = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -63,20 +58,16 @@ public class Ui_Jugador extends javax.swing.JDialog {
         header.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         saldoJugador.setEditable(false);
-        saldoJugador.setText("saldo");
         saldoJugador.setToolTipText("");
         jScrollPane1.setViewportView(saldoJugador);
 
         numeroSorteado.setEditable(false);
-        numeroSorteado.setText("numero");
         jScrollPane2.setViewportView(numeroSorteado);
 
         montoPozo.setEditable(false);
-        montoPozo.setText("pozo");
         jScrollPane3.setViewportView(montoPozo);
 
         estadoDelJuego.setEditable(false);
-        estadoDelJuego.setText("estado");
         jScrollPane4.setViewportView(estadoDelJuego);
 
         listaJugadores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -92,6 +83,11 @@ public class Ui_Jugador extends javax.swing.JDialog {
         jScrollPane6.setViewportView(figurasHabilitadas);
 
         continuar.setText("Continuar");
+        continuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                continuarActionPerformed(evt);
+            }
+        });
 
         abandonar.setText("Abandonar");
 
@@ -157,6 +153,10 @@ public class Ui_Jugador extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
+        this.continuar();
+    }//GEN-LAST:event_continuarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -167,7 +167,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     private javax.swing.JScrollPane cartones;
     private javax.swing.JButton continuar;
     private javax.swing.JTextPane estadoDelJuego;
-    private javax.swing.JList<String> figurasHabilitadas;
+    private javax.swing.JList figurasHabilitadas;
     private javax.swing.JTextField header;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -176,16 +176,35 @@ public class Ui_Jugador extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JList<String> listaJugadores;
+    private javax.swing.JList listaJugadores;
     private javax.swing.JTextPane montoPozo;
     private javax.swing.JTextPane numeroSorteado;
     private javax.swing.JList<String> numerosSorteados;
     private javax.swing.JTextPane saldoJugador;
     // End of variables declaration//GEN-END:variables
     
-    public void generar(){
+   
+    public void generarCarton(){
        ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
-       cj.generar(listaPaneles);
+       cj.generarCarton(listaPaneles);
        cartones.setViewportView(listaPaneles);
+       this.actualizarInterfaz();
+    }
+    
+    public void actualizarInterfaz(){
+        saldoJugador.setText("$"+j.getSaldo());
+        listaJugadores.setListData(j.getJuego().getJugadores().toArray());
+        figurasHabilitadas.setListData(j.getJuego().getFigurasHabilitadas().toArray());
+        header.setText("<< " + j.getNombre() + " >> << " + j.getJuego().getNumero() + " >>");
+        estadoDelJuego.setText("HACER ESTADO");
+        montoPozo.setText("$" + j.getJuego().getPozo());
+        numeroSorteado.setText("Hacer NUMERO SORTEADO");
+//        numerosSorteados.setListData(); ESTO HAY QUE HACERLO TMB
+        
+    }
+
+    private void continuar() {
+        j.setEstado(Jugador.EstadoJugador.Continuar);
+        j.getJuego().continuar();
     }
 }

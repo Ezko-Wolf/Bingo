@@ -13,19 +13,26 @@ import java.util.ArrayList;
  * @author Ezko
  */
 public class Jugador {
+
+    public enum EstadoJugador {
+        Continuar,
+        Abandona
+    }
+    
     private double saldo;
     private ArrayList<Carton> cartones = new ArrayList();
     private int cantCartones;
     private Juego juego;
     private Usuario usuario;
-    
+    private EstadoJugador estado;
+            
     public Jugador(double saldo, Usuario usuario, int cantCartones){
         this.saldo = saldo;
         this.usuario = usuario;
         this.cantCartones = cantCartones;
         this.juego = null;
+        this.estado = EstadoJugador.Continuar;
     }
-
  
     public void setJuego(Juego unJ){
         this.juego = unJ;
@@ -33,6 +40,18 @@ public class Jugador {
     
     public double getSaldo(){
         return this.saldo;
+    }
+    
+    public void setEstado(EstadoJugador estado){
+        this.estado = estado;
+    } 
+    
+    public EstadoJugador getEstado(){
+        return this.estado;
+    }
+    
+    public String getNombre() {
+        return this.usuario.getNombre();
     }
     
     public void setCartones(ArrayList<Carton> cartones){
@@ -45,6 +64,14 @@ public class Jugador {
 
     public ArrayList<Carton> getCartones() {
         return this.cartones;
+    }
+    
+    public Juego getJuego() {
+        return this.juego;
+    }
+
+    public String getCi() {
+        return this.usuario.getCedula();
     }
     
     public boolean anotarBolilla(Bolilla b){
@@ -68,18 +95,15 @@ public class Jugador {
         }
     }
 
-    public Juego getJuego() {
-        return this.juego;
-    }
-
-    public String getCi() {
-        return this.usuario.getCedula();
-    }
-
     public void crearCartones() {
         for(int i = 0; i < this.cantCartones; i++){
             Carton cart = new Carton(this.juego.getFilas(), this.juego.getColumnas());
             this.cartones.add(cart);
         }
+    }
+    
+    @Override
+    public String toString(){
+      return this.getNombre();
     }
 }
