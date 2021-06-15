@@ -100,7 +100,6 @@
         <Component class="javax.swing.JTextPane" name="saldoJugador">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="saldo"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
@@ -116,7 +115,6 @@
         <Component class="javax.swing.JTextPane" name="numeroSorteado">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="numero"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -131,7 +129,6 @@
         <Component class="javax.swing.JTextPane" name="montoPozo">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="pozo"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -146,7 +143,6 @@
         <Component class="javax.swing.JTextPane" name="estadoDelJuego">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="estado"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -168,7 +164,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -193,7 +189,7 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -202,6 +198,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Continuar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="continuarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="abandonar">
       <Properties>

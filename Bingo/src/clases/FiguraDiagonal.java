@@ -14,6 +14,8 @@ import interfaces.IFigura;
  */
 class FiguraDiagonal implements IFigura {
     
+    private String nombre = "Diagonal";
+    
     @Override
     public boolean cumpleFigura(Carton carton) throws BingoExceptions {
         if (carton.getFilas() != carton.getColumnas())
@@ -32,5 +34,10 @@ class FiguraDiagonal implements IFigura {
             if(carton.getCeldas().get(i).getBolilla() == null) derechaAIzquierda=false;
         }
         return izquierdaADerecha || derechaAIzquierda;
+    }
+    
+    @Override
+    public String toString(){
+        return this.nombre;
     }
 }
