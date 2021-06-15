@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package modelo;
 
+import clases.Config;
+import clases.Juego;
+import clases.Jugador;
 import exepctions.BingoExceptions;
 import interfaces.IFigura;
 import java.util.ArrayList;
@@ -24,23 +27,26 @@ public class Bingo {
         juegos = new ArrayList();
     }
   
-    public void iniciarJuego(Juego juego){        
-        juegos.add(juego);
+    public void iniciarJuego(){
+        Juego juego = juegos.get(juegos.size() - 1);
         enEspera.clear(); 
         juego.iniciar();
     }  
   
     public void validarJuego(Jugador unJ){
         enEspera.add(unJ);
-        if(configuracion.getCantidadJugadores() == enEspera.size()){
-            Juego juego = new Juego(new ArrayList(enEspera), configuracion);
-            for(Jugador j : enEspera){
-                j.setJuego(juego);
-            }
-            this.iniciarJuego(juego);
-
-        }  
+        this.getProximoJuego().addJugador(unJ);
+        if(configuracion.getCantidadJugadores() == enEspera.size())          
+            this.iniciarJuego();
     }
+    
+    public Juego getProximoJuego(){
+        if(enEspera.size() == 0){
+            Juego juego = new Juego(configuracion);
+            juegos.add(juego);
+        }
+        return juegos.get(juegos.size() - 1);            
+    }            
     
     public void puedeJugar(Jugador unJ) throws BingoExceptions {
         try{

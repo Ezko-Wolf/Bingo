@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsistemas;
+package modelo;
 
 import clases.Administrador;
+import clases.Carton;
+import clases.Celda;
 import clases.Jugador;
 import clases.User;
 import clases.Usuario;
@@ -31,14 +33,17 @@ public class ControladorUsuarios {
         usuarios.add(usuario);
     }
     
-    public void loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions{
+    public Jugador loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions{
         try{
             Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
             Fachada fachada = Fachada.getInstancia();
             Jugador unJ = new Jugador(usuario.getSaldo(), usuario, cantCartones);
             fachada.puedeJugar(unJ);
             jugadores.add(unJ);
-            fachada.agregarAJuego(unJ);
+            unJ.setJuego(fachada.getProximoJuego());
+            unJ.crearCartones();
+            fachada.agregarAJuego(unJ);            
+            return unJ;
         }
         catch(BingoExceptions error){
             throw error;
@@ -55,8 +60,7 @@ public class ControladorUsuarios {
         }
     }
 
-
-   private User loginGenerico(String usuario, String password, ArrayList<User> listaUsuarios) throws BingoExceptions {
+    private User loginGenerico(String usuario, String password, ArrayList<User> listaUsuarios) throws BingoExceptions {
         for (User u : listaUsuarios) {
             if (u.getCi().equals(usuario) && u.getPassword().equals(password)) {
                 return u;
@@ -74,4 +78,12 @@ public class ControladorUsuarios {
         }        
         throw new BingoExceptions("El jugador: " + unU.getCi() + " ya está participando del Bingo.");
     }
+    
+//    public ArrayList<Celda> getCeldasDeJugador(Jugador j) {
+//        ArrayList<Celda> celdas = new ArrayList();
+//        for(Carton c:j.getCartones()){
+//            celdas.addAll(c.getCeldas());
+//        }
+//        return celdas;
+//    }
 }

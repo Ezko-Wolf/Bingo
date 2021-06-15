@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package subsistemas;
-import clases.Bingo;
+package modelo;
+import clases.Celda;
+import clases.Juego;
 import clases.Jugador;
 import clases.Usuario;
 import exepctions.BingoExceptions;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,9 +33,9 @@ public class Fachada {
         return instance;
     }
     
-    public void loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions {
+    public Jugador loginUsuario(String ci, String pass, int cantCartones) throws BingoExceptions {
         try{
-            cu.loginUsuario(ci, pass, cantCartones);
+            return cu.loginUsuario(ci, pass, cantCartones);
         }
         catch(BingoExceptions error){
             throw error;
@@ -64,6 +66,10 @@ public class Fachada {
     
     public void addUsuario(Usuario usuario){
         cu.addUser(usuario);
+    }
+    
+    public Juego getProximoJuego(){
+        return bingo.getProximoJuego();
     }
     
     //ESTO SE VA

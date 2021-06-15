@@ -5,8 +5,8 @@
  */
 package UI;
 
-import clases.Usuario;
-import controladores.ControllerJugador;
+import clases.Jugador;
+import controladores.ControllerLogin;
 import exepctions.BingoExceptions;
 import javax.swing.JOptionPane;
 
@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author atrias
  */
-public class ui_loginJugador extends javax.swing.JFrame {
+public class Ui_LoginJugador extends javax.swing.JFrame {
 
     /**
      * Creates new form ui_loginJugador
      */
-    public ui_loginJugador() {
+    public Ui_LoginJugador() {
         initComponents();
     }
 
@@ -138,20 +138,21 @@ public class ui_loginJugador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ui_loginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ui_loginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ui_loginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ui_loginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ui_loginJugador().setVisible(true);
+                new Ui_LoginJugador().setVisible(true);
             }
         });
     }
@@ -172,15 +173,22 @@ public class ui_loginJugador extends javax.swing.JFrame {
         String cedula = txtCedula.getText();
         String password = new String(txtPassword.getPassword());
         String cantCartones = txtCantCartones.getText();
-        ControllerJugador cj = new ControllerJugador();
+        ControllerLogin cl = new ControllerLogin(this);
         
         try{
-            cj.loginUsuario(cedula, password, Integer.valueOf(cantCartones));
-            this.dispose();            
+            cl.loginUsuario(cedula, password, Integer.valueOf(cantCartones));                                  
         }
         catch(BingoExceptions error){
             JOptionPane.showMessageDialog(this, error.getMessage(), "Login incorrecto", JOptionPane.ERROR_MESSAGE);
-        }
-        
+        }    
+    }
+    
+    public void cerrarVentana(){
+        this.dispose();
+    }    
+    
+    public void cargarPanelDeJuego(Jugador j){
+        Ui_Jugador uj = new Ui_Jugador(this, false, j);
+        uj.setVisible(true);
     }
 }

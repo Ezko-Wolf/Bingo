@@ -36,7 +36,7 @@ public class Config {
         if(instancia == null){
             ArrayList<IFigura> figuritas = new ArrayList();
             figuritas.add(new FiguraDiagonal());
-            instancia = new Config(3, 3, 3, 4, 50, figuritas);
+            instancia = new Config(3, 3, 3, 2, 50, figuritas);
         }
         return instancia;
     }
