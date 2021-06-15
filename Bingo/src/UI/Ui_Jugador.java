@@ -184,7 +184,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     
     public void generar(){
-        ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
+       ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
        cj.generar(listaPaneles);
        cartones.setViewportView(listaPaneles);
     }
