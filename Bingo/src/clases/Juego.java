@@ -8,19 +8,20 @@ package clases;
 import interfaces.IFigura;
 import java.util.ArrayList;
 import interfaces.IFigura;
+import observer.Observable;
+import observer.Observer;
 
 /**
  *
  * @author Ezko
  */
-public class Juego {
+public class Juego extends Observable{
     private ArrayList<Jugador> jugadores = new ArrayList();
     private Jugador ganador;
     private Bolillero bolillero;
     private Config cfg;
         
-    public Juego(ArrayList<Jugador> jugadores, Config cfg){
-        this.jugadores = jugadores;
+    public Juego(Config cfg){
         this.ganador = null;
         this.cfg = cfg;
     }
@@ -37,11 +38,24 @@ public class Juego {
         return this.ganador;
     }
     
+    public void addJugador(Jugador unJ) {
+        this.jugadores.add(unJ);
+    }
+    
+    public int getFilas(){
+        return this.cfg.getFilas();
+    }
+    
+    public int getColumnas(){
+        return this.cfg.getColumnas();
+    }
+    
     public void iniciar(){
         int cantCartones = this.obtenerCantCartones();
         int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
         this.bolillero = new Bolillero(cantidadNumeros);
         this.dispararCreacionDeCartones();
+        notifyObservers(Observer.Eventos.JUEGO_INICIADO);
         this.continuar();
     }
     
@@ -66,7 +80,11 @@ public class Juego {
     }    
   
     private void dispararCreacionDeCartones() {
-        HelperCrearCartones.crearCartones(bolillero.getBolillas(), jugadores, cfg.getFilas(), cfg.getColumnas());
+        ArrayList<Carton> auxCartones = new ArrayList();
+        for(Jugador j:jugadores){
+            auxCartones.addAll(j.getCartones());
+        }
+        HelperCrearCartones.llenarCartones(auxCartones, this.bolillero.getBolillas());
     }
 
     private int cantidadNumerosEnJuego(int cantCartones, int numerosEnCarton) {

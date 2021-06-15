@@ -75,4 +75,11 @@ public class Jugador {
     public String getCi() {
         return this.usuario.getCedula();
     }
+
+    public void crearCartones() {
+        for(int i = 0; i < this.cantCartones; i++){
+            Carton cart = new Carton(this.juego.getFilas(), this.juego.getColumnas());
+            this.cartones.add(cart);
+        }
+    }
 }

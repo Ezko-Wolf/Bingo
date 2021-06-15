@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controladores;
+package observer;
 
 /**
  *
  * @author Ezko
  */
-public class controllerLogin {
+public interface Observer {
+    public enum Eventos {
+        JUEGO_INICIADO
+    }
     
+    public void update(Observable source, Object event);
 }

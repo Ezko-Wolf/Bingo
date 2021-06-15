@@ -9,15 +9,17 @@ package clases;
  *
  * @author Ezko
  */
-class Celda {
+public class Celda {
     private int valor;
     private Bolilla bolilla;
+    private boolean cargada = false;
     
     public Celda(){
     }
     
     public Celda(int valor){
         this.valor = valor;
+        this.cargada = true;
     }
 
     public Bolilla getBolilla(){
@@ -26,6 +28,15 @@ class Celda {
     
     public void setValor(int valor){
         this.valor = valor;
+        this.cargada = true;
+    }
+    
+    public int getValor(){
+        return this.valor;
+    }
+    
+    public boolean getCargada(){
+        return this.cargada;
     }
     
     public boolean marcar(Bolilla b) {

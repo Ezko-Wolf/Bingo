@@ -6,7 +6,7 @@
 package controladores;
 
 import exepctions.BingoExceptions;
-import subsistemas.Fachada;
+import modelo.Fachada;
 
 /**
  *

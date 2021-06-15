@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author atrias
  */
-public class ui_loginAdministrador extends javax.swing.JFrame {
+public class Ui_LoginAdministrador extends javax.swing.JFrame {
 
     /**
      * Creates new form ui_loginAdministrador
      */
-    public ui_loginAdministrador() {
+    public Ui_LoginAdministrador() {
         initComponents();
     }
 
@@ -120,20 +120,21 @@ public class ui_loginAdministrador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ui_loginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ui_loginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ui_loginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ui_loginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ui_LoginAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ui_loginAdministrador().setVisible(true);
+                new Ui_LoginAdministrador().setVisible(true);
             }
         });
     }
