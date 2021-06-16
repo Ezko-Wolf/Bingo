@@ -53,6 +53,14 @@ public class Juego extends ObservableJuego{
         notifyObservers(ObserverJuego.Eventos.HAY_GANADOR);
     }
     
+    public double getMontoPozo(){
+        return pozo.getMonto();
+    }
+    
+    public IFigura getFiguraGanadora(){
+        return ganador.getFiguraGanadora();
+    }
+    
     public Jugador getGanador(){
         return this.ganador;
     }

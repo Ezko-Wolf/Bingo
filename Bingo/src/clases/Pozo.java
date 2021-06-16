@@ -29,9 +29,26 @@ public class Pozo {
     void agregarSaldo(int cantCartones, double valorCarton) {
         this.monto += cantCartones * valorCarton;
     }
+    
+    private void agregarPremio(double costoPremio){
+        this.monto += costoPremio;
+    }
+    
+    private double calcularPremio(int cantCartones, double valorCarton, double multiploPozo){
+        return cantCartones * valorCarton * multiploPozo;
+    }
 
-    void liquidar(Jugador ganador, ArrayList<Jugador> jugadores,double valorCarton) {
+    public void liquidar(Jugador ganador, ArrayList<Jugador> jugadores,double valorCarton) {
         IFigura figuraGanadora = ganador.getFiguraGanadora();
-        figuraGanadora.getMultiploPozo();
+        double multiploPozo = figuraGanadora.getMultiploPozo();
+        for(Jugador j : jugadores){
+            if(!ganador.equals(j)) {
+                double costoPremio = this.calcularPremio(j.getCantidadCartones(),valorCarton,multiploPozo);
+                this.agregarPremio(costoPremio);
+                j.pagar(costoPremio);
+                
+            }
+        }
+        ganador.cobrar(this.getMonto());
     }  
 }

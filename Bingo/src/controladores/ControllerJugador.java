@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import UI.Ui_GanadorPerdedor;
 import UI.Ui_Jugador;
 import clases.Carton;
 import clases.Celda;
@@ -31,6 +32,7 @@ import modelo.Fachada;
  */
 public class ControllerJugador implements MarcadorBoton, ObserverJuego, ObserverJugador {
     private Ui_Jugador vista;
+    private Ui_GanadorPerdedor vistaFinal;
     private Jugador j;
     private ListaPaneles listaPaneles;
     
@@ -95,7 +97,6 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             case JUEGO_INICIADO : 
                 vista.generarCarton(); 
                 vista.actualizarInterfaz();
-             
             break;
             case JUGADOR_ABANDONO : 
                 vista.actualizarInterfaz();
@@ -105,6 +106,11 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
                 vista.actualizarInterfaz();  
             break;
             case HAY_GANADOR :
+                Juego juego = (Juego)source;
+                this.vistaFinal = new Ui_GanadorPerdedor();
+
+                vistaFinal.actualizarInterfaz(j,juego.getMontoPozo(),juego.getGanador());
+                
                 System.out.println("Tenemos ganador");
             break;
         }
