@@ -15,6 +15,7 @@ import controladores.ControllerJugador;
 public class Ui_Jugador extends javax.swing.JDialog {
     private Jugador j;
     private ControllerJugador cj;
+    private ListaPaneles listaPaneles;
     
     public Ui_Jugador(java.awt.Frame parent, boolean modal, Jugador j) {
         super(parent, modal);
@@ -194,7 +195,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     
    
     public void generarCarton(){
-       ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
+       listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
        cj.generarCarton(listaPaneles);
        cartones.setViewportView(listaPaneles);
        this.cargarDatos();
@@ -202,10 +203,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     }
     
     public void actualizarInterfaz(){
-       // saldoJugador.setText("$"+j.getSaldo());
         listaJugadores.setListData(j.getJuego().getJugadores().toArray());
-        //figurasHabilitadas.setListData(j.getJuego().getFigurasHabilitadas().toArray());
-        //header.setText("<< " + j.getNombre() + " >> << " + j.getJuego().getNumero() + " >>");
         estadoDelJuego.setText("HACER ESTADO");
         montoPozo.setText("$" + j.getJuego().getPozo());
         numeroSorteado.setText("Hacer NUMERO SORTEADO");
@@ -214,8 +212,11 @@ public class Ui_Jugador extends javax.swing.JDialog {
     }
 
     private void continuar() {
-        j.setEstado(Jugador.EstadoJugador.Continuar);
-        j.getJuego().continuar();
+        cj.continuar();
+    }
+    
+    public void cerrarVentana(){
+        this.dispose();
     }
     
 

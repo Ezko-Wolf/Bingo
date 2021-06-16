@@ -9,11 +9,10 @@ package observer;
  *
  * @author Ezko
  */
-public interface Observer {
+public interface ObserverJugador {
     public enum Eventos {
-        JUEGO_INICIADO,
-        JUGADOR_ABANDONO
+        MARCA_BOLILLA
     }
     
-    public void update(Observable source, Object event);
+    public void update(ObservableJugador source, Object event);
 }

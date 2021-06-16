@@ -5,27 +5,36 @@
  */
 package clases;
 
-import interfaces.IFigura;
+import clases.Jugador.EstadoJugador;
 import java.util.ArrayList;
 import interfaces.IFigura;
-import observer.Observable;
-import observer.Observer;
+import observer.ObservableJuego;
+import observer.ObserverJuego;
 
 /**
  *
  * @author Ezko
  */
-public class Juego extends Observable{
+public class Juego extends ObservableJuego{
+    public enum EstadoJuego {
+        EsperandoInicio,
+        Jugando,
+        EsperandoJugadores,
+        Finalizado
+    }
+    
     private ArrayList<Jugador> jugadores = new ArrayList();
     private Jugador ganador;
     private Bolillero bolillero;
     private Pozo pozo;
     private Config cfg;
+    private EstadoJuego estado;
     private int numeroJuego;
         
     public Juego(Config cfg, int numero){
         this.ganador = null;
         this.cfg = cfg;
+        this.estado = EstadoJuego.EsperandoInicio;
         this.pozo = new Pozo();
         this.numeroJuego = numero;
     }
@@ -36,12 +45,17 @@ public class Juego extends Observable{
     
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
+        this.estado = EstadoJuego.Finalizado;
+        notifyObservers(ObserverJuego.Eventos.HAY_GANADOR);
     }
     
     public Jugador getGanador(){
         return this.ganador;
     }
     
+    public EstadoJuego getEstado(){
+        return this.estado;
+    }
     
     public void addJugador(Jugador unJ) {
         this.jugadores.add(unJ);
@@ -64,20 +78,31 @@ public class Juego extends Observable{
         int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
         this.bolillero = new Bolillero(cantidadNumeros);
         this.dispararCreacionDeCartones();
-        notifyObservers(Observer.Eventos.JUEGO_INICIADO);
+        notifyObservers(ObserverJuego.Eventos.JUEGO_INICIADO);
         this.continuar();
     }
     
     public void continuar(){
-        try{
+        if(this.estado == EstadoJuego.EsperandoInicio || this.jugadoresListos()){
+            this.estado = EstadoJuego.Jugando;
+            notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
             Bolilla sorteada = this.bolillero.sortear();
             boolean bolillaMarcada = false;
             for(int i = 0; i < jugadores.size() && ganador == null && !bolillaMarcada; i++){
                 bolillaMarcada = jugadores.get(i).anotarBolilla(sorteada);
             }
-        }catch(Error error){
-            //Capturar el error y mostrarlo en la vista
+            this.estado = EstadoJuego.EsperandoJugadores;
+            notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
         }
+    }
+    
+    private boolean jugadoresListos() {
+        boolean jugar = true;
+        for(Jugador j:jugadores){
+            jugar = j.getEstado() == EstadoJugador.Continuar; 
+            if(jugar == false) return false;
+        }
+        return jugar;
     }
 
     private int obtenerCantCartones() {
