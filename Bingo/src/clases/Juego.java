@@ -149,8 +149,7 @@ public class Juego extends ObservableJuego{
         else{            
             jugadores.remove(unJ);
         }
-        
-        notifyObservers(Observer.Eventos.JUGADOR_ABANDONO);
+        notifyObservers(ObserverJuego.Eventos.JUGADOR_ABANDONO);
             
     }
 }
