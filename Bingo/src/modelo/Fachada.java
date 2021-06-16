@@ -60,8 +60,12 @@ public class Fachada {
         }
     }
 
-    public void agregarAJuego(Jugador unJ) {
-        bingo.validarJuego(unJ);        
+    public void agregarAJuego(Jugador unJ) throws BingoExceptions {
+       try{
+           bingo.validarJuego(unJ);        
+       }catch(BingoExceptions error){
+           throw error;
+       }
     }
     
     public void addUsuario(Usuario usuario){
@@ -73,8 +77,12 @@ public class Fachada {
     }
     
     //ESTO SE VA
-    public void continuar(){
-        bingo.continuar();
+    public void continuar() throws BingoExceptions{
+        try{
+            bingo.continuar();
+        }catch(BingoExceptions error){
+            throw error;
+        } 
     }
     
     public boolean ganador(){

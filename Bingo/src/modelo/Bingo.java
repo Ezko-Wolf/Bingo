@@ -27,21 +27,29 @@ public class Bingo {
         juegos = new ArrayList();
     }
   
-    public void iniciarJuego(){
-        Juego juego = juegos.get(juegos.size() - 1);
-        enEspera.clear(); 
-        juego.iniciar();
+    public void iniciarJuego() throws BingoExceptions{
+       try{
+           Juego juego = juegos.get(juegos.size() - 1);
+           enEspera.clear(); 
+           juego.iniciar();
+       }catch(BingoExceptions error){
+           throw error;
+       }
     }  
   
-    public void validarJuego(Jugador unJ){
-        enEspera.add(unJ);
-        Juego juego = this.getProximoJuego();
-        juego.addJugador(unJ);
-        juego.setPozo(unJ.getCartones().size());
-        
-        
-        if(configuracion.getCantidadJugadores() == enEspera.size())          
-            this.iniciarJuego();
+    public void validarJuego(Jugador unJ) throws BingoExceptions{
+        try{
+            enEspera.add(unJ);
+            Juego juego = this.getProximoJuego();
+            juego.addJugador(unJ);
+            juego.setPozo(unJ.getCartones().size());
+            
+            
+            if(configuracion.getCantidadJugadores() == enEspera.size())          
+                this.iniciarJuego();
+        }catch(BingoExceptions error){
+            throw error;
+        }
     }
     
     public Juego getProximoJuego(){
@@ -79,8 +87,12 @@ public class Bingo {
     }
 
     //ESTO SE VA
-    public void continuar(){
-        juegos.get(0).continuar();
+    public void continuar() throws BingoExceptions{
+        try{
+            juegos.get(0).continuar();
+        }catch(BingoExceptions error){
+            throw error;
+        }
     }
     
     public boolean ganador(){

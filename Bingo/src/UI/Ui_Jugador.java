@@ -8,6 +8,7 @@ package UI;
 import clases.Jugador;
 import componenteGrid.ListaPaneles;
 import controladores.ControllerJugador;
+import exepctions.BingoExceptions;
 /**
  *
  * @author Ezko
@@ -86,7 +87,11 @@ public class Ui_Jugador extends javax.swing.JDialog {
         continuar.setText("Continuar");
         continuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                continuarActionPerformed(evt);
+                try{
+                    continuarActionPerformed(evt);
+                }catch(BingoExceptions error){
+
+                }
             }
         });
 
@@ -159,8 +164,12 @@ public class Ui_Jugador extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
-        this.continuar();
+    private void continuarActionPerformed(java.awt.event.ActionEvent evt) throws BingoExceptions {//GEN-FIRST:event_continuarActionPerformed
+        try{
+            this.continuar();
+        }catch(BingoExceptions error){
+            throw error;
+        }
     }//GEN-LAST:event_continuarActionPerformed
 
     private void abandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abandonarActionPerformed
@@ -211,8 +220,12 @@ public class Ui_Jugador extends javax.swing.JDialog {
         
     }
 
-    private void continuar() {
-        cj.continuar();
+    private void continuar() throws BingoExceptions {
+        try{
+            cj.continuar();
+        }catch(BingoExceptions error){
+            throw error;
+        }
     }
 
     private void cargarDatos() {

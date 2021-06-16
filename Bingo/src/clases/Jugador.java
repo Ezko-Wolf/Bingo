@@ -7,6 +7,8 @@ package clases;
 
 import exepctions.BingoExceptions;
 import interfaces.IFigura;
+import modelo.Bingo;
+
 import java.util.ArrayList;
 import observer.ObservableJugador;
 import observer.ObserverJugador;
@@ -138,8 +140,12 @@ public class Jugador extends ObservableJugador {
       return this.getNombre();
     }
     
-    public void continuar(){
-        this.estado = EstadoJugador.Continuar;
-        this.juego.continuar();
+    public void continuar() throws BingoExceptions{
+       try{
+           this.estado = EstadoJugador.Continuar;
+           this.juego.continuar();
+       }catch(BingoExceptions error){
+           throw error;
+       }
     }
 }
