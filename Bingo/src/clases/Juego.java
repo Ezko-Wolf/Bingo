@@ -142,7 +142,7 @@ public class Juego extends ObservableJuego{
 
     private void finalizarPartida() {
         pozo.liquidar(ganador,jugadores,cfg.getValorCarton());
-
+    }
     public ArrayList<Bolilla> listaDeBolillasJugadas() {
         return bolillero.getBolillasSoretadas();
     }
