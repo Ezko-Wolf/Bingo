@@ -13,6 +13,7 @@ public interface ObserverJuego {
     public enum Eventos {
         JUEGO_INICIADO,
         ACTUALIZA_ESTADO_JUEGO,
+        JUGADOR_ABANDONO,
         HAY_GANADOR
     }
     

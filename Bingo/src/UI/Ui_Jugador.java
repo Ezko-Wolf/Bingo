@@ -214,11 +214,6 @@ public class Ui_Jugador extends javax.swing.JDialog {
     private void continuar() {
         cj.continuar();
     }
-    
-    public void cerrarVentana(){
-        this.dispose();
-    }
-    
 
     private void cargarDatos() {
         saldoJugador.setText("$"+j.getSaldo());
