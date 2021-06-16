@@ -17,33 +17,30 @@ public class FiguraPerimetro implements IFigura {
 
     @Override
     public boolean cumpleFigura(Carton carton) {
-        return false;
-//        int largoCol = carton.getColumnas();  
-//        int largoFila = carton.getFilas();
-//        int largo = carton.getCeldas().size() - 1; 
-//        
-//        boolean puedeSeguirExtremo = true;  
-//        boolean puedeSeguirMedio = true;
-//        
-//        int i = 0;
-//        int auxTotalCeldas = carton.getCeldas().size()-1;
-//        
-//        while(i < largoCol-1 && puedeSeguirExtremo){
-//            if(carton.getCeldas().get(i).getBolilla() == null || carton.getCeldas().get(auxTotalCeldas).getBolilla() == null) puedeSeguirExtremo = false;
-//            i++;
-//            auxTotalCeldas--;
-//        }
-//        
-//        int j = largoFila;
-//        
-//        while(j < largo && puedeSeguirMedio){
-//            if(carton.getCeldas().get(j).getBolilla() == null || carton.getCeldas().get(j*2-1).getBolilla() == null) puedeSeguirMedio = false;
-//            j+=largoFila;
-//        }
-//        
-//        
-//        
-//        return puedeSeguirExtremo && puedeSeguirMedio;
+        int largoCol = carton.getColumnas();  
+        int largoFila = carton.getFilas();
+        int largo = carton.getCeldas().size() - 1; 
+        
+        boolean puedeSeguirExtremo = true;  
+        boolean puedeSeguirMedio = true;
+        
+        int i = 0;
+        int auxTotalCeldas = carton.getCeldas().size()-1;
+        
+        while(i < largoCol-1 && puedeSeguirExtremo){
+            if(carton.getCeldas().get(i).getBolilla() == null || carton.getCeldas().get(auxTotalCeldas).getBolilla() == null) puedeSeguirExtremo = false;
+            i++;
+            auxTotalCeldas--;
+        }
+        
+        int j = largoFila;
+        
+        while(j < largo && puedeSeguirMedio){
+            if(carton.getCeldas().get(j).getBolilla() == null || carton.getCeldas().get(j*2-1).getBolilla() == null) puedeSeguirMedio = false;
+            j+=largoFila;
+        }
+        
+        return puedeSeguirExtremo && puedeSeguirMedio;
     }   
 
     @Override
@@ -53,6 +50,11 @@ public class FiguraPerimetro implements IFigura {
 
     @Override
     public String getNombre() {
+        return this.nombre;
+    }
+    
+    @Override
+    public String toString(){
         return this.nombre;
     }
 }

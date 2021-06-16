@@ -28,7 +28,7 @@ class FiguraDiagonal implements IFigura {
         int largoCol = carton.getColumnas();
         int totalCeldas = carton.getColumnas() * carton.getColumnas()-1;
 
-        for (int i = 0; i < carton.getCeldas().size() -1 && izquierdaADerecha; i = i + largoCol + 1) {
+        for (int i = 0; i < carton.getCeldas().size() && izquierdaADerecha; i = i + largoCol + 1) {
             if (carton.getCeldas().get(i).getBolilla() == null) izquierdaADerecha = false;
         }
 

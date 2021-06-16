@@ -8,14 +8,16 @@ package clases;
 import exepctions.BingoExceptions;
 import interfaces.IFigura;
 import java.util.ArrayList;
+import observer.ObservableJugador;
+import observer.ObserverJugador;
 
 /**
  *
  * @author Ezko
  */
-public class Jugador {
-
+public class Jugador extends ObservableJugador {
     public enum EstadoJugador {
+        Esperando,
         Continuar,
         Abandona
     }
@@ -33,7 +35,7 @@ public class Jugador {
         this.usuario = usuario;
         this.cantCartones = cantCartones;
         this.juego = null;
-        this.estado = EstadoJugador.Continuar;
+        this.estado = EstadoJugador.Esperando;
     }
     
     public void setFiguraGanadora(IFigura figuraGanadora) {
@@ -94,8 +96,8 @@ public class Jugador {
                 marco = cartones.get(i).marcar(b);
                 if(marco){
                     b.setJugador(this);
+                    notifyObservers(ObserverJugador.Eventos.MARCA_BOLILLA);
                     this.isGanador(cartones.get(i));
-                    cartones.get(i).cumpleFigura(juego.getFigurasHabilitadas());
                 }
             }
             return marco;
@@ -106,7 +108,7 @@ public class Jugador {
    
     }
     
-    private void isGanador(Carton carton) {
+    private void isGanador(Carton carton) throws BingoExceptions{
         try{
             IFigura figGanadora = carton.cumpleFigura(juego.getFigurasHabilitadas());
             if(figuraGanadora != null){
@@ -114,6 +116,7 @@ public class Jugador {
                 this.setFiguraGanadora(figuraGanadora);             
             }
         }catch(BingoExceptions error){
+            throw error;
             //Capturar el error y mostrarlo en la vista
         }
     }
@@ -126,8 +129,17 @@ public class Jugador {
         }
     }
     
+    public void abandonar() {
+        this.getJuego().abandonar(this);
+    }
+    
     @Override
     public String toString(){
       return this.getNombre();
+    }
+    
+    public void continuar(){
+        this.estado = EstadoJugador.Continuar;
+        this.juego.continuar();
     }
 }

@@ -15,6 +15,7 @@ import controladores.ControllerJugador;
 public class Ui_Jugador extends javax.swing.JDialog {
     private Jugador j;
     private ControllerJugador cj;
+    private ListaPaneles listaPaneles;
     
     public Ui_Jugador(java.awt.Frame parent, boolean modal, Jugador j) {
         super(parent, modal);
@@ -90,6 +91,11 @@ public class Ui_Jugador extends javax.swing.JDialog {
         });
 
         abandonar.setText("Abandonar");
+        abandonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abandonarActionPerformed(evt);
+            }
+        });
 
         numerosSorteados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         numerosSorteados.setEnabled(false);
@@ -157,6 +163,10 @@ public class Ui_Jugador extends javax.swing.JDialog {
         this.continuar();
     }//GEN-LAST:event_continuarActionPerformed
 
+    private void abandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abandonarActionPerformed
+        this.abandonar();
+    }//GEN-LAST:event_abandonarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -185,26 +195,42 @@ public class Ui_Jugador extends javax.swing.JDialog {
     
    
     public void generarCarton(){
-       ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
+       listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
        cj.generarCarton(listaPaneles);
        cartones.setViewportView(listaPaneles);
+       this.cargarDatos();
        this.actualizarInterfaz();
     }
     
     public void actualizarInterfaz(){
-        saldoJugador.setText("$"+j.getSaldo());
         listaJugadores.setListData(j.getJuego().getJugadores().toArray());
-        figurasHabilitadas.setListData(j.getJuego().getFigurasHabilitadas().toArray());
-        header.setText("<< " + j.getNombre() + " >> << " + j.getJuego().getNumero() + " >>");
         estadoDelJuego.setText("HACER ESTADO");
         montoPozo.setText("$" + j.getJuego().getPozo());
         numeroSorteado.setText("Hacer NUMERO SORTEADO");
-//        numerosSorteados.setListData(); ESTO HAY QUE HACERLO TMB
+        //numerosSorteados.setListData((String[]) j.getJuego().listaDeBolillasJugadas().toArray());
         
     }
 
     private void continuar() {
-        j.setEstado(Jugador.EstadoJugador.Continuar);
-        j.getJuego().continuar();
+        cj.continuar();
+    }
+    
+    public void cerrarVentana(){
+        this.dispose();
+    }
+    
+
+    private void cargarDatos() {
+        saldoJugador.setText("$"+j.getSaldo());
+        figurasHabilitadas.setListData(j.getJuego().getFigurasHabilitadas().toArray());
+        header.setText("<< " + j.getNombre() + " >> << " + j.getJuego().getNumero() + " >>");
+    }
+    
+    public void cerrarVentana(){        
+        this.dispose();
+    }
+
+    private void abandonar() {
+        cj.abandonar();
     }
 }

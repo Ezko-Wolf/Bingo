@@ -12,24 +12,24 @@ import java.util.Iterator;
  *
  * @author Ezko
  */
-public class Observable {
-     private HashSet<Observer> observers;
+public class ObservableJugador {
+     private HashSet<ObserverJugador> observers;
 
-    public Observable() {
+    public ObservableJugador() {
         observers = new HashSet();
     }
     
-    public void addObserver(Observer obs) {
+    public void addObserver(ObserverJugador obs) {
         observers.add(obs);
     }
     
-    public void deleteObserver(Observer obs) {
+    public void deleteObserver(ObserverJugador obs) {
         observers.remove(obs);
     }
     
     public void notifyObservers(Object event) {
-        for (Iterator<Observer> iterator = observers.iterator(); iterator.hasNext();) {
-            Observer o = iterator.next();
+        for (Iterator<ObserverJugador> iterator = observers.iterator(); iterator.hasNext();) {
+            ObserverJugador o = iterator.next();
             o.update(this, event);
         }
     }
