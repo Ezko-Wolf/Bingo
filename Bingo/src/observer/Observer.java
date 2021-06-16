@@ -11,7 +11,8 @@ package observer;
  */
 public interface Observer {
     public enum Eventos {
-        JUEGO_INICIADO
+        JUEGO_INICIADO,
+        JUGADOR_ABANDONO
     }
     
     public void update(Observable source, Object event);

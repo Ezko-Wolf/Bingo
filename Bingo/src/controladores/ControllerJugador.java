@@ -8,11 +8,13 @@ package controladores;
 import UI.Ui_Jugador;
 import clases.Carton;
 import clases.Celda;
+import clases.Juego;
 import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
 import componenteGrid.MarcadorBoton;
 import java.util.ArrayList;
+import modelo.Fachada;
 import observer.Observable;
 import observer.Observer;
 import static observer.Observer.Eventos.JUEGO_INICIADO;
@@ -70,8 +72,21 @@ public class ControllerJugador implements MarcadorBoton, Observer {
             case JUEGO_INICIADO : 
                 vista.generarCarton(); 
                 vista.actualizarInterfaz();
+             
+            break;
+            case JUGADOR_ABANDONO : 
+                vista.actualizarInterfaz();
+                
             break;
         }
     }
+
+    public void abandonar() {        
+        j.abandonar();
+        j.getJuego().deleteObserver(this);          
+        vista.cerrarVentana();
+    }
     
+
+
 }
