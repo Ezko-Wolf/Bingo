@@ -15,6 +15,7 @@ import controladores.ControllerJugador;
 public class Ui_Jugador extends javax.swing.JDialog {
     private Jugador j;
     private ControllerJugador cj;
+    private ListaPaneles listaPaneles;
     
     public Ui_Jugador(java.awt.Frame parent, boolean modal, Jugador j) {
         super(parent, modal);
@@ -184,7 +185,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
     
     public void generarCarton(){
-       ListaPaneles listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
+       listaPaneles = new ListaPaneles(j.getJuego().getFilas(),j.getJuego().getColumnas());
        cj.generarCarton(listaPaneles);
        cartones.setViewportView(listaPaneles);
        this.actualizarInterfaz();
@@ -195,7 +196,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
         listaJugadores.setListData(j.getJuego().getJugadores().toArray());
         figurasHabilitadas.setListData(j.getJuego().getFigurasHabilitadas().toArray());
         header.setText(j.getNombre() + " COMPLETAR NUMERO DE JUEGO");
-        estadoDelJuego.setText("HACER ESTADO");
+        estadoDelJuego.setText(j.getJuego().getEstado()+"");
         montoPozo.setText("HACER EL POZO");
         numeroSorteado.setText("Hacer NUMERO SORTEADO");
 //        numerosSorteados.setListData(); ESTO HAY QUE HACERLO TMB
@@ -203,7 +204,10 @@ public class Ui_Jugador extends javax.swing.JDialog {
     }
 
     private void continuar() {
-        j.setEstado(Jugador.EstadoJugador.Continuar);
-        j.getJuego().continuar();
+        cj.continuar();
+    }
+    
+    public void cerrarVentana(){
+        this.dispose();
     }
 }

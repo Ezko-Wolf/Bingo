@@ -7,13 +7,16 @@ package clases;
 
 import exepctions.BingoExceptions;
 import java.util.ArrayList;
+import observer.ObservableJugador;
+import observer.ObserverJugador;
 
 /**
  *
  * @author Ezko
  */
-public class Jugador {
+public class Jugador extends ObservableJugador {
     public enum EstadoJugador {
+        Esperando,
         Continuar,
         Abandona
     }
@@ -30,7 +33,7 @@ public class Jugador {
         this.usuario = usuario;
         this.cantCartones = cantCartones;
         this.juego = null;
-        this.estado = EstadoJugador.Continuar;
+        this.estado = EstadoJugador.Esperando;
     }
  
     public void setJuego(Juego unJ){
@@ -74,11 +77,13 @@ public class Jugador {
     }
     
     public boolean anotarBolilla(Bolilla b){
+        this.estado = EstadoJugador.Esperando;
         boolean marco = false;
         for(int i = 0; i < cartones.size() && marco == false; i++){
             marco = cartones.get(i).marcar(b);
             if(marco){
-                b.setJugador(this);
+                b.setJugador(this);                
+                notifyObservers(ObserverJugador.Eventos.MARCA_BOLILLA);
                 this.isGanador(cartones.get(i));
             }
         }
@@ -104,5 +109,10 @@ public class Jugador {
     @Override
     public String toString(){
       return this.getNombre();
+    }
+    
+    public void continuar(){
+        this.estado = EstadoJugador.Continuar;
+        this.juego.continuar();
     }
 }

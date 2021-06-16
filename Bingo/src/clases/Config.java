@@ -35,7 +35,8 @@ public class Config {
     public synchronized static Config getInstancia(){
         if(instancia == null){
             ArrayList<IFigura> figuritas = new ArrayList();
-            figuritas.add(new FiguraDiagonal());
+            //figuritas.add(new FiguraDiagonal());
+            figuritas.add(new FiguraPerimetro());
             instancia = new Config(3, 3, 3, 2, 50, figuritas);
         }
         return instancia;
@@ -66,8 +67,4 @@ public class Config {
     public double getValorCarton() {
        return this.valorCarton;
     }
-    
-    
-    
-    
 }
