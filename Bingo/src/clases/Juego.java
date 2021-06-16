@@ -111,4 +111,21 @@ public class Juego extends Observable{
     public int getNumero() {
         return this.numeroJuego;
     }
+
+    public ArrayList<Bolilla> listaDeBolillasJugadas() {
+        return bolillero.getBolillasSoretadas();
+    }
+
+    public void abandonar(Jugador unJ) {
+        if(jugadores.size() == 2){
+            jugadores.remove(unJ);
+            unJ.getJuego().setGanador(jugadores.get(0));
+        }
+        else{            
+            jugadores.remove(unJ);
+        }
+        
+        notifyObservers(Observer.Eventos.JUGADOR_ABANDONO);
+            
+    }
 }

@@ -48,4 +48,8 @@ public class Bolillero {
         }        
         Collections.shuffle(bolillas);
     }    
+
+    public ArrayList<Bolilla> getBolillasSoretadas() {
+        return this.bolillasSorteadas;
+    }
 }
