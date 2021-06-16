@@ -11,10 +11,24 @@ import interfaces.IFigura;
  *
  * @author atrias
  */
+
+
 public class FiguraLinea implements IFigura {
+    private double multiploPozo = 0;
+    private String nombre = "Linea";
     @Override
     public boolean cumpleFigura(Carton carton) {
         return false;
+    }
+
+    @Override
+    public double getMultiploPozo() {
+        return this.multiploPozo;
+    }
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
     }
     
 }

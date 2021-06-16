@@ -14,4 +14,6 @@ import clases.Carton;
  */
 public interface IFigura {
     public abstract boolean cumpleFigura(Carton carton) throws BingoExceptions;
+    public abstract double getMultiploPozo();
+    public abstract String getNombre();
 }

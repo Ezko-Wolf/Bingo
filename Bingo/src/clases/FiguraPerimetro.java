@@ -12,6 +12,9 @@ import interfaces.IFigura;
  * @author atrias
  */
 public class FiguraPerimetro implements IFigura {
+    private double multiploPozo = 1.5;
+    private String nombre = "Perimetro";
+
     @Override
     public boolean cumpleFigura(Carton carton) {
         return false;
@@ -42,4 +45,14 @@ public class FiguraPerimetro implements IFigura {
 //        
 //        return puedeSeguirExtremo && puedeSeguirMedio;
     }   
+
+    @Override
+    public double getMultiploPozo() {
+        return this.multiploPozo;
+    }
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
+    }
 }

@@ -6,6 +6,7 @@
 package clases;
 
 import exepctions.BingoExceptions;
+import interfaces.IFigura;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +22,7 @@ public class Jugador {
     
     private double saldo;
     private ArrayList<Carton> cartones = new ArrayList();
+    private IFigura figuraGanadora;
     private int cantCartones;
     private Juego juego;
     private Usuario usuario;
@@ -33,10 +35,21 @@ public class Jugador {
         this.juego = null;
         this.estado = EstadoJugador.Continuar;
     }
- 
+    
+    public void setFiguraGanadora(IFigura figuraGanadora) {
+        this.figuraGanadora = figuraGanadora;
+    }
+    public IFigura getFiguraGanadora() {
+        return this.figuraGanadora;
+    }
+    
     public void setJuego(Juego unJ){
         this.juego = unJ;
     } 
+    
+    public void sumarSaldo(Double saldoASumar){
+        this.saldo += saldoASumar;
+    }
     
     public double getSaldo(){
         return this.saldo;
@@ -74,26 +87,37 @@ public class Jugador {
         return this.usuario.getCedula();
     }
     
-    public boolean anotarBolilla(Bolilla b){
-        boolean marco = false;
-        for(int i = 0; i < cartones.size() && marco == false; i++){
-            marco = cartones.get(i).marcar(b);
-            if(marco){
-                b.setJugador(this);
-                this.isGanador(cartones.get(i));
+    public boolean anotarBolilla(Bolilla b) throws BingoExceptions{
+        try{
+            boolean marco = false;
+            for(int i = 0; i < cartones.size() && marco == false; i++){
+                marco = cartones.get(i).marcar(b);
+                if(marco){
+                    b.setJugador(this);
+                    this.isGanador(cartones.get(i));
+                    cartones.get(i).cumpleFigura(juego.getFigurasHabilitadas());
+                }
             }
+            return marco;
+        }catch(BingoExceptions error){
+            throw error;
         }
-        return marco;
+        
+   
     }
     
     private void isGanador(Carton carton) {
         try{
-            boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
-            if(isGanador) juego.setGanador(this);
+            IFigura figGanadora = carton.cumpleFigura(juego.getFigurasHabilitadas());
+            if(figuraGanadora != null){
+                juego.setGanador(this);
+                this.setFiguraGanadora(figuraGanadora);             
+            }
         }catch(BingoExceptions error){
             //Capturar el error y mostrarlo en la vista
         }
     }
+    
 
     public void crearCartones() {
         for(int i = 0; i < this.cantCartones; i++){

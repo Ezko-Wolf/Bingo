@@ -13,9 +13,22 @@ import interfaces.IFigura;
  */
 public class FiguraCartonLleno implements IFigura {
 
+    private double multiploPozo = 2 ;
+    private String nombre = "CartonLleno";
+    
     @Override
     public boolean cumpleFigura(Carton carton) {
         return false;
+    }
+
+    @Override
+    public double getMultiploPozo() {
+        return this.multiploPozo;
+    }
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
     }
     
 }

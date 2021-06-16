@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exepctions.BingoExceptions;
 import interfaces.IFigura;
 import java.util.ArrayList;
 import interfaces.IFigura;
@@ -72,10 +73,13 @@ public class Juego extends Observable{
         try{
             Bolilla sorteada = this.bolillero.sortear();
             boolean bolillaMarcada = false;
-            for(int i = 0; i < jugadores.size() && ganador == null && !bolillaMarcada; i++){
+            for(int i = 0; i < jugadores.size() && ganador == null && bolillaMarcada; i++){
                 bolillaMarcada = jugadores.get(i).anotarBolilla(sorteada);
             }
-        }catch(Error error){
+            if(ganador!=null){
+                this.finalizarPartida();
+            }
+        }catch(BingoExceptions error){
             //Capturar el error y mostrarlo en la vista
         }
     }
@@ -110,5 +114,9 @@ public class Juego extends Observable{
 
     public int getNumero() {
         return this.numeroJuego;
+    }
+
+    private void finalizarPartida() {
+        pozo.liquidar(ganador,jugadores,cfg.getValorCarton());
     }
 }
