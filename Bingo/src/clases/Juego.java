@@ -26,13 +26,17 @@ public class Juego extends ObservableJuego{
     private ArrayList<Jugador> jugadores = new ArrayList();
     private Jugador ganador;
     private Bolillero bolillero;
+    private Pozo pozo;
     private Config cfg;
     private EstadoJuego estado;
+    private int numeroJuego;
         
-    public Juego(Config cfg){
+    public Juego(Config cfg, int numero){
         this.ganador = null;
         this.cfg = cfg;
         this.estado = EstadoJuego.EsperandoInicio;
+        this.pozo = new Pozo();
+        this.numeroJuego = numero;
     }
 
     public ArrayList<IFigura> getFigurasHabilitadas(){
@@ -119,5 +123,34 @@ public class Juego extends ObservableJuego{
 
     private int cantidadNumerosEnJuego(int cantCartones, int numerosEnCarton) {
         return cantCartones * numerosEnCarton;
+    }
+
+    public void setPozo(int cartones) {
+        pozo.agregarSaldo(cartones, cfg.getValorCarton());
+    }
+
+    public double getPozo() {
+        return this.pozo.getMonto();
+    }
+
+    public int getNumero() {
+        return this.numeroJuego;
+    }
+
+    public ArrayList<Bolilla> listaDeBolillasJugadas() {
+        return bolillero.getBolillasSoretadas();
+    }
+
+    public void abandonar(Jugador unJ) {
+        if(jugadores.size() == 2){
+            jugadores.remove(unJ);
+            unJ.getJuego().setGanador(jugadores.get(0));
+        }
+        else{            
+            jugadores.remove(unJ);
+        }
+        
+        notifyObservers(Observer.Eventos.JUGADOR_ABANDONO);
+            
     }
 }

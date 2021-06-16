@@ -106,6 +106,10 @@ public class Jugador extends ObservableJugador {
         }
     }
     
+    public void abandonar() {
+        this.getJuego().abandonar(this);
+    }
+    
     @Override
     public String toString(){
       return this.getNombre();

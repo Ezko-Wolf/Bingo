@@ -8,6 +8,7 @@ package controladores;
 import UI.Ui_Jugador;
 import clases.Carton;
 import clases.Celda;
+import clases.Juego;
 import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
@@ -19,6 +20,7 @@ import observer.ObservableJugador;
 import static observer.ObserverJuego.Eventos.JUEGO_INICIADO;
 import observer.ObserverJuego;
 import observer.ObserverJugador;
+import modelo.Fachada;
 
 /**
  *
@@ -86,6 +88,11 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             case JUEGO_INICIADO : 
                 vista.generarCarton(); 
                 vista.actualizarInterfaz();
+             
+            break;
+            case JUGADOR_ABANDONO : 
+                vista.actualizarInterfaz();
+                
             break;
             case ACTUALIZA_ESTADO_JUEGO:
                 vista.actualizarInterfaz();  
@@ -104,4 +111,12 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             break;
         }  
     }
+    public void abandonar() {        
+        j.abandonar();
+        j.getJuego().deleteObserver(this);          
+        vista.cerrarVentana();
+    }
+    
+
+
 }
