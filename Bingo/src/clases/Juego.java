@@ -160,8 +160,8 @@ public class Juego extends ObservableJuego{
 
     public void abandonar(Jugador unJ) {
         if(jugadores.size() == 2){
-        jugadores.remove(unJ);
-        unJ.getJuego().setGanador(jugadores.get(0));
+            jugadores.remove(unJ);
+            unJ.getJuego().setGanador(jugadores.get(0));
         }
         else{
         jugadores.remove(unJ);

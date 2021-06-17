@@ -22,7 +22,6 @@ public class FiguraLinea implements IFigura {
         boolean cumpleVertical = true;
         
         int largoCol = carton.getColumnas();  
-        int largoFila = carton.getFilas();
         int largo = carton.getCeldas().size(); 
         int largoFijo = largoCol;
       
