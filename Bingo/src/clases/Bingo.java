@@ -10,12 +10,14 @@ import clases.Juego;
 import clases.Jugador;
 import exepctions.BingoExceptions;
 import java.util.ArrayList;
+import observer.ObservableJuego;
+import observer.ObserverJuego;
 
 /**
  *
  * @author Ezko
  */
-public class Bingo {
+public class Bingo extends ObservableJuego{
     ArrayList<Jugador> enEspera;
     ArrayList<Juego> juegos;
     Config configuracion;
@@ -47,6 +49,7 @@ public class Bingo {
         if(enEspera.isEmpty()){
             Juego juego = new Juego(configuracion, juegos.size()+1);
             juegos.add(juego);
+            notifyObservers(ObserverJuego.Eventos.JUEGO_CREADO);
         }
         return juegos.get(juegos.size() - 1);            
     }            

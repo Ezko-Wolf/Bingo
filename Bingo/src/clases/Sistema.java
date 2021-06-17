@@ -6,7 +6,6 @@
 package clases;
 
 import UI.Ui_ElegirLogin;
-import UI.Ui_LoginJugador;
 import modelo.Fachada;
 
 /**
@@ -25,14 +24,14 @@ public class Sistema {
         Usuario jenny = new Usuario("12345", "jenny123", "Jenny", 3, 3000.0);
         Usuario alejo = new Usuario("23423", "alejo123", "Alejo", 3, 3000.0);
         Usuario manteca = new Usuario("3456", "mante123", "Manteca", 3, 3000.0);
-        Usuario tonga = new Usuario("34536", "tonga123", "Tonga", 3, 3000.0);
+        Usuario tonga = new Usuario("54321", "tonga123", "Tonga", 3, 3000.0);
         facha.addUsuario(alejo);
         facha.addUsuario(jenny);
         facha.addUsuario(manteca);
         facha.addUsuario(tonga);
         
-        facha.addAdministrador(new Administrador("28654", "admin123", "admin 1", "admin1@admin.com"));
-        facha.addAdministrador(new Administrador("29654", "admin123", "admin 2", "admin2@admin.com"));
+        facha.addAdministrador(new Administrador("12345", "admin123", "admin 1", "admin1@admin.com", facha.getBingo()));
+        facha.addAdministrador(new Administrador("29654", "admin123", "admin 2", "admin2@admin.com", facha.getBingo()));
         
         
         Ui_ElegirLogin ui = new Ui_ElegirLogin();       

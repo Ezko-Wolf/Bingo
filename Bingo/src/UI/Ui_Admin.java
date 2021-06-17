@@ -6,8 +6,10 @@
 package UI;
 
 import clases.Administrador;
+import clases.Bolilla;
 import controladores.ControllerAdmin;
 import clases.Juego;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,7 +25,7 @@ public class Ui_Admin extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.admin = admin;
-        this.ca = new ControllerAdmin(this, a);
+        this.ca = new ControllerAdmin(this, admin);
         this.iniciar();
     }
 
@@ -41,8 +43,6 @@ public class Ui_Admin extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaDeJuegos = new javax.swing.JList();
         jugadorQueAnoto = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listaDeBolillas = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
         listaDeJugadores = new javax.swing.JList();
         cantBolillasSorteadas = new javax.swing.JLabel();
@@ -53,26 +53,24 @@ public class Ui_Admin extends javax.swing.JDialog {
         numeroJuego = new javax.swing.JLabel();
         estadoJuego = new javax.swing.JLabel();
         ganadorJuego = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        listaDeBolillas = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        listaDeJuegos.setEnabled(false);
+        listaDeJuegos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaDeJuegos.setFocusable(false);
         listaDeJuegos.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        listaDeJuegos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaDeJuegosValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaDeJuegos);
 
         jugadorQueAnoto.setEditable(false);
-        jugadorQueAnoto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jugadorQueAnotoActionPerformed(evt);
-            }
-        });
 
-        listaDeBolillas.setEnabled(false);
-        listaDeBolillas.setFocusable(false);
-        listaDeBolillas.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
-        jScrollPane3.setViewportView(listaDeBolillas);
-
+        listaDeJugadores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listaDeJugadores.setEnabled(false);
         listaDeJugadores.setFocusable(false);
         jScrollPane2.setViewportView(listaDeJugadores);
@@ -93,6 +91,17 @@ public class Ui_Admin extends javax.swing.JDialog {
 
         ganadorJuego.setText("Ganador :");
 
+        listaDeBolillas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        listaDeBolillas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaDeBolillas.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        listaDeBolillas.setVisibleRowCount(2);
+        listaDeBolillas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaDeBolillasValueChanged(evt);
+            }
+        });
+        jScrollPane4.setViewportView(listaDeBolillas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,7 +111,6 @@ public class Ui_Admin extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addComponent(jugadorQueAnoto)
-                    .addComponent(jScrollPane3)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +125,8 @@ public class Ui_Admin extends javax.swing.JDialog {
                             .addComponent(estadoJuegoValue)
                             .addComponent(numeroJuegoValue))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -146,9 +155,9 @@ public class Ui_Admin extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cantBolillasSorteadas)
                             .addComponent(cantBolillasSorteadasValue))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jugadorQueAnoto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -156,9 +165,13 @@ public class Ui_Admin extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jugadorQueAnotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugadorQueAnotoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jugadorQueAnotoActionPerformed
+    private void listaDeJuegosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDeJuegosValueChanged
+        ca.cargarDatos(listaDeJuegos.getSelectedValue());
+    }//GEN-LAST:event_listaDeJuegosValueChanged
+
+    private void listaDeBolillasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDeBolillasValueChanged
+        ca.jugadorQueAnoto(listaDeBolillas.getSelectedValue());
+    }//GEN-LAST:event_listaDeBolillasValueChanged
 
     /**
      * @param args the command line arguments
@@ -173,7 +186,7 @@ public class Ui_Admin extends javax.swing.JDialog {
     private javax.swing.JLabel ganadorJuegoValue;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jugadorQueAnoto;
     private javax.swing.JList listaDeBolillas;
     private javax.swing.JList listaDeJuegos;
@@ -190,10 +203,7 @@ public class Ui_Admin extends javax.swing.JDialog {
         listaDeJuegos.setListData(admin.getBingo().getJuegos().toArray());
     }
     
-    public void cargarDatosDeJuego(Juego juego, int cantBolillasSorteadas){
-        estadoJuegoValue.setText(juego.getEstado().toString());
-        ganadorJuegoValue.setText(juego.getGanador() == null ? juego.getGanador() : "-" );
-        cantBolillasSorteadasValue.setText(cantBolillasSorteadas+"");
+    public void cargarJugadores(Juego juego){
         listaDeJugadores.setListData(juego.getJugadores().toArray());        
     }
     
@@ -201,7 +211,17 @@ public class Ui_Admin extends javax.swing.JDialog {
         numeroJuegoValue.setText(juego.getNumero()+"");    
     }
     
-            
+    public void cargarEstadoCantidadBolillasYBolillero(Juego juego, int cantBolillasSorteadas, ArrayList<Bolilla> bolillas){
+        estadoJuegoValue.setText(juego.getEstado().toString());
+        cantBolillasSorteadasValue.setText(cantBolillasSorteadas+"");
+        listaDeBolillas.setListData(bolillas.toArray());
+    }
     
+    public void cargarGanador(Juego juego){
+        ganadorJuegoValue.setText(juego.getGanador() == null ? "-" : juego.getGanador().getNombre());        
+    }      
     
+    public void cargarJugadorQueAnoto(String nombre){
+        jugadorQueAnoto.setText(nombre);
+    }
 }
