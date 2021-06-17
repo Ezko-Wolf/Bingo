@@ -5,9 +5,6 @@
  */
 package clases;
 
-import clases.Config;
-import clases.Juego;
-import clases.Jugador;
 import exepctions.BingoExceptions;
 import java.util.ArrayList;
 import observer.ObservableJuego;
@@ -38,9 +35,8 @@ public class Bingo extends ObservableJuego{
         enEspera.add(unJ);
         Juego juego = this.getProximoJuego();
         juego.addJugador(unJ);
+        notifyObservers(ObserverJuego.Eventos.JUGADOR_AGREGADO);
         juego.setPozo(unJ.getCartones().size());
-        
-        
         if(configuracion.getCantidadJugadores() == enEspera.size())          
             this.iniciarJuego();
     }
@@ -82,6 +78,10 @@ public class Bingo extends ObservableJuego{
     
     private boolean saldoInsuficiente(double valorCarton, Jugador unJ){
         return unJ.getSaldo() < valorCarton * 3 * unJ.getCantidadCartones();
+    }
+
+    public double getValorCarton() {
+        return this.configuracion.getValorCarton();
     }
 
 }

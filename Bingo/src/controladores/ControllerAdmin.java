@@ -7,6 +7,7 @@ package controladores;
 
 import UI.Ui_Admin;
 import clases.Administrador;
+import clases.Bingo;
 import clases.Juego;
 import clases.Bolilla;
 import clases.Bolillero;
@@ -31,11 +32,15 @@ public class ControllerAdmin implements ObserverJuego{
         admin.getBingo().addObserver(this);
     }
     
-    public void cargarDatos(Object obj){
-        Juego juego = (Juego)obj;  
+    public void suscribirAJuego(Object obj){
+        Juego juego = (Juego)obj;
         if(this.juegoAnterior != null) this.juegoAnterior.deleteObserver(this); 
         this.juegoAnterior = juego;
         juego.addObserver(this);
+        this.cargarDatos(juego);
+    }
+    
+    public void cargarDatos(Juego juego){
         vista.cargarJugadores(juego);    
         vista.cargarNumero(juego);
         vista.cargarGanador(juego);
@@ -70,16 +75,16 @@ public class ControllerAdmin implements ObserverJuego{
 
     @Override
     public void update(ObservableJuego source, Object event) {
-        switch((ObserverJuego.Eventos)event) {
+        switch((ObserverJuego.Eventos)event) {  
+            case JUGADOR_AGREGADO :
             case JUEGO_CREADO : 
                 vista.cargarJuegos();
-            break;
+            break;            
             case JUGADOR_ABANDONO : 
                 vista.cargarJugadores((Juego)source);
             break;
             case JUEGO_INICIADO:
             case ACTUALIZA_ESTADO_JUEGO:
-                vista.cargarJuegos();
                 this.cargarEstadoCantidadBolillasYBolillero((Juego)source);
             break;
             case HAY_GANADOR :
