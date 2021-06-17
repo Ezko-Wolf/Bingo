@@ -36,8 +36,11 @@ public class Config {
         if(instancia == null){
             ArrayList<IFigura> figuritas = new ArrayList();
             //figuritas.add(new FiguraDiagonal());
-            figuritas.add(new FiguraDiagonal());
-            instancia = new Config(3, 3, 3, 3, 50, figuritas);
+            //figuritas.add(new FiguraPerimetro());
+            figuritas.add(new FiguraCartonLleno());
+            //figuritas.add(new FiguraLinea());
+            
+            instancia = new Config(3, 3, 3, 2, 50, figuritas);
         }
         return instancia;
     }

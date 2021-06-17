@@ -166,7 +166,7 @@ public class Ui_Admin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaDeJuegosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDeJuegosValueChanged
-        ca.cargarDatos(listaDeJuegos.getSelectedValue());
+        ca.suscribirAJuego(listaDeJuegos.getSelectedValue());
     }//GEN-LAST:event_listaDeJuegosValueChanged
 
     private void listaDeBolillasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDeBolillasValueChanged

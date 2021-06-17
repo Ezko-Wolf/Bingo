@@ -59,7 +59,6 @@ public class Jugador extends ObservableJugador {
         return usuario.cobrar(monto);
     }
     
-    
     public double getSaldoUsuario(){
         return this.usuario.getSaldo();
     }
@@ -73,7 +72,6 @@ public class Jugador extends ObservableJugador {
     
     public void setJuego(Juego unJ){
         this.juego = unJ;
-        
     } 
     
     public double getSaldo(){

@@ -5,10 +5,12 @@
  */
 package UI;
 
+import clases.Bolilla;
 import clases.Jugador;
 import componenteGrid.ListaPaneles;
 import controladores.ControllerJugador;
 import exepctions.BingoExceptions;
+import java.util.ArrayList;
 /**
  *
  * @author Ezko
@@ -51,7 +53,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
         continuar = new javax.swing.JButton();
         abandonar = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        numerosSorteados = new javax.swing.JList<>();
+        numerosSorteados = new javax.swing.JList();
         cartones = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -87,11 +89,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
         continuar.setText("Continuar");
         continuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try{
-                    continuarActionPerformed(evt);
-                }catch(BingoExceptions error){
-
-                }
+                continuarActionPerformed(evt);
             }
         });
 
@@ -106,6 +104,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
         numerosSorteados.setEnabled(false);
         numerosSorteados.setFocusable(false);
         numerosSorteados.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        numerosSorteados.setVisibleRowCount(1);
         jScrollPane7.setViewportView(numerosSorteados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,13 +163,13 @@ public class Ui_Jugador extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void continuarActionPerformed(java.awt.event.ActionEvent evt) throws BingoExceptions {//GEN-FIRST:event_continuarActionPerformed
-            this.continuar();
-    }//GEN-LAST:event_continuarActionPerformed
-
     private void abandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abandonarActionPerformed
         this.abandonar();
     }//GEN-LAST:event_abandonarActionPerformed
+
+    private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
+        this.continuar();
+    }//GEN-LAST:event_continuarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,7 +193,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     private javax.swing.JList listaJugadores;
     private javax.swing.JTextPane montoPozo;
     private javax.swing.JTextPane numeroSorteado;
-    private javax.swing.JList<String> numerosSorteados;
+    private javax.swing.JList numerosSorteados;
     private javax.swing.JTextPane saldoJugador;
     // End of variables declaration//GEN-END:variables
     
@@ -209,15 +208,12 @@ public class Ui_Jugador extends javax.swing.JDialog {
     
     public void actualizarInterfaz(){
         listaJugadores.setListData(j.getJuego().getJugadores().toArray());
-        estadoDelJuego.setText("HACER ESTADO");
-        montoPozo.setText("$" + j.getJuego().getPozo());
-        numeroSorteado.setText("Hacer NUMERO SORTEADO");
-        //numerosSorteados.setListData((String[]) j.getJuego().listaDeBolillasJugadas().toArray());
-        
+        estadoDelJuego.setText(j.getJuego().getEstado().toString());
+        montoPozo.setText("$" + j.getJuego().getPozo());        
     }
-    private void continuar() throws BingoExceptions {
+    
+    private void continuar(){
         cj.continuar();
- 
     }
 
     private void cargarDatos() {
@@ -238,6 +234,11 @@ public class Ui_Jugador extends javax.swing.JDialog {
     public void ganadorPerdedor(Jugador j, double montoPozo, Jugador ganador) {
         Ui_GanadorPerdedor vistaFinal = new Ui_GanadorPerdedor(this);
         vistaFinal.actualizarInterfaz(j, montoPozo, ganador);
+    }
+
+    public void actualizarBolillas(ArrayList<Bolilla> bolillasSoretadas, Bolilla ultimaBolillaSorteada) {
+        numeroSorteado.setText(ultimaBolillaSorteada == null ? "-" : ultimaBolillaSorteada.toString());
+        numerosSorteados.setListData(bolillasSoretadas.toArray());
     }
 
 }

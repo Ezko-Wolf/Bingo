@@ -8,12 +8,13 @@ package clases;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import observer.ObservableBolillero;
 
 /**
  *
  * @author Ezko
  */
-public class Bolillero {
+public class Bolillero extends ObservableBolillero{
     private ArrayList<Bolilla> bolillas = new ArrayList();
     private ArrayList<Bolilla> bolillasSorteadas = new ArrayList();
     private int cantidadBolillas;
@@ -52,6 +53,11 @@ public class Bolillero {
     public ArrayList<Bolilla> getBolillasSoretadas() {
         return this.bolillasSorteadas;
     }
+    
+    public Bolilla getUltimaBolillaSorteada(){
+        if(bolillasSorteadas.isEmpty())
+            return null;
+        return bolillasSorteadas.get(bolillasSorteadas.size()-1);
 
     void sacarBolillas(ArrayList<Integer> bolillasAbandono) {
         for(int i = 0; i < bolillas.size();i++){

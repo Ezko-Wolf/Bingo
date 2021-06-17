@@ -9,16 +9,10 @@ package observer;
  *
  * @author Ezko
  */
-public interface ObserverJuego {
+public interface ObserverBolillero {
     public enum Eventos {
-        JUEGO_INICIADO,
-        ACTUALIZA_ESTADO_JUEGO,
-        JUGADOR_ABANDONO,
-        HAY_GANADOR,
-        JUEGO_CREADO,
-        JUGADOR_AGREGADO,
         SORTEA_BOLILLA
     }
     
-    public void update(ObservableJuego source, Object event);
+    public void update(ObservableBolillero source, Object event);
 }

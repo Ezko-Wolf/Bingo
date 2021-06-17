@@ -39,8 +39,6 @@ public class Juego extends ObservableJuego{
         this.numeroJuego = numero;       
     }
 
-
-
     public ArrayList<IFigura> getFigurasHabilitadas(){
         return this.cfg.getFigurasHabilitadas();
     }
@@ -89,12 +87,12 @@ public class Juego extends ObservableJuego{
     }
     
     public void iniciar() {
-            int cantCartones = this.obtenerCantCartones();
-            int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
-            this.bolillero = new Bolillero(cantidadNumeros);
-            this.dispararCreacionDeCartones();
-            notifyObservers(ObserverJuego.Eventos.JUEGO_INICIADO);
-            this.continuar();
+        int cantCartones = this.obtenerCantCartones();
+        int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
+        this.bolillero = new Bolillero(cantidadNumeros);
+        this.dispararCreacionDeCartones();
+        notifyObservers(ObserverJuego.Eventos.JUEGO_INICIADO);
+        this.continuar();
     }
     
     public void continuar(){
@@ -102,6 +100,7 @@ public class Juego extends ObservableJuego{
             this.estado = EstadoJuego.Jugando;
             notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
             Bolilla sorteada = this.bolillero.sortear();
+            notifyObservers(ObserverJuego.Eventos.SORTEA_BOLILLA);            
             boolean bolillaMarcada = false;
             this.jugadoresAEspera();
             for(int i = 0; i < jugadores.size() && ganador == null && !bolillaMarcada; i++){
@@ -115,8 +114,8 @@ public class Juego extends ObservableJuego{
     private boolean jugadoresListos() {
         boolean jugar = true;
         for(Jugador j:jugadores){
-        jugar = j.getEstado() == EstadoJugador.Continuar;
-        if(jugar == false) return false;
+            jugar = j.getEstado() == EstadoJugador.Continuar;
+            if(jugar == false) return false;
         }
         return jugar;
     }
@@ -125,8 +124,6 @@ public class Juego extends ObservableJuego{
         for(Jugador j:jugadores)
             j.setEstado(EstadoJugador.Esperando);
     }
-
-
 
     private int obtenerCantCartones() {
         int cant = 0;
@@ -168,12 +165,10 @@ public class Juego extends ObservableJuego{
         return bolillero.getBolillasSoretadas();
     }
 
-
-
     public void abandonar(Jugador unJ,ArrayList<Integer> bolillasAbandono) {
         if(jugadores.size() == 2){
             jugadores.remove(unJ);
-            unJ.getJuego().setGanador(jugadores.get(0));
+            this.setGanador(jugadores.get(0));
         }
         else{
             jugadores.remove(unJ);

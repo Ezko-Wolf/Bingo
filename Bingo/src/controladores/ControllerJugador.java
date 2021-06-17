@@ -7,6 +7,7 @@ package controladores;
 
 import UI.Ui_GanadorPerdedor;
 import UI.Ui_Jugador;
+import clases.Bolillero;
 import clases.Carton;
 import clases.Celda;
 import clases.Juego;
@@ -14,8 +15,8 @@ import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
 import componenteGrid.MarcadorBoton;
-import exepctions.BingoExceptions;
 import java.util.ArrayList;
+import observer.ObservableBolillero;
 import observer.ObservableJuego;
 import observer.ObservableJugador;
 import static observer.ObserverJuego.Eventos.JUEGO_INICIADO;
@@ -29,7 +30,6 @@ import observer.ObserverJugador;
 public class ControllerJugador implements MarcadorBoton, ObserverJuego, ObserverJugador {
     private Ui_Jugador vista;
     private Jugador jugador;
-    private Ui_GanadorPerdedor vistaFinal;
     private ListaPaneles listaPaneles;
     
     public ControllerJugador(Ui_Jugador vista, Jugador jugador){
@@ -46,6 +46,7 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             try {            
                 ArrayList<Celda> celdas = cartones.get(i).getCeldas();
                 this.listaPaneles.agregarPanel(celdas.toArray(), this);
+                this.listaPaneles.marcar();     
             } catch (GridLayoutException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(0);
@@ -65,20 +66,15 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
 
     @Override
     public String getTextoAyuda(Object dato) {
-        return "el otro texto";
+       return !((Celda) dato).getCargada() ? "Esperando numeros" : "|"+((Celda) dato).getValor()+"|";
     }
 
     @Override
     public void click(Object dato) {
-        int i = 0;
     }    
 
-    public void continuar() throws BingoExceptions {
-       //try{
+    public void continuar() {
            jugador.continuar();
-       /*}catch(BingoExceptions error){
-           throw error;
-       }*/
     }
     
     private void cerrar(){
@@ -89,22 +85,23 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
     
     @Override
     public void update(ObservableJuego source, Object event) {
+        Juego juego = (Juego)source;
         switch((ObserverJuego.Eventos)event) {
             case JUEGO_INICIADO : 
-                vista.generarCarton(); 
+                vista.generarCarton();          
                 vista.actualizarInterfaz();
-             
             break;
             case JUGADOR_ABANDONO : 
                 vista.actualizarInterfaz();
-                
             break;
-            case ACTUALIZA_ESTADO_JUEGO:
+            case ACTUALIZA_ESTADO_JUEGO:        
                 vista.actualizarInterfaz();  
             break;
             case HAY_GANADOR :
-                Juego juego = (Juego)source;
                 vista.ganadorPerdedor(this.jugador, juego.getMontoPozo(), juego.getGanador());
+            break;
+            case SORTEA_BOLILLA :                
+                this.obtenerBolillas(juego);
             break;
         }
     }
@@ -128,6 +125,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
         jugador.getJuego().deleteObserver(this);
     }
     
-
-
+    private void obtenerBolillas(Juego juego) {
+        Bolillero bolillero = juego.getBolillero();
+        vista.actualizarBolillas(bolillero.getBolillasSoretadas(), bolillero.getUltimaBolillaSorteada());
+    }
 }
