@@ -46,9 +46,7 @@ public class Juego extends ObservableJuego{
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
         this.estado = EstadoJuego.Finalizado;
-        if(jugadores.size() > 1){
-            this.finalizarPartida();
-        }
+        this.finalizarPartida();
         notifyObservers(ObserverJuego.Eventos.HAY_GANADOR);
     }
     
@@ -167,13 +165,14 @@ public class Juego extends ObservableJuego{
         return bolillero.getBolillasSoretadas();
     }
 
-    public void abandonar(Jugador unJ) {
+    public void abandonar(Jugador unJ,ArrayList<Integer> bolillasAbandono) {
         if(jugadores.size() == 2){
             jugadores.remove(unJ);
             this.setGanador(jugadores.get(0));
         }
         else{
             jugadores.remove(unJ);
+            bolillero.sacarBolillas(bolillasAbandono);
             notifyObservers(ObserverJuego.Eventos.JUGADOR_ABANDONO);
         }
     }

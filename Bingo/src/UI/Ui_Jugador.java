@@ -223,6 +223,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     }
     
     public void cerrarVentana(){        
+        cj.desuscrbirir();
         this.dispose();
     }
 

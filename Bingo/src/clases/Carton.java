@@ -44,6 +44,13 @@ public class Carton {
             celdas.add(new Celda());
         }
     }
+    public ArrayList<Integer> getValores(){
+        ArrayList<Integer> valores = new ArrayList();
+        for(Celda c: celdas){
+            c.getBolillaSinMarcar(valores);
+        }
+        return valores;
+    }
     
     //deberia ser void?
     //ver logica como avisar si cumpli patron

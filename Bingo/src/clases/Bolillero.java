@@ -58,5 +58,12 @@ public class Bolillero extends ObservableBolillero{
         if(bolillasSorteadas.isEmpty())
             return null;
         return bolillasSorteadas.get(bolillasSorteadas.size()-1);
+
+    void sacarBolillas(ArrayList<Integer> bolillasAbandono) {
+        for(int i = 0; i < bolillas.size();i++){
+            if(bolillasAbandono.contains(bolillas.get(i).getValor())){
+                bolillas.remove(bolillas.get(i));
+            }
+        }
     }
 }

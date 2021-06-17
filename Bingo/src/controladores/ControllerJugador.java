@@ -115,12 +115,16 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
         }  
     }
     public void abandonar() {
-        jugador.getJuego().deleteObserver(this);         
-        jugador.abandonar();          
+        jugador.getJuego().deleteObserver(this);           
+        jugador.abandonar();
         jugador.cobroAbandono();
         vista.cerrarVentana();
-    }   
+    }
 
+    public void desuscrbirir() {
+        jugador.getJuego().deleteObserver(this);
+    }
+    
     private void obtenerBolillas(Juego juego) {
         Bolillero bolillero = juego.getBolillero();
         vista.actualizarBolillas(bolillero.getBolillasSoretadas(), bolillero.getUltimaBolillaSorteada());

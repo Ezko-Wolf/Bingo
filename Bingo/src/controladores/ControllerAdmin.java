@@ -82,6 +82,7 @@ public class ControllerAdmin implements ObserverJuego{
             break;            
             case JUGADOR_ABANDONO : 
                 vista.cargarJugadores((Juego)source);
+                this.cargarEstadoCantidadBolillasYBolillero((Juego)source);
             break;
             case JUEGO_INICIADO:
             case ACTUALIZA_ESTADO_JUEGO:

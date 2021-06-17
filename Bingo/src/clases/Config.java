@@ -39,6 +39,7 @@ public class Config {
             //figuritas.add(new FiguraPerimetro());
             figuritas.add(new FiguraCartonLleno());
             //figuritas.add(new FiguraLinea());
+            
             instancia = new Config(3, 3, 3, 2, 50, figuritas);
         }
         return instancia;
