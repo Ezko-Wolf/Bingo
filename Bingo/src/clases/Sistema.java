@@ -5,6 +5,7 @@
  */
 package clases;
 
+import UI.Ui_ElegirLogin;
 import UI.Ui_LoginJugador;
 import exepctions.BingoExceptions;
 import interfaces.IFigura;
@@ -30,14 +31,13 @@ public class Sistema {
         facha.addUsuario(jenny);
         facha.addUsuario(manteca);
         facha.addUsuario(tonga);
-        Ui_LoginJugador ui = new Ui_LoginJugador();            
-        Ui_LoginJugador ui2 = new Ui_LoginJugador();            
-        Ui_LoginJugador ui3 = new Ui_LoginJugador();            
-        Ui_LoginJugador ui4 = new Ui_LoginJugador();
+        
+        facha.addAdministrador(new Administrador("28654", "admin123", "admin 1", "admin1@admin.com"));
+        facha.addAdministrador(new Administrador("29654", "admin123", "admin 2", "admin2@admin.com"));
+        
+        
+        Ui_ElegirLogin ui = new Ui_ElegirLogin();       
             ui.setVisible(true);
-            ui2.setVisible(true);
-            ui3.setVisible(true);
-            ui4.setVisible(true);
         //            facha.loginUsuario("12345", "jenny123", 3);
 //            facha.loginUsuario("23423", "alejo123", 2);
 //            facha.loginUsuario("3456", "mante123", 1);

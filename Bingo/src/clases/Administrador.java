@@ -11,16 +11,25 @@ package clases;
  */
 public class Administrador extends User {
     private String email;
+    private boolean enLinea;
     
     public Administrador(String ci, String pass, String nombre, String email){
         super(ci, pass, nombre);
         this.email = email;
+        this.enLinea = false;
     }
 
     public void setMail(String mail) {
         this.email = mail;
     }
     
+    public void setEnLinea(Boolean enL){
+        this.enLinea = enL;
+    }
+
+    public boolean getEnLinea() {
+        return this.enLinea;
+    }
 
     
     

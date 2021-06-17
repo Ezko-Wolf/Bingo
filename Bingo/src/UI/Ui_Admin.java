@@ -5,6 +5,9 @@
  */
 package UI;
 
+import clases.Administrador;
+import controladores.ControllerAdmin;
+
 /**
  *
  * @author gmedina
@@ -14,10 +17,17 @@ public class Ui_Admin extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public Ui_Admin(java.awt.Frame parent, boolean modal) {
+    Administrador a;
+    ControllerAdmin ca;
+    
+    public Ui_Admin(java.awt.Frame parent, boolean modal, Administrador a) {
         super(parent, modal);
         initComponents();
+        this.a = a;
+        //this.ca = new ControllerAdmin(this, a);
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,8 +189,8 @@ public class Ui_Admin extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
                 Ui_Admin dialog = new Ui_Admin(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -190,7 +200,7 @@ public class Ui_Admin extends javax.swing.JDialog {
                 });
                 dialog.setVisible(true);
             }
-        });
+        });*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

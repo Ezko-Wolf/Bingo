@@ -28,13 +28,13 @@ public class Bingo {
     }
   
     public void iniciarJuego() throws BingoExceptions{
-       try{
+       //try{
            Juego juego = juegos.get(juegos.size() - 1);
            enEspera.clear(); 
            juego.iniciar();
-       }catch(BingoExceptions error){
+       /*}catch(BingoExceptions error){
            throw error;
-       }
+       }*/
     }  
   
     public void validarJuego(Jugador unJ) throws BingoExceptions{
@@ -88,11 +88,11 @@ public class Bingo {
 
     //ESTO SE VA
     public void continuar() throws BingoExceptions{
-        try{
+        //try{
             juegos.get(0).continuar();
-        }catch(BingoExceptions error){
+        /*}catch(BingoExceptions error){
             throw error;
-        }
+        }*/
     }
     
     public boolean ganador(){

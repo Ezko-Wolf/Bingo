@@ -76,11 +76,11 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
     }    
 
     public void continuar() throws BingoExceptions {
-       try{
+       //try{
            j.continuar();
-       }catch(BingoExceptions error){
+       /*}catch(BingoExceptions error){
            throw error;
-       }
+       }*/
     }
     
     private void cerrar(){

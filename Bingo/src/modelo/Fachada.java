@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
+import clases.Administrador;
 import clases.Celda;
 import clases.Juego;
 import clases.Jugador;
@@ -51,9 +52,9 @@ public class Fachada {
         }
     }
 
-    public void loginAdministrador(String ci, String pass) throws BingoExceptions {
+    public Administrador loginAdministrador(String ci, String pass) throws BingoExceptions {
         try{
-            cu.loginAdministrador(ci, pass);        
+            return cu.loginAdministrador(ci, pass);        
         }
         catch(BingoExceptions error){
             throw error;
@@ -87,5 +88,9 @@ public class Fachada {
     
     public boolean ganador(){
         return bingo.ganador();
+    }
+
+    public void addAdministrador(Administrador administrador) {
+        cu.addAdministrador(administrador);
     }
 }

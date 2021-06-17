@@ -22,25 +22,26 @@ public class FiguraPerimetro implements IFigura {
         int largo = carton.getCeldas().size() - 1; 
         
         boolean puedeSeguirExtremo = true;  
-        boolean puedeSeguirMedio = true;
+        boolean noPuedeSeguirMedio = false;
         
         int i = 0;
         int auxTotalCeldas = carton.getCeldas().size()-1;
         
-        while(i < largoCol-1 && puedeSeguirExtremo){
-            if(carton.getCeldas().get(i).getBolilla() == null || carton.getCeldas().get(auxTotalCeldas).getBolilla() == null) puedeSeguirExtremo = false;
+        while(i < largoCol && puedeSeguirExtremo){
+            if(carton.getCeldas().get(i).getBolilla() == null || carton.getCeldas().get(auxTotalCeldas).getBolilla() == null)
+                puedeSeguirExtremo = false;
             i++;
             auxTotalCeldas--;
         }
         
         int j = largoFila;
         
-        while(j < largo && puedeSeguirMedio){
-            if(carton.getCeldas().get(j).getBolilla() == null || carton.getCeldas().get(j*2-1).getBolilla() == null) puedeSeguirMedio = false;
+        while(j < largo && !noPuedeSeguirMedio){
+            if(carton.getCeldas().get(j).getBolilla() != null && carton.getCeldas().get((j*2)-1).getBolilla() != null) noPuedeSeguirMedio = true;
             j+=largoFila;
         }
         
-        return puedeSeguirExtremo && puedeSeguirMedio;
+        return puedeSeguirExtremo && noPuedeSeguirMedio;
     }   
 
     @Override
