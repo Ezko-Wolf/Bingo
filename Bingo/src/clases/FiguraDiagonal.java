@@ -15,6 +15,8 @@ import interfaces.IFigura;
 class FiguraDiagonal implements IFigura {
     
     private String nombre = "Diagonal";
+    private double multiploPozo = 0.5 ;
+
     
     @Override
     public boolean cumpleFigura(Carton carton) throws BingoExceptions {
@@ -38,6 +40,16 @@ class FiguraDiagonal implements IFigura {
     
     @Override
     public String toString(){
+        return this.nombre;
+    }
+
+    @Override
+    public double getMultiploPozo() {
+        return this.multiploPozo;
+    }
+  
+    @Override
+    public String getNombre() {
         return this.nombre;
     }
 }

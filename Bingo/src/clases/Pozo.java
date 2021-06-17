@@ -5,6 +5,7 @@
  */
 package clases;
 
+import interfaces.IFigura;
 import java.util.ArrayList;
 
 /**
@@ -29,5 +30,8 @@ public class Pozo {
         this.monto += cantCartones * valorCarton;
     }
 
-    
+   /* void liquidar(Jugador ganador, ArrayList<Jugador> jugadores,double valorCarton) {
+        IFigura figuraGanadora = ganador.getFiguraGanadora();
+        figuraGanadora.getMultiploPozo();
+    }  */
 }

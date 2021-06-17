@@ -6,6 +6,7 @@
 package UI;
 
 import clases.Administrador;
+import controladores.ControllerAdmin;
 import clases.Juego;
 
 /**
@@ -14,6 +15,7 @@ import clases.Juego;
  */
 public class Ui_Admin extends javax.swing.JDialog {
     private Administrador admin;
+    private ControllerAdmin ca;
     /**
      * Creates new form NewJDialog
      */
@@ -21,8 +23,11 @@ public class Ui_Admin extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.admin = admin;
+        this.ca = new ControllerAdmin(this, a);
         this.iniciar();
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,7 +163,6 @@ public class Ui_Admin extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cantBolillasSorteadas;

@@ -13,6 +13,8 @@ import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
 import componenteGrid.MarcadorBoton;
+import exepctions.BingoExceptions;
+
 import java.util.ArrayList;
 import java.util.Observer;
 import observer.ObservableJuego;
@@ -20,6 +22,7 @@ import observer.ObservableJugador;
 import static observer.ObserverJuego.Eventos.JUEGO_INICIADO;
 import observer.ObserverJuego;
 import observer.ObserverJugador;
+import modelo.Bingo;
 import modelo.Fachada;
 
 /**
@@ -72,8 +75,12 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
         int i = 0;
     }    
 
-    public void continuar() {
-        j.continuar();
+    public void continuar() throws BingoExceptions {
+       //try{
+           j.continuar();
+       /*}catch(BingoExceptions error){
+           throw error;
+       }*/
     }
     
     private void cerrar(){

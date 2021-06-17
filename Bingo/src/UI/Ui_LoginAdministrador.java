@@ -5,8 +5,10 @@
  */
 package UI;
 
+import clases.Administrador;
 import controladores.ControllerAdmin;
 import controladores.ControllerJugador;
+import controladores.ControllerLogin;
 import exepctions.BingoExceptions;
 import javax.swing.JOptionPane;
 
@@ -151,15 +153,26 @@ public class Ui_LoginAdministrador extends javax.swing.JFrame {
     private void ingresar() {
         String cedula = txtCedula.getText();
         String password = new String(txtPassword.getPassword());
-        ControllerAdmin ca = new ControllerAdmin();
+        ControllerLogin cl = new ControllerLogin(this);
         
         try{
-            ca.loginAdministrador(cedula, password);
-            this.dispose();            
+            cl.loginAdministrador(cedula, password);
+           // this.dispose();            
         }
         catch(BingoExceptions error){
             JOptionPane.showMessageDialog(this, error.getMessage(), "Login incorrecto", JOptionPane.ERROR_MESSAGE);
         }
         
+
+        
+    }
+
+    public void cerrarVentana() {
+        this.dispose();
+    }
+
+    public void cargarPanelDeAdmin(Administrador a) {
+        Ui_Admin unA = new Ui_Admin(this, false, a);
+        unA.setVisible(true);
     }
 }

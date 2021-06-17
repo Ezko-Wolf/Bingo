@@ -92,7 +92,8 @@ public class Jugador extends ObservableJugador {
     private void isGanador(Carton carton) {
         try{
             boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
-            if(isGanador) juego.setGanador(this);
+            if(isGanador)
+                juego.setGanador(this);
         }catch(BingoExceptions error){
             //Capturar el error y mostrarlo en la vista
         }
