@@ -7,10 +7,10 @@ package clases;
 
 import exepctions.BingoExceptions;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import interfaces.IFigura;
-import java.util.Collections;
-import java.util.HashMap;
+
 /**
  *
  * @author Ezko

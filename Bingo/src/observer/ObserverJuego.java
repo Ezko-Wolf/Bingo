@@ -14,7 +14,8 @@ public interface ObserverJuego {
         JUEGO_INICIADO,
         ACTUALIZA_ESTADO_JUEGO,
         JUGADOR_ABANDONO,
-        HAY_GANADOR
+        HAY_GANADOR,
+        JUEGO_CREADO
     }
     
     public void update(ObservableJuego source, Object event);

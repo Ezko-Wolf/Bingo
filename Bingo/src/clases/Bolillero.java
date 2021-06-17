@@ -26,9 +26,13 @@ public class Bolillero {
     public ArrayList<Bolilla> getBolillas() {
         return bolillas;
     }
+    
+    public int getCantidadBolillas(){
+        return this.cantidadBolillas;
+    }
 
     public Bolilla sortear() {
-        if(bolillas.size()== 0) throw new Error("No hay mas bolillas para sortear");
+        if(bolillas.isEmpty()) throw new Error("No hay mas bolillas para sortear");
         Random r = new Random();
         int low = 0;
         int high = bolillas.size();
@@ -36,11 +40,7 @@ public class Bolillero {
         Bolilla boli = bolillas.remove(indx);
         bolillasSorteadas.add(boli);
         return boli;
-    }
-    
-    private void crearBolillas(){
-        
-    }
+    }  
 
     private void generarBolillas() {
         for(int i = 0; i < this.cantidadBolillas; i++){

@@ -7,7 +7,6 @@ package clases;
 
 import exepctions.BingoExceptions;
 import interfaces.IFigura;
-import modelo.Bingo;
 
 import java.util.ArrayList;
 import observer.ObservableJugador;
@@ -51,7 +50,7 @@ public class Jugador extends ObservableJugador {
     public void cobroAbandono(){
         this.usuario.cobrar(usuario.getSaldo()-this.saldo);
     }
-    
+  
     public double pagar(double monto){
         return usuario.pagar(monto);
     }
@@ -76,10 +75,6 @@ public class Jugador extends ObservableJugador {
         this.juego = unJ;
         
     } 
-    
-    public void sumarSaldo(Double saldoASumar){
-        this.saldo += saldoASumar;
-    }
     
     public double getSaldo(){
         return this.saldo;
@@ -117,10 +112,9 @@ public class Jugador extends ObservableJugador {
         return this.usuario.getCedula();
     }
     
-    public boolean anotarBolilla(Bolilla b){
-            this.estado = EstadoJugador.Esperando;
-            boolean marco = false;
-            for(int i = 0; i < cartones.size() && marco == false; i++){
+    public boolean anotarBolilla(Bolilla b){        
+        boolean marco = false;
+        for(int i = 0; i < cartones.size() && marco == false; i++){
             marco = cartones.get(i).marcar(b);
             if(marco){
                 b.setJugador(this);                
@@ -138,7 +132,6 @@ public class Jugador extends ObservableJugador {
                 juego.setGanador(this);
             }
     }
-    
 
     public void crearCartones() {
         for(int i = 0; i < this.cantCartones; i++){
@@ -157,7 +150,7 @@ public class Jugador extends ObservableJugador {
     }
     
     public void continuar(){
-           this.estado = EstadoJugador.Continuar;
-           this.juego.continuar();
+        this.estado = EstadoJugador.Continuar;
+        this.juego.continuar();
     }
 }

@@ -34,4 +34,11 @@ public class FiguraCartonLleno implements IFigura {
         return this.nombre;
     }
     
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
+
+    
+    
 }

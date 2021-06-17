@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package clases;
 
 import clases.Config;
 import clases.Juego;
 import clases.Jugador;
 import exepctions.BingoExceptions;
-import interfaces.IFigura;
 import java.util.ArrayList;
+import observer.ObservableJuego;
+import observer.ObserverJuego;
 
 /**
  *
  * @author Ezko
  */
-public class Bingo {
+public class Bingo extends ObservableJuego{
     ArrayList<Jugador> enEspera;
     ArrayList<Juego> juegos;
     Config configuracion;
@@ -27,32 +28,28 @@ public class Bingo {
         juegos = new ArrayList();
     }
   
-    public void iniciarJuego() throws BingoExceptions{
-       //try{
-           Juego juego = juegos.get(juegos.size() - 1);
-           enEspera.clear(); 
-           juego.iniciar();
-       /*}catch(BingoExceptions error){
-           throw error;
-       }*/
+    public void iniciarJuego(){
+        Juego juego = juegos.get(juegos.size() - 1);
+        enEspera.clear(); 
+        juego.iniciar();
     }  
   
-    public void validarJuego(Jugador unJ) throws BingoExceptions{
-            enEspera.add(unJ);
-            Juego juego = this.getProximoJuego();
-            juego.addJugador(unJ);
-            juego.setPozo(unJ.getCartones().size());
-            
-            
-            if(configuracion.getCantidadJugadores() == enEspera.size())          
-                this.iniciarJuego();
+    public void validarJuego(Jugador unJ){
+        enEspera.add(unJ);
+        Juego juego = this.getProximoJuego();
+        juego.addJugador(unJ);
+        juego.setPozo(unJ.getCartones().size());
         
+        
+        if(configuracion.getCantidadJugadores() == enEspera.size())          
+            this.iniciarJuego();
     }
     
     public Juego getProximoJuego(){
-        if(enEspera.size() == 0){
+        if(enEspera.isEmpty()){
             Juego juego = new Juego(configuracion, juegos.size()+1);
             juegos.add(juego);
+            notifyObservers(ObserverJuego.Eventos.JUEGO_CREADO);
         }
         return juegos.get(juegos.size() - 1);            
     }            
@@ -65,6 +62,10 @@ public class Bingo {
         catch(BingoExceptions error){
             throw error;
         }
+    }
+    
+    public ArrayList<Juego> getJuegos(){
+        return this.juegos;
     }
 
     private void cantidadCartonesValidas(int maximoCartones, Jugador unJ) throws BingoExceptions {
@@ -83,16 +84,4 @@ public class Bingo {
         return unJ.getSaldo() < valorCarton * 3 * unJ.getCantidadCartones();
     }
 
-    //ESTO SE VA
-    public void continuar() {
-            juegos.get(0).continuar();
-    }
-    
-    public boolean ganador(){
-        return juegos.get(0).getGanador() == null ? false : true;
-    }
-
-    public double getValorCarton() {
-        return this.configuracion.getValorCarton();
-    }
 }

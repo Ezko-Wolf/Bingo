@@ -6,13 +6,12 @@
 package modelo;
 
 import clases.Administrador;
-import clases.Carton;
-import clases.Celda;
 import clases.Jugador;
 import clases.User;
 import clases.Usuario;
 import exepctions.BingoExceptions;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *
@@ -54,9 +53,12 @@ public class ControladorUsuarios {
            
     }
     
-    public void loginAdministrador(String ci, String pass) throws BingoExceptions {
+    public Administrador loginAdministrador(String ci, String pass) throws BingoExceptions {
         try{            
-            Administrador admin = (Administrador) loginGenerico(ci, pass, (ArrayList) administradores);   
+            Administrador admin = (Administrador) loginGenerico(ci, pass, (ArrayList) administradores);
+            administradorEnLinea(admin);
+            admin.setEnLinea(true);   
+            return admin;
         }
         catch(BingoExceptions error){
             throw error;
@@ -80,12 +82,13 @@ public class ControladorUsuarios {
         }        
         
     }
-    
-//    public ArrayList<Celda> getCeldasDeJugador(Jugador j) {
-//        ArrayList<Celda> celdas = new ArrayList();
-//        for(Carton c:j.getCartones()){
-//            celdas.addAll(c.getCeldas());
-//        }
-//        return celdas;
-//    }
+
+    private void administradorEnLinea(Administrador admin) throws BingoExceptions  {
+        if(admin.getEnLinea() == true) 
+            throw new BingoExceptions("El administrador: " + admin.getCedula() + " ya inicio sesión.");
+    }
+
+    public void addAdministrador(Administrador administrador) {
+        administradores.add(administrador);
+    }
 }
