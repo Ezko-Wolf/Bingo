@@ -6,9 +6,6 @@
 package clases;
 
 import UI.Ui_LoginJugador;
-import exepctions.BingoExceptions;
-import interfaces.IFigura;
-import java.util.ArrayList;
 import modelo.Fachada;
 
 /**
@@ -22,6 +19,8 @@ public class Sistema {
     public static void main(String[] args) {
         // TODO code application logic here
         Fachada facha = Fachada.getInstancia();
+        Bingo bing = new Bingo();
+        facha.setBingo(bing);
         Usuario jenny = new Usuario("12345", "jenny123", "Jenny", 3, 3000.0);
         Usuario alejo = new Usuario("23423", "alejo123", "Alejo", 3, 3000.0);
         Usuario manteca = new Usuario("3456", "mante123", "Manteca", 3, 3000.0);
