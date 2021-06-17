@@ -15,6 +15,8 @@ import observer.ObserverJugador;
  * @author Ezko
  */
 public class Jugador extends ObservableJugador {
+
+
     public enum EstadoJugador {
         Esperando,
         Continuar,
@@ -35,7 +37,24 @@ public class Jugador extends ObservableJugador {
         this.juego = null;
         this.estado = EstadoJugador.Esperando;
     }
- 
+  
+    public double pagar(double monto){
+        return usuario.pagar(monto);
+    }
+    public double cobrar(double monto) {
+        return usuario.cobrar(monto);
+    }
+    public double getSaldoUsuario(){
+        return this.usuario.getSaldo();
+    }
+    
+    public void setFiguraGanadora(IFigura figuraGanadora) {
+        this.figuraGanadora = figuraGanadora;
+    }
+    public IFigura getFiguraGanadora() {
+        return this.figuraGanadora;
+    }
+    
     public void setJuego(Juego unJ){
         this.juego = unJ;
     } 

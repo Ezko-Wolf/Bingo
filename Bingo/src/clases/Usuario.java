@@ -24,4 +24,14 @@ public class Usuario extends User {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+    public double pagar(double monto) {
+        this.setSaldo(saldo-monto);
+        return monto;
+    }
+
+    double cobrar(double monto) {
+        this.setSaldo(this.saldo+monto);
+        return this.getSaldo();
+    }
 }

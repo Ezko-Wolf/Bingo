@@ -37,6 +37,7 @@ public class Config {
             ArrayList<IFigura> figuritas = new ArrayList();
             figuritas.add(new FiguraDiagonal());
             //figuritas.add(new FiguraPerimetro());
+
             instancia = new Config(3, 3, 3, 2, 50, figuritas);
         }
         return instancia;

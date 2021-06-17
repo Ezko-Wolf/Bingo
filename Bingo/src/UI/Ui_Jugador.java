@@ -241,4 +241,5 @@ public class Ui_Jugador extends javax.swing.JDialog {
     private void abandonar() {
         cj.abandonar();
     }
+
 }
