@@ -36,7 +36,7 @@ public class Juego extends ObservableJuego{
         this.cfg = cfg;
         this.estado = EstadoJuego.EsperandoInicio;
         this.pozo = new Pozo();
-        this.numeroJuego = numero;
+        this.numeroJuego = numero;       
     }
 
 
@@ -65,6 +65,10 @@ public class Juego extends ObservableJuego{
 
     public ArrayList<Jugador> getJugadores(){
         return this.jugadores;
+    }
+    
+    public Bolillero getBolillero(){
+        return this.bolillero;
     }
 
     public int getFilas(){
@@ -131,25 +135,17 @@ public class Juego extends ObservableJuego{
         HelperCrearCartones.llenarCartones(auxCartones, this.bolillero.getBolillas());
     }
 
-
-
     private int cantidadNumerosEnJuego(int cantCartones, int numerosEnCarton) {
         return cantCartones * numerosEnCarton;
     }
-
-
 
     public void setPozo(int cartones) {
         pozo.agregarSaldo(cartones, cfg.getValorCarton());
     }
 
-
-
     public double getPozo() {
         return this.pozo.getMonto();
     }
-
-
 
     public int getNumero() {
         return this.numeroJuego;
@@ -173,12 +169,6 @@ public class Juego extends ObservableJuego{
         }
         notifyObservers(ObserverJuego.Eventos.JUGADOR_ABANDONO);
 
-    }
-    
-    
-    private void jugadoresAEspera() {
-        for(Jugador j:jugadores)
-            j.setEstado(EstadoJugador.Esperando);
     }
     
     @Override

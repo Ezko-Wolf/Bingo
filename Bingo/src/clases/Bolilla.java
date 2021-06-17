@@ -9,7 +9,7 @@ package clases;
  *
  * @author Ezko
  */
-class Bolilla {
+public class Bolilla {
     private int valor;    
     private Jugador jugador;
     
@@ -21,8 +21,16 @@ class Bolilla {
         return this.valor;
     }
 
-    void setJugador(Jugador jugador) {
+    public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
     
+    public Jugador getJugador(){
+        return this.jugador;
+    }
+
+    @Override
+    public String toString(){
+        return this.valor+"";
+    }
 }

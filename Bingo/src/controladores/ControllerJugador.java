@@ -8,22 +8,17 @@ package controladores;
 import UI.Ui_Jugador;
 import clases.Carton;
 import clases.Celda;
-import clases.Juego;
 import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
 import componenteGrid.MarcadorBoton;
 import exepctions.BingoExceptions;
-
 import java.util.ArrayList;
-import java.util.Observer;
 import observer.ObservableJuego;
 import observer.ObservableJugador;
 import static observer.ObserverJuego.Eventos.JUEGO_INICIADO;
 import observer.ObserverJuego;
 import observer.ObserverJugador;
-import modelo.Bingo;
-import modelo.Fachada;
 
 /**
  *
@@ -31,20 +26,20 @@ import modelo.Fachada;
  */
 public class ControllerJugador implements MarcadorBoton, ObserverJuego, ObserverJugador {
     private Ui_Jugador vista;
-    private Jugador j;
+    private Jugador jugador;
     private ListaPaneles listaPaneles;
     
-    public ControllerJugador(Ui_Jugador vista, Jugador j){
+    public ControllerJugador(Ui_Jugador vista, Jugador jugador){
         this.vista = vista;
-        this.j = j;        
-        j.getJuego().addObserver(this);      
-        j.addObserver(this);
+        this.jugador = jugador;        
+        jugador.getJuego().addObserver(this);      
+        jugador.addObserver(this);
     }
 
     public void generarCarton(ListaPaneles listaPaneles) {
         this.listaPaneles = listaPaneles;
-        ArrayList<Carton> cartones = j.getCartones();
-        for(int i = 0; i < j.getCantidadCartones(); i++){
+        ArrayList<Carton> cartones = jugador.getCartones();
+        for(int i = 0; i < jugador.getCantidadCartones(); i++){
             try {            
                 ArrayList<Celda> celdas = cartones.get(i).getCeldas();
                 this.listaPaneles.agregarPanel(celdas.toArray(), this);
@@ -62,7 +57,7 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
 
     @Override
     public boolean marcar(Object dato) {
-        return ((Celda) dato).getBolilla() == null ? false : true;
+        return ((Celda) dato).getBolilla() != null;
     }
 
     @Override
@@ -77,15 +72,15 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
 
     public void continuar() throws BingoExceptions {
        //try{
-           j.continuar();
+           jugador.continuar();
        /*}catch(BingoExceptions error){
            throw error;
        }*/
     }
     
     private void cerrar(){
-        j.getJuego().deleteObserver(this);
-        j.deleteObserver(this);
+        jugador.getJuego().deleteObserver(this);
+        jugador.deleteObserver(this);
         vista.cerrarVentana();
     }
     
@@ -119,8 +114,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
         }  
     }
     public void abandonar() {        
-        j.abandonar();
-        j.getJuego().deleteObserver(this);          
+        jugador.abandonar();
+        jugador.getJuego().deleteObserver(this);          
         vista.cerrarVentana();
     }
     

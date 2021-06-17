@@ -7,34 +7,87 @@ package controladores;
 
 import UI.Ui_Admin;
 import clases.Administrador;
-import exepctions.BingoExceptions;
-import modelo.Fachada;
+import clases.Juego;
+import clases.Bolilla;
+import clases.Bolillero;
+import java.util.ArrayList;
+import java.util.Comparator;
+import observer.ObservableJuego;
+import observer.ObserverJuego;
 
 /**
  *
  * @author atrias
  */
-public class ControllerAdmin {
+public class ControllerAdmin implements ObserverJuego{
 
     private Ui_Admin vista;
     private Administrador admin;
+    private Juego juegoAnterior = null;
         
-    public ControllerAdmin(Ui_Admin admin, Administrador a) {
-        this.vista = admin;
-        this.admin = a;
+    public ControllerAdmin(Ui_Admin vistaAdmin, Administrador admin) {
+        this.vista = vistaAdmin;
+        this.admin = admin;
+        admin.getBingo().addObserver(this);
+    }
+    
+    public void cargarDatos(Object obj){
+        Juego juego = (Juego)obj;  
+        if(this.juegoAnterior != null) this.juegoAnterior.deleteObserver(this); 
+        this.juegoAnterior = juego;
+        juego.addObserver(this);
+        vista.cargarJugadores(juego);    
+        vista.cargarNumero(juego);
+        vista.cargarGanador(juego);
+        this.cargarEstadoCantidadBolillasYBolillero(juego);
+    }   
+    
+    public void jugadorQueAnoto(Object obj) {
+        Bolilla boli = (Bolilla)obj;
+        vista.cargarJugadorQueAnoto(boli.getJugador() == null ? "-" : boli.getJugador().toString());
+    }
+    
+    private void cargarEstadoCantidadBolillasYBolillero(Juego juego){
+        ArrayList<Bolilla> bolillas = new ArrayList();
+        Bolillero bolillero = juego.getBolillero();
+        this.agruparYOrdenarBolillas(bolillero, bolillas);
+        vista.cargarEstadoCantidadBolillasYBolillero(juego, bolillero.getCantidadBolillas(), bolillas);
     }
 
-    /*public ControllerAdmin(Ui_Admin aThis, Administrador a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+    private void agruparYOrdenarBolillas(Bolillero bolillero, ArrayList<Bolilla> bolillas) {
+        bolillas.addAll(bolillero.getBolillasSoretadas());
+        bolillas.addAll(bolillero.getBolillas());
+        bolillas.sort(new Comparator<Bolilla>() {
+            @Override
+            public int compare(Bolilla b1, Bolilla b2) {
+                int ret = 0;
+                if(b1.getValor() > b2.getValor()) ret = 1;
+                if(b1.getValor() < b2.getValor()) ret = -1;
+                return ret;
+            }
+        });
+    }
 
-    public void loginAdministrador(String cedula, String password)  throws BingoExceptions {
-     try{
-         Fachada.getInstancia().loginAdministrador(cedula, password);
-     }
-     catch(BingoExceptions error){
-         throw error;
-     }
- }
+    @Override
+    public void update(ObservableJuego source, Object event) {
+        switch((ObserverJuego.Eventos)event) {
+            case JUEGO_CREADO : 
+                vista.cargarJuegos();
+            break;
+            case JUGADOR_ABANDONO : 
+                vista.cargarJugadores((Juego)source);
+            break;
+            case JUEGO_INICIADO:
+            case ACTUALIZA_ESTADO_JUEGO:
+                vista.cargarJuegos();
+                this.cargarEstadoCantidadBolillasYBolillero((Juego)source);
+            break;
+            case HAY_GANADOR :
+                vista.cargarGanador((Juego)source);
+            break;
+        }
+    }
+
+    
     
 }
