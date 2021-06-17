@@ -84,8 +84,4 @@ public class Bingo extends ObservableJuego{
         return this.configuracion.getValorCarton();
     }
 
-    public double getValorCarton() {
-        return this.configuracion.getValorCarton();
-    }
-
 }
