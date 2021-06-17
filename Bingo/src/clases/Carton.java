@@ -9,8 +9,7 @@ import exepctions.BingoExceptions;
 import java.util.ArrayList;
 
 import interfaces.IFigura;
-import java.util.Collections;
-import java.util.HashMap;
+
 /**
  *
  * @author Ezko
@@ -55,18 +54,13 @@ public class Carton {
         return result;
     }
 
-    public IFigura cumpleFigura(ArrayList<IFigura> figurasHabilitadas) throws BingoExceptions {
+    public boolean cumpleFigura(ArrayList<IFigura> figurasHabilitadas) throws BingoExceptions {
         if(figurasHabilitadas.size() == 0) throw new BingoExceptions("No se configuraron figuras ganadoras");
         try{
-            HashMap<String, IFigura> map = new HashMap<String,IFigura>();
             for(IFigura f: figurasHabilitadas){
-                if(f.cumpleFigura(this)) map.put(f.getNombre(), f);
-            }
-            if(map.get("CartonLleno") != null) return map.get("CartonLleno");
-            else if(map.get("Perimetro")!= null) return map.get("Perimetro");
-            else if(map.get("Diagonal")!= null)return map.get("Diagonal");
-            else if(map.get("Linea")!= null)return map.get("Linea");
-            else return null;
+                if(f.cumpleFigura(this)) return true;
+            }            
+            return false;
         }catch(BingoExceptions error){
             throw error;
         }
