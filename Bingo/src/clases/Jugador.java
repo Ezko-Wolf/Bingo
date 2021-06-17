@@ -140,8 +140,16 @@ public class Jugador extends ObservableJugador {
         }
     }
     
+    private ArrayList<Integer> getBolillasJugador(){
+        ArrayList<Integer> bolillas = new ArrayList();
+        for(Carton c:cartones){
+            bolillas.addAll(c.getValores());
+        }
+        return bolillas;
+    }
+    
     public void abandonar() {
-        this.getJuego().abandonar(this);
+        this.getJuego().abandonar(this,this.getBolillasJugador());
     }
     
     @Override

@@ -52,4 +52,12 @@ public class Bolillero {
     public ArrayList<Bolilla> getBolillasSoretadas() {
         return this.bolillasSorteadas;
     }
+
+    void sacarBolillas(ArrayList<Integer> bolillasAbandono) {
+        for(int i = 0; i < bolillas.size();i++){
+            if(bolillasAbandono.contains(bolillas.get(i).getValor())){
+                bolillas.remove(bolillas.get(i));
+            }
+        }
+    }
 }

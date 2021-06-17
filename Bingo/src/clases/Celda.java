@@ -5,6 +5,8 @@
  */
 package clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ezko
@@ -47,4 +49,7 @@ public class Celda {
         return false;
     }
     
+    public void getBolillaSinMarcar( ArrayList<Integer> valores){
+        if (this.getBolilla() == null) valores.add(this.getValor());
+    }
 }
