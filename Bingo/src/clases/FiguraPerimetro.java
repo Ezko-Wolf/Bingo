@@ -18,7 +18,6 @@ public class FiguraPerimetro implements IFigura {
     @Override
     public boolean cumpleFigura(Carton carton) {
         int largoCol = carton.getColumnas();  
-        int largoFila = carton.getFilas();
         int largo = carton.getCeldas().size() - 1; 
         
         boolean puedeSeguirExtremo = true;  
@@ -34,11 +33,11 @@ public class FiguraPerimetro implements IFigura {
             auxTotalCeldas--;
         }
         
-        int j = largoFila;
+        int j = largoCol;
         
         while(j < largo && !noPuedeSeguirMedio){
             if(carton.getCeldas().get(j).getBolilla() != null && carton.getCeldas().get((j*2)-1).getBolilla() != null) noPuedeSeguirMedio = true;
-            j+=largoFila;
+            j+=largoCol;
         }
         
         return puedeSeguirExtremo && noPuedeSeguirMedio;
