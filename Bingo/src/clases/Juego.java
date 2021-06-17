@@ -86,14 +86,14 @@ public class Juego extends ObservableJuego{
 
     public void continuar(){
         if(this.estado == EstadoJuego.EsperandoInicio || this.jugadoresListos()){
-        this.estado = EstadoJuego.Jugando;
-        notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
-        Bolilla sorteada = this.bolillero.sortear();
-        boolean bolillaMarcada = false;
-        this.jugadoresAEspera();
-        for(int i = 0; i < jugadores.size() && ganador == null && !bolillaMarcada; i++){
-            bolillaMarcada = jugadores.get(i).anotarBolilla(sorteada);
-        }
+            this.estado = EstadoJuego.Jugando;
+            notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
+            Bolilla sorteada = this.bolillero.sortear();
+            boolean bolillaMarcada = false;
+            this.jugadoresAEspera();
+            for(int i = 0; i < jugadores.size() && ganador == null && !bolillaMarcada; i++){
+                bolillaMarcada = jugadores.get(i).anotarBolilla(sorteada);
+            }
             this.estado = EstadoJuego.EsperandoJugadores;
             notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
         }
@@ -106,6 +106,11 @@ public class Juego extends ObservableJuego{
         if(jugar == false) return false;
         }
         return jugar;
+    }
+    
+    private void jugadoresAEspera() {
+        for(Jugador j:jugadores)
+            j.setEstado(EstadoJugador.Esperando);
     }
 
 
@@ -170,11 +175,6 @@ public class Juego extends ObservableJuego{
 
     }
     
-    
-    private void jugadoresAEspera() {
-        for(Jugador j:jugadores)
-            j.setEstado(EstadoJugador.Esperando);
-    }
 
     @Override
     public String toString(){

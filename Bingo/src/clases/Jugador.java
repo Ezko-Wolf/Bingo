@@ -76,8 +76,7 @@ public class Jugador extends ObservableJugador {
         return this.usuario.getCedula();
     }
     
-    public boolean anotarBolilla(Bolilla b){
-        this.estado = EstadoJugador.Esperando;
+    public boolean anotarBolilla(Bolilla b){        
         boolean marco = false;
         for(int i = 0; i < cartones.size() && marco == false; i++){
             marco = cartones.get(i).marcar(b);

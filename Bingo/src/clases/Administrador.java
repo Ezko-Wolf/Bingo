@@ -12,11 +12,13 @@ package clases;
 public class Administrador extends User {
     private String email;
     private boolean enLinea;
+    private Bingo bingo;
     
-    public Administrador(String ci, String pass, String nombre, String email){
+    public Administrador(String ci, String pass, String nombre, String email, Bingo bingo){
         super(ci, pass, nombre);
         this.email = email;
         this.enLinea = false;
+        this.bingo = bingo;
     }
 
     public void setMail(String mail) {
@@ -31,6 +33,7 @@ public class Administrador extends User {
         return this.enLinea;
     }
 
-    
-    
+    public Bingo getBingo(){
+        return this.bingo;
+    }
 }
