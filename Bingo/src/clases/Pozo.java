@@ -39,16 +39,18 @@ public class Pozo {
     }
 
     public void liquidar(Jugador ganador, ArrayList<Jugador> jugadores,double valorCarton) {
-        IFigura figuraGanadora = ganador.getFiguraGanadora();
-        double multiploPozo = figuraGanadora.getMultiploPozo();
-        for(Jugador j : jugadores){
-            if(!ganador.equals(j)) {
-                double costoPremio = this.calcularPremio(j.getCantidadCartones(),valorCarton,multiploPozo);
-                this.agregarPremio(costoPremio);
-                j.pagar(this.getMonto());
-                
+        if(jugadores.size() > 1 ){
+            IFigura figuraGanadora = ganador.getFiguraGanadora();
+            double multiploPozo = figuraGanadora.getMultiploPozo();
+            for(Jugador j : jugadores){
+                if(!ganador.equals(j)) {
+                    double costoPremio = this.calcularPremio(j.getCantidadCartones(),valorCarton,multiploPozo);
+                    this.agregarPremio(costoPremio);
+                    j.pagar(this.getMonto());
+
+                }
             }
+            ganador.cobrar(this.getMonto());
         }
-        ganador.cobrar(this.getMonto());
     }  
 }

@@ -105,7 +105,6 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             case HAY_GANADOR :
                 Juego juego = (Juego)source;
                 vista.ganadorPerdedor(this.jugador, juego.getMontoPozo(), juego.getGanador());
-                jugador.getJuego().deleteObserver(this);          
             break;
         }
     }
@@ -118,11 +117,15 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             break;
         }  
     }
-    public void abandonar() {        
+    public void abandonar() {
+        jugador.getJuego().deleteObserver(this);           
         jugador.abandonar();
-        jugador.getJuego().deleteObserver(this);   
         jugador.cobroAbandono();
         vista.cerrarVentana();
+    }
+
+    public void desuscrbirir() {
+        jugador.getJuego().deleteObserver(this);
     }
     
 
