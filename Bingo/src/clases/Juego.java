@@ -48,6 +48,9 @@ public class Juego extends ObservableJuego{
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
         this.estado = EstadoJuego.Finalizado;
+        if(jugadores.size() > 1){
+            this.finalizarPartida();
+        }
         notifyObservers(ObserverJuego.Eventos.HAY_GANADOR);
     }
     
@@ -86,16 +89,16 @@ public class Juego extends ObservableJuego{
     public int getColumnas(){
         return this.cfg.getColumnas();
     }
-
-    public void iniciar(){
-        int cantCartones = this.obtenerCantCartones();
-        int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
-        this.bolillero = new Bolillero(cantidadNumeros);
-        this.dispararCreacionDeCartones();
-        notifyObservers(ObserverJuego.Eventos.JUEGO_INICIADO);
-        this.continuar();
+    
+    public void iniciar() {
+            int cantCartones = this.obtenerCantCartones();
+            int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
+            this.bolillero = new Bolillero(cantidadNumeros);
+            this.dispararCreacionDeCartones();
+            notifyObservers(ObserverJuego.Eventos.JUEGO_INICIADO);
+            this.continuar();
     }
-
+    
     public void continuar(){
         if(this.estado == EstadoJuego.EsperandoInicio || this.jugadoresListos()){
             this.estado = EstadoJuego.Jugando;
@@ -159,7 +162,9 @@ public class Juego extends ObservableJuego{
         return this.numeroJuego;
     }
 
-
+    private void finalizarPartida() {
+        pozo.liquidar(ganador,jugadores,cfg.getValorCarton());
+    }
 
     public ArrayList<Bolilla> listaDeBolillasJugadas() {
         return bolillero.getBolillasSoretadas();

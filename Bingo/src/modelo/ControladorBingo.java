@@ -39,4 +39,7 @@ public class ControladorBingo {
     public void puedeJugar(Jugador unJ) throws BingoExceptions{
         bingo.puedeJugar(unJ);
     }
+    public double getValorCarton() {
+        return bingo.getValorCarton();
+    }
 }

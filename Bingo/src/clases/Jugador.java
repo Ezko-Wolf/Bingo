@@ -6,6 +6,8 @@
 package clases;
 
 import exepctions.BingoExceptions;
+import interfaces.IFigura;
+
 import java.util.ArrayList;
 import observer.ObservableJugador;
 import observer.ObserverJugador;
@@ -16,6 +18,9 @@ import observer.ObserverJugador;
  */
 public class Jugador extends ObservableJugador {
 
+  
+
+
 
     public enum EstadoJugador {
         Esperando,
@@ -25,25 +30,36 @@ public class Jugador extends ObservableJugador {
     
     private double saldo;
     private ArrayList<Carton> cartones = new ArrayList();
+    private IFigura figuraGanadora;
     private int cantCartones;
     private Juego juego;
     private Usuario usuario;
     private EstadoJugador estado;
             
-    public Jugador(double saldo, Usuario usuario, int cantCartones){
-        this.saldo = saldo;
+    public Jugador(Usuario usuario, int cantCartones){
         this.usuario = usuario;
         this.cantCartones = cantCartones;
         this.juego = null;
         this.estado = EstadoJugador.Esperando;
+    } 
+    
+    public void setSaldo(double valorCarton) {
+        this.saldo = this.usuario.getSaldo() - (valorCarton * this.cantCartones);
+    }
+    
+    public void cobroAbandono(){
+        this.usuario.cobrar(usuario.getSaldo()-this.saldo);
     }
   
     public double pagar(double monto){
         return usuario.pagar(monto);
     }
+    
     public double cobrar(double monto) {
         return usuario.cobrar(monto);
     }
+    
+    
     public double getSaldoUsuario(){
         return this.usuario.getSaldo();
     }
@@ -57,6 +73,7 @@ public class Jugador extends ObservableJugador {
     
     public void setJuego(Juego unJ){
         this.juego = unJ;
+        
     } 
     
     public double getSaldo(){
@@ -109,13 +126,11 @@ public class Jugador extends ObservableJugador {
     }
     
     private void isGanador(Carton carton) {
-        try{
-            boolean isGanador = carton.cumpleFigura(juego.getFigurasHabilitadas());
-            if(isGanador)
+            IFigura figGanadora = carton.cumpleFigura(juego.getFigurasHabilitadas());
+            if(figGanadora != null){
+                this.setFiguraGanadora(figGanadora);             
                 juego.setGanador(this);
-        }catch(BingoExceptions error){
-            //Capturar el error y mostrarlo en la vista
-        }
+            }
     }
 
     public void crearCartones() {

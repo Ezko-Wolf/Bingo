@@ -18,7 +18,10 @@ public class FiguraCartonLleno implements IFigura {
     
     @Override
     public boolean cumpleFigura(Carton carton) {
-        return false;
+        for (int i = 0; i < carton.getCeldas().size(); i++) {
+            if (carton.getCeldas().get(i).getBolilla() == null) return false;
+        }
+        return true;
     }
 
     @Override

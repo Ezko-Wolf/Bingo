@@ -84,4 +84,8 @@ public class Fachada {
     public void addAdministrador(Administrador administrador) {
         cu.addAdministrador(administrador);
     }
+
+    public double getValorCarton() {
+        return cb.getValorCarton();
+    }
 }

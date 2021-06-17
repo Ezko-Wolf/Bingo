@@ -16,8 +16,13 @@ public class Ui_GanadorPerdedor extends javax.swing.JFrame {
     /**
      * Creates new form Ui_GanadorPerdedor
      */
-    public Ui_GanadorPerdedor() {
+    private Ui_Jugador IUJugador;
+    public Ui_GanadorPerdedor(Ui_Jugador IUJugador) {
+        this.IUJugador = IUJugador;
         initComponents();
+    }
+
+    private Ui_GanadorPerdedor() {
     }
 
     /**
@@ -31,30 +36,49 @@ public class Ui_GanadorPerdedor extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         textWinnerLoser = new javax.swing.JTextPane();
+        bAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(textWinnerLoser);
+
+        bAceptar.setText("Aceptar");
+        bAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(bAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(bAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAceptarActionPerformed
+        this.finalizar();
+    }//GEN-LAST:event_bAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,13 +114,25 @@ public class Ui_GanadorPerdedor extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAceptar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane textWinnerLoser;
     // End of variables declaration//GEN-END:variables
 
     public void actualizarInterfaz(Jugador j, double montoPozo,Jugador ganador) {
-        textWinnerLoser.setText("El jugador ganador es "+ ganador.getNombre() + ". Ganó con la figura "+ ganador.getFiguraGanadora().getNombre() + "y cobro "+ montoPozo);
+        if(ganador.getFiguraGanadora() != null){
+            textWinnerLoser.setText("El jugador ganador es "+ ganador.getNombre() + ". Ganó con la figura "+ ganador.getFiguraGanadora().getNombre() + " y cobro "+ montoPozo);
+        }else{
+             textWinnerLoser.setText("El jugador ganador es "+ ganador.getNombre() +  ". y cobro "+ montoPozo);
+        }
+        this.setVisible(true);
+    }
+
+    private void finalizar() {
+        IUJugador.cerrarVentana();
+        this.dispose();
     }
 }

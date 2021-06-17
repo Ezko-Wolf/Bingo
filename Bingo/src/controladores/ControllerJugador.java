@@ -9,6 +9,7 @@ import UI.Ui_GanadorPerdedor;
 import UI.Ui_Jugador;
 import clases.Carton;
 import clases.Celda;
+import clases.Juego;
 import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
@@ -92,6 +93,7 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             case JUEGO_INICIADO : 
                 vista.generarCarton(); 
                 vista.actualizarInterfaz();
+             
             break;
             case JUGADOR_ABANDONO : 
                 vista.actualizarInterfaz();
@@ -102,11 +104,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             break;
             case HAY_GANADOR :
                 Juego juego = (Juego)source;
-                this.vistaFinal = new Ui_GanadorPerdedor();
-
-                vistaFinal.actualizarInterfaz(j,juego.getMontoPozo(),juego.getGanador());
-                
-                System.out.println("Tenemos ganador");
+                vista.ganadorPerdedor(this.jugador, juego.getMontoPozo(), juego.getGanador());
+                jugador.getJuego().deleteObserver(this);          
             break;
         }
     }
@@ -121,7 +120,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
     }
     public void abandonar() {        
         jugador.abandonar();
-        jugador.getJuego().deleteObserver(this);          
+        jugador.getJuego().deleteObserver(this);   
+        jugador.cobroAbandono();
         vista.cerrarVentana();
     }
     

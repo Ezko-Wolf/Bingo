@@ -38,7 +38,6 @@ public class Bingo {
     }  
   
     public void validarJuego(Jugador unJ) throws BingoExceptions{
-        try{
             enEspera.add(unJ);
             Juego juego = this.getProximoJuego();
             juego.addJugador(unJ);
@@ -47,9 +46,7 @@ public class Bingo {
             
             if(configuracion.getCantidadJugadores() == enEspera.size())          
                 this.iniciarJuego();
-        }catch(BingoExceptions error){
-            throw error;
-        }
+        
     }
     
     public Juego getProximoJuego(){
@@ -87,15 +84,15 @@ public class Bingo {
     }
 
     //ESTO SE VA
-    public void continuar() throws BingoExceptions{
-        //try{
+    public void continuar() {
             juegos.get(0).continuar();
-        /*}catch(BingoExceptions error){
-            throw error;
-        }*/
     }
     
     public boolean ganador(){
         return juegos.get(0).getGanador() == null ? false : true;
+    }
+
+    public double getValorCarton() {
+        return this.configuracion.getValorCarton();
     }
 }
