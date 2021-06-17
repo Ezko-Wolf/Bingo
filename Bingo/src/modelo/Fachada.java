@@ -78,14 +78,15 @@ public class Fachada {
     
     //ESTO SE VA
     public void continuar() throws BingoExceptions{
-        try{
-            bingo.continuar();
-        }catch(BingoExceptions error){
-            throw error;
-        } 
+        bingo.continuar();
+      
     }
     
     public boolean ganador(){
         return bingo.ganador();
+    }
+
+    public double getValorCarton() {
+        return bingo.getValorCarton();
     }
 }

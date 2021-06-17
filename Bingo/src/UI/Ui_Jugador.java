@@ -165,11 +165,7 @@ public class Ui_Jugador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) throws BingoExceptions {//GEN-FIRST:event_continuarActionPerformed
-        try{
             this.continuar();
-        }catch(BingoExceptions error){
-            throw error;
-        }
     }//GEN-LAST:event_continuarActionPerformed
 
     private void abandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abandonarActionPerformed
@@ -219,13 +215,9 @@ public class Ui_Jugador extends javax.swing.JDialog {
         //numerosSorteados.setListData((String[]) j.getJuego().listaDeBolillasJugadas().toArray());
         
     }
-
     private void continuar() throws BingoExceptions {
-        try{
-            cj.continuar();
-        }catch(BingoExceptions error){
-            throw error;
-        }
+        cj.continuar();
+ 
     }
 
     private void cargarDatos() {
@@ -240,6 +232,11 @@ public class Ui_Jugador extends javax.swing.JDialog {
 
     private void abandonar() {
         cj.abandonar();
+    }
+
+    public void ganadorPerdedor(Jugador j, double montoPozo, Jugador ganador) {
+        Ui_GanadorPerdedor vistaFinal = new Ui_GanadorPerdedor(this);
+        vistaFinal.actualizarInterfaz(j, montoPozo, ganador);
     }
 
 }

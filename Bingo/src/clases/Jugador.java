@@ -19,6 +19,9 @@ import observer.ObserverJugador;
  */
 public class Jugador extends ObservableJugador {
 
+  
+
+
 
     public enum EstadoJugador {
         Esperando,
@@ -34,20 +37,30 @@ public class Jugador extends ObservableJugador {
     private Usuario usuario;
     private EstadoJugador estado;
             
-    public Jugador(double saldo, Usuario usuario, int cantCartones){
-        this.saldo = saldo;
+    public Jugador(Usuario usuario, int cantCartones){
         this.usuario = usuario;
         this.cantCartones = cantCartones;
         this.juego = null;
         this.estado = EstadoJugador.Esperando;
+    } 
+    
+    public void setSaldo(double valorCarton) {
+        this.saldo = this.usuario.getSaldo() - (valorCarton * this.cantCartones);
+    }
+    
+    public void cobroAbandono(){
+        this.usuario.cobrar(usuario.getSaldo()-this.saldo);
     }
     
     public double pagar(double monto){
         return usuario.pagar(monto);
     }
+    
     public double cobrar(double monto) {
         return usuario.cobrar(monto);
     }
+    
+    
     public double getSaldoUsuario(){
         return this.usuario.getSaldo();
     }
@@ -61,6 +74,7 @@ public class Jugador extends ObservableJugador {
     
     public void setJuego(Juego unJ){
         this.juego = unJ;
+        
     } 
     
     public void sumarSaldo(Double saldoASumar){
@@ -103,36 +117,26 @@ public class Jugador extends ObservableJugador {
         return this.usuario.getCedula();
     }
     
-    public boolean anotarBolilla(Bolilla b) throws BingoExceptions{
-        try{
+    public boolean anotarBolilla(Bolilla b){
+            this.estado = EstadoJugador.Esperando;
             boolean marco = false;
             for(int i = 0; i < cartones.size() && marco == false; i++){
-                marco = cartones.get(i).marcar(b);
-                if(marco){
-                    b.setJugador(this);
-                    notifyObservers(ObserverJugador.Eventos.MARCA_BOLILLA);
-                    this.isGanador(cartones.get(i));
-                }
+            marco = cartones.get(i).marcar(b);
+            if(marco){
+                b.setJugador(this);                
+                notifyObservers(ObserverJugador.Eventos.MARCA_BOLILLA);
+                this.isGanador(cartones.get(i));
             }
-            return marco;
-        }catch(BingoExceptions error){
-            throw error;
         }
-        
-   
+        return marco;
     }
     
-    private void isGanador(Carton carton) throws BingoExceptions{
-        try{
+    private void isGanador(Carton carton) {
             IFigura figGanadora = carton.cumpleFigura(juego.getFigurasHabilitadas());
-            if(figuraGanadora != null){
+            if(figGanadora != null){
+                this.setFiguraGanadora(figGanadora);             
                 juego.setGanador(this);
-                this.setFiguraGanadora(figuraGanadora);             
             }
-        }catch(BingoExceptions error){
-            throw error;
-            //Capturar el error y mostrarlo en la vista
-        }
     }
     
 
@@ -152,12 +156,8 @@ public class Jugador extends ObservableJugador {
       return this.getNombre();
     }
     
-    public void continuar() throws BingoExceptions{
-       try{
+    public void continuar(){
            this.estado = EstadoJugador.Continuar;
            this.juego.continuar();
-       }catch(BingoExceptions error){
-           throw error;
-       }
     }
 }

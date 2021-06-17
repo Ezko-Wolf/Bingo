@@ -38,7 +38,9 @@ public class ControladorUsuarios {
             Usuario usuario = (Usuario) loginGenerico(ci, pass, (ArrayList) usuarios);
             Fachada fachada = Fachada.getInstancia();
             this.usuarioEnJuego(usuario);
-            Jugador unJ = new Jugador(usuario.getSaldo(), usuario, cantCartones);
+            Jugador unJ = new Jugador(usuario, cantCartones);
+            double valorCarton = fachada.getValorCarton();
+            unJ.setSaldo(valorCarton);
             fachada.puedeJugar(unJ);
             jugadores.add(unJ);
             unJ.setJuego(fachada.getProximoJuego());

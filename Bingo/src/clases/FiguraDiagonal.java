@@ -19,9 +19,7 @@ class FiguraDiagonal implements IFigura {
 
     
     @Override
-    public boolean cumpleFigura(Carton carton) throws BingoExceptions {
-        if (carton.getFilas() != carton.getColumnas())
-            throw new BingoExceptions("La matriz no es cuadrada, no existe diagonal");
+    public boolean cumpleFigura(Carton carton) {
         boolean izquierdaADerecha = true;
         boolean derechaAIzquierda = true;
         

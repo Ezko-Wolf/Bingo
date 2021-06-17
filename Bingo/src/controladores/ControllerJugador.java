@@ -14,8 +14,6 @@ import clases.Jugador;
 import componenteGrid.GridLayoutException;
 import componenteGrid.ListaPaneles;
 import componenteGrid.MarcadorBoton;
-import exepctions.BingoExceptions;
-
 import java.util.ArrayList;
 import java.util.Observer;
 import observer.ObservableJuego;
@@ -23,7 +21,6 @@ import observer.ObservableJugador;
 import static observer.ObserverJuego.Eventos.JUEGO_INICIADO;
 import observer.ObserverJuego;
 import observer.ObserverJugador;
-import modelo.Bingo;
 import modelo.Fachada;
 
 /**
@@ -32,7 +29,6 @@ import modelo.Fachada;
  */
 public class ControllerJugador implements MarcadorBoton, ObserverJuego, ObserverJugador {
     private Ui_Jugador vista;
-    private Ui_GanadorPerdedor vistaFinal;
     private Jugador j;
     private ListaPaneles listaPaneles;
     
@@ -77,12 +73,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
         int i = 0;
     }    
 
-    public void continuar() throws BingoExceptions {
-       try{
-           j.continuar();
-       }catch(BingoExceptions error){
-           throw error;
-       }
+    public void continuar() {
+        j.continuar();
     }
     
     private void cerrar(){
@@ -97,6 +89,7 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             case JUEGO_INICIADO : 
                 vista.generarCarton(); 
                 vista.actualizarInterfaz();
+             
             break;
             case JUGADOR_ABANDONO : 
                 vista.actualizarInterfaz();
@@ -107,11 +100,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
             break;
             case HAY_GANADOR :
                 Juego juego = (Juego)source;
-                this.vistaFinal = new Ui_GanadorPerdedor();
-
-                vistaFinal.actualizarInterfaz(j,juego.getMontoPozo(),juego.getGanador());
-                
-                System.out.println("Tenemos ganador");
+                vista.ganadorPerdedor(this.j, juego.getMontoPozo(), juego.getGanador());
+                j.getJuego().deleteObserver(this);          
             break;
         }
     }
@@ -126,7 +116,8 @@ public class ControllerJugador implements MarcadorBoton, ObserverJuego, Observer
     }
     public void abandonar() {        
         j.abandonar();
-        j.getJuego().deleteObserver(this);          
+        j.getJuego().deleteObserver(this);   
+        j.cobroAbandono();
         vista.cerrarVentana();
     }
     

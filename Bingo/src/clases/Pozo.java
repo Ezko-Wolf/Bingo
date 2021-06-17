@@ -45,7 +45,7 @@ public class Pozo {
             if(!ganador.equals(j)) {
                 double costoPremio = this.calcularPremio(j.getCantidadCartones(),valorCarton,multiploPozo);
                 this.agregarPremio(costoPremio);
-                j.pagar(costoPremio);
+                j.pagar(this.getMonto());
                 
             }
         }

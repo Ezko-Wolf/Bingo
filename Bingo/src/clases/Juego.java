@@ -49,7 +49,9 @@ public class Juego extends ObservableJuego{
     public void setGanador(Jugador ganador) {
         this.ganador = ganador;
         this.estado = EstadoJuego.Finalizado;
-        this.finalizarPartida();
+        if(jugadores.size() > 1){
+            this.finalizarPartida();
+        }
         notifyObservers(ObserverJuego.Eventos.HAY_GANADOR);
     }
     
@@ -85,36 +87,28 @@ public class Juego extends ObservableJuego{
         return this.cfg.getColumnas();
     }
     
-    public void iniciar() throws BingoExceptions{
-        try{
+    public void iniciar() {
             int cantCartones = this.obtenerCantCartones();
             int cantidadNumeros = this.cantidadNumerosEnJuego(cantCartones, this.cfg.getNumerosPorCarton());
             this.bolillero = new Bolillero(cantidadNumeros);
             this.dispararCreacionDeCartones();
             notifyObservers(ObserverJuego.Eventos.JUEGO_INICIADO);
             this.continuar();
-        }catch(BingoExceptions error){
-            throw error;
-        }
-        
     }
     
-    public void continuar() throws BingoExceptions{
-       try{
-           if(this.estado == EstadoJuego.EsperandoInicio || this.jugadoresListos()){
-               this.estado = EstadoJuego.Jugando;
-               notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
-               Bolilla sorteada = this.bolillero.sortear();
-               boolean bolillaMarcada = false;
-               for(int i = 0; i < jugadores.size() && ganador == null && bolillaMarcada; i++){
-                   bolillaMarcada = jugadores.get(i).anotarBolilla(sorteada);
-               }
-               this.estado = EstadoJuego.EsperandoJugadores;
-               notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
-           }
-       }catch(BingoExceptions error){
-           throw error;
-       }
+    public void continuar(){
+        if(this.estado == EstadoJuego.EsperandoInicio || this.jugadoresListos()){
+            this.estado = EstadoJuego.Jugando;
+            notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
+            Bolilla sorteada = this.bolillero.sortear();
+            boolean bolillaMarcada = false;
+            for(int i = 0; i < jugadores.size() && ganador == null && !bolillaMarcada; i++){
+                bolillaMarcada = jugadores.get(i).anotarBolilla(sorteada);
+            }
+            this.estado = EstadoJuego.EsperandoJugadores;
+            notifyObservers(ObserverJuego.Eventos.ACTUALIZA_ESTADO_JUEGO);
+        }
+      
     }
     
     private boolean jugadoresListos() {

@@ -38,7 +38,7 @@ public class Boton extends JButton implements ActionListener{
     public void marcar(){
         if(marcador.marcar(dato)){
             setBackground(new Color(0, 64, 0));
-            setForeground(Color.WHITE);
+            setForeground(Color.BLUE);
         } else {
             setBackground(null);
             setForeground(null);
