@@ -6,8 +6,6 @@
 package modelo;
 
 import clases.Administrador;
-import clases.Carton;
-import clases.Celda;
 import clases.Jugador;
 import clases.User;
 import clases.Usuario;
@@ -82,14 +80,6 @@ public class ControladorUsuarios {
         }        
         
     }
-    
-//    public ArrayList<Celda> getCeldasDeJugador(Jugador j) {
-//        ArrayList<Celda> celdas = new ArrayList();
-//        for(Carton c:j.getCartones()){
-//            celdas.addAll(c.getCeldas());
-//        }
-//        return celdas;
-//    }
 
     private void administradorEnLinea(Administrador admin) throws BingoExceptions  {
         if(admin.getEnLinea() == true) 

@@ -6,11 +6,11 @@
 package modelo;
 import clases.Administrador;
 import clases.Celda;
+import clases.Bingo;
 import clases.Juego;
 import clases.Jugador;
 import clases.Usuario;
 import exepctions.BingoExceptions;
-import java.util.ArrayList;
 
 /**
  *
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 public class Fachada {   
     private static Fachada instance = null;
     private ControladorUsuarios cu;
-    private Bingo bingo;
+    private ControladorBingo cb;
 
    
     private Fachada() {
         this.cu = new ControladorUsuarios();
-        this.bingo = new Bingo();
+        this.cb = new ControladorBingo();
     }
 
     public synchronized static Fachada getInstancia() {
@@ -45,7 +45,7 @@ public class Fachada {
     
     public void puedeJugar(Jugador unJ) throws BingoExceptions{
         try{
-            bingo.puedeJugar(unJ);
+            cb.puedeJugar(unJ);
         }
         catch(BingoExceptions error){
             throw error;
@@ -61,12 +61,8 @@ public class Fachada {
         }
     }
 
-    public void agregarAJuego(Jugador unJ) throws BingoExceptions {
-       try{
-           bingo.validarJuego(unJ);        
-       }catch(BingoExceptions error){
-           throw error;
-       }
+    public void agregarAJuego(Jugador unJ) {
+        cb.validarJuego(unJ);  
     }
     
     public void addUsuario(Usuario usuario){
@@ -74,20 +70,15 @@ public class Fachada {
     }
     
     public Juego getProximoJuego(){
-        return bingo.getProximoJuego();
+        return cb.getProximoJuego();
+    }
+  
+    public void setBingo(Bingo bingo){
+        cb.setBingo(bingo);
     }
     
-    //ESTO SE VA
-    public void continuar() throws BingoExceptions{
-        try{
-            bingo.continuar();
-        }catch(BingoExceptions error){
-            throw error;
-        } 
-    }
-    
-    public boolean ganador(){
-        return bingo.ganador();
+    public Bingo getBingo(){
+        return cb.getBingo();
     }
 
     public void addAdministrador(Administrador administrador) {
